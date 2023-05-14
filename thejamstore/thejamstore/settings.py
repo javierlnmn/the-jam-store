@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'general.apps.GeneralConfig'
+    'general.apps.GeneralConfig',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +129,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Cambiar login_Redirect_url a administracion del perfil de usuario
+LOGIN_REDIRECT_URL='inicio'
+LOGOUT_REDIRECT_URL='inicio'

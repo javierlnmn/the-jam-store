@@ -1,6 +1,8 @@
 from django.shortcuts import render
-# from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.views.generic import TemplateView
 
+directorio_templates = "general/"
+
+
 class IndiceView(TemplateView):
-    template_name = "indice.html"
+    template_name = directorio_templates + "indice.html"
