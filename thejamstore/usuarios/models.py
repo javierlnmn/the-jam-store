@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from productos.models import Producto
 
 PROVINCIAS_CHOICES = (
     ("AC", "A Coruña"),
@@ -55,8 +56,30 @@ PROVINCIAS_CHOICES = (
 )
 
 
+class CategoriaUsuario(models.Model):
+    categoria = models.CharField(max_length=255)  # USUARIO / EMPRESA (son las opciones)
+    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
+    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+
+
+class CustomUser(AbstractUser):
+    telefono = models.CharField(max_length=20)
+    categoria = models.ForeignKey(
+        CategoriaUsuario, on_delete=models.SET_NULL, null=True, blank=True
+    )
+    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
+    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+
+    def save(self, *args, **kwargs):
+        if not self.categoria:
+            raise ValueError("La categoría es obligatoria.")
+        super().save(*args, **kwargs)
+
+
 class Direccion(models.Model):
-    pais = models.CharField(max_length=255, default="España")
+    # Damos por hecho que los pedidos se realizan únicamente en el territorio español por el momento
+    # Si llegara a trriunfar, ampliaríamos nuestra oferta a otros países
+    usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     provincia = models.CharField(max_length=255, choices=PROVINCIAS_CHOICES)
     municipio = models.CharField(max_length=255)
     cod_postal = models.CharField(max_length=10)
@@ -64,22 +87,43 @@ class Direccion(models.Model):
     numero = models.CharField(max_length=20)
     piso = models.CharField(max_length=20, null=True)
     puerta = models.CharField(max_length=20, null=True)
-    datos_adicionales = models.TextField()
+    datos_adicionales = models.TextField(null=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
 
-class CategoriaUsuario(models.Model):
-    categoria = models.CharField(
-        max_length=255,
-    )  # USUARIO / EMPRESA (son las opciones)
+class Carrito(models.Model):
+    usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    producto = models.ManyToManyField(Producto, through="CarritoProductos")
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
 
-class CustomUser(AbstractUser):
-    telefono = models.CharField(max_length=20)
-    direccion = models.ForeignKey(Direccion, on_delete=models.SET_NULL)
-    categoria = models.ForeignKey(CategoriaUsuario, on_delete=models.SET_NULL)
+class CarritoProductos(models.Model):
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)
+
+
+class ListaDeseos(models.Model):
+    usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    producto = models.ManyToManyField(Producto)
+    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
+    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+
+
+class PuntuacionValoracion(models.IntegerChoices):
+    MUY_MALO = 1, "Muy malo"
+    MALO = 2, "Malo"
+    ACEPTABLE = 3, "Aceptable"
+    BUENO = 4, "Bueno"
+    EXCELENTE = 5, "Excelente"
+
+
+class Comentario(models.Model):
+    comentario = models.TextField(null=True)
+    valoracion = models.IntegerField(choices=PuntuacionValoracion.choices)
+    usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
