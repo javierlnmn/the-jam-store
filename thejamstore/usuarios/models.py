@@ -60,12 +60,15 @@ class CategoriaUsuario(models.Model):
     categoria = models.CharField(max_length=255)  # USUARIO / EMPRESA (son las opciones)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    
+    def __str__(self):
+        return self.categoria
 
 
 class CustomUser(AbstractUser):
     telefono = models.CharField(max_length=20)
     categoria = models.ForeignKey(
-        CategoriaUsuario, on_delete=models.SET_NULL, null=True, blank=True
+        CategoriaUsuario, on_delete=models.SET_NULL, null=True, blank=True, default="1"
     )
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
