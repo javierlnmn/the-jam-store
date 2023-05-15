@@ -8,6 +8,7 @@ class Color(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
+
 class Marca(models.Model):
     descripcion = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
