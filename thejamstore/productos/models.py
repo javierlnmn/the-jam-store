@@ -29,6 +29,10 @@ class Color(models.Model):
     def __str__(self):
         return self.descripcion
 
+    class Meta:
+        verbose_name = "Color"
+        verbose_name_plural = "Colores"
+
 
 class Marca(models.Model):
     descripcion = models.CharField(max_length=255)
@@ -46,6 +50,10 @@ class Ajuste(models.Model):
 
     def __str__(self):
         return self.descripcion
+    
+    class Meta:
+        verbose_name = "Ajuste de la Prenda"
+        verbose_name_plural = "Ajuste de la Prenda"
 
 
 class Tipo_Prenda(models.Model):
@@ -56,7 +64,7 @@ class Tipo_Prenda(models.Model):
 
     def __str__(self):
         return self.descripcion
-    
+
     class Meta:
         verbose_name = "Tipo de Prenda"
         verbose_name_plural = "Tipos de Prenda"
@@ -122,9 +130,10 @@ class Producto_Talla(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     talla = models.ForeignKey(Talla, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField(default=0)
-    
+
     def __str__(self):
-        return self.tala + '('+self.cantidad+')'
+        return self.tala + "(" + self.cantidad + ")"
+
     class Meta:
         verbose_name = "Talla del Producto"
         verbose_name_plural = "Talla del Producto"
