@@ -57,8 +57,8 @@ class Ajuste(models.Model):
 
 
 class Tipo_Prenda(models.Model):
-    categoria_padre = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     descripcion = models.CharField(max_length=255)
+    categoria_padre = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
@@ -72,6 +72,8 @@ class Tipo_Prenda(models.Model):
 
 class Talla(models.Model):
     talla = models.CharField(max_length=20)
+    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
+    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
 
 class Producto(models.Model):
@@ -87,9 +89,8 @@ class Producto(models.Model):
     precio_oferta = models.DecimalField(
         max_digits=10, decimal_places=2, null=True, blank=True
     )
-    talla = models.ManyToManyField(
-        Talla, through="Producto_Talla"
-    )  # A traves de la talla se sabe si hay o no disponibilidad del producto
+    # A traves de la talla se sabe si hay o no disponibilidad del producto
+    talla = models.ManyToManyField(Talla, through="Producto_Talla")
     producto_color = models.ManyToManyField(Color)
     producto_marca = models.ManyToManyField(Marca)
     producto_ajuste = models.ManyToManyField(Ajuste)
@@ -97,28 +98,37 @@ class Producto(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
-    @property
-    def hay_stock(self):
-        return False
+    # @property
+    # def hay_stock(self):
+    #     pass
 
     def __str__(self):
         return self.nombre + ", " + self.referencia
 
-    def save(self, *args, **kwargs):
-        if not self.categoria or not self.producto_tipo_prenda:
-            raise ValueError("La categoría y/o el tipo de prenda son obligatorios.")
-        super().save(*args, **kwargs)
+
+    # EDITAR ESTO
+    # def save(self, *args, **kwargs):
+    #     print('pene')
+    #     self.full_clean()  # Validate the model instance
+    #     super().save(*args, **kwargs)
+    #     self.refresh_from_db()
+    #     tipo_prendas = self.producto_tipo_prenda.all()
+    #     for tipo_prenda in tipo_prendas:
+    #         print(tipo_prenda)
+
+    # def clean(self):
+    #     super().clean()
+    #     if self.categoria and self.producto_tipo_prenda:
+    #         if self.producto_tipo_prenda.categoria_padre != self.categoria:
+    #             raise ValidationError(
+    #                 {
+    #                     "producto_tipo_prenda": "El tipo de prenda no es válido para la categoría seleccionada"
+    #                 }
+    #             )
 
     def clean(self):
-        super().clean()
-
-        if self.categoria and self.producto_tipo_prenda:
-            if self.producto_tipo_prenda.categoria_padre != self.categoria:
-                raise ValidationError(
-                    {
-                        "producto_tipo_prenda": "El tipo de prenda no es válido para la categoría seleccionada"
-                    }
-                )
+        if not self.categoria:
+            raise ValidationError({"categoria": "La categoría es obligatoria."})
 
 
 class Producto_Talla(models.Model):
