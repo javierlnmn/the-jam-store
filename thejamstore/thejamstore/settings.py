@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -107,13 +108,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = "usuarios.CustomUser"
+AUTH_USER_MODEL = "usuarios.Custom_User"
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "es-ES"
 
 TIME_ZONE = "UTC"
 
@@ -138,3 +139,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Cambiar login_Redirect_url a administracion del perfil de usuario
 LOGIN_REDIRECT_URL = "inicio"
 LOGOUT_REDIRECT_URL = "inicio"
+
+
+# Media 
+MEDIA_URL='/media/'
+MEDIA_ROOT=os.path.join(BASE_DIR, 'media')

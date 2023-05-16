@@ -56,19 +56,23 @@ PROVINCIAS_CHOICES = (
 )
 
 
-class CategoriaUsuario(models.Model):
+class Categoria_Usuario(models.Model):
     categoria = models.CharField(max_length=255)  # USUARIO / EMPRESA (son las opciones)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
     
     def __str__(self):
         return self.categoria
+    
+    class Meta:
+        verbose_name = "Categoría de Usuario"
+        verbose_name_plural = "Categorías de Usuario"
 
 
-class CustomUser(AbstractUser):
+class Custom_User(AbstractUser):
     telefono = models.CharField(max_length=20)
     categoria = models.ForeignKey(
-        CategoriaUsuario, on_delete=models.SET_NULL, null=True, blank=True, default="1"
+        Categoria_Usuario, on_delete=models.SET_NULL, null=True, blank=True, default='1'
     )
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
@@ -77,12 +81,16 @@ class CustomUser(AbstractUser):
         if not self.categoria:
             raise ValueError("La categoría es obligatoria.")
         super().save(*args, **kwargs)
+        
+    class Meta:
+        verbose_name = "Usuario"
+        verbose_name_plural = "Usuarios"
 
 
 class Direccion(models.Model):
     # Damos por hecho que los pedidos se realizan únicamente en el territorio español por el momento
     # Si llegara a trriunfar, ampliaríamos nuestra oferta a otros países
-    usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Custom_User, on_delete=models.CASCADE)
     provincia = models.CharField(max_length=255, choices=PROVINCIAS_CHOICES)
     municipio = models.CharField(max_length=255)
     cod_postal = models.CharField(max_length=10)
@@ -96,23 +104,31 @@ class Direccion(models.Model):
 
 
 class Carrito(models.Model):
-    usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    producto = models.ManyToManyField(Producto, through="CarritoProductos")
+    usuario = models.ForeignKey(Custom_User, on_delete=models.CASCADE)
+    producto = models.ManyToManyField(Producto, through="Carrito_Productos")
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
 
-class CarritoProductos(models.Model):
+class Carrito_Productos(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField(default=1)
+    
+    class Meta:
+        verbose_name = "Producto del Carrito"
+        verbose_name_plural = "Productos del Carrito"
 
 
 class ListaDeseos(models.Model):
-    usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Custom_User, on_delete=models.CASCADE)
     producto = models.ManyToManyField(Producto)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    
+    class Meta:
+        verbose_name = "Lista de Deseos"
+        verbose_name_plural = "Listas de Deseos"
 
 
 class PuntuacionValoracion(models.IntegerChoices):
@@ -126,7 +142,7 @@ class PuntuacionValoracion(models.IntegerChoices):
 class Comentario(models.Model):
     comentario = models.TextField(null=True)
     valoracion = models.IntegerField(choices=PuntuacionValoracion.choices)
-    usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Custom_User, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")

@@ -1,10 +1,10 @@
 from django.contrib import admin
 from .models import *
 
-admin.site.register(CategoriaUsuario)
-admin.site.register(CustomUser)
+admin.site.register(Categoria_Usuario)
+admin.site.register(Custom_User)
 admin.site.register(Direccion)
 admin.site.register(Carrito)
-admin.site.register(CarritoProductos)
+admin.site.register(Carrito_Productos)
 admin.site.register(ListaDeseos)
 admin.site.register(Comentario)
