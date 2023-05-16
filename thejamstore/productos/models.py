@@ -50,7 +50,7 @@ class Ajuste(models.Model):
 
     def __str__(self):
         return self.descripcion
-    
+
     class Meta:
         verbose_name = "Ajuste de la Prenda"
         verbose_name_plural = "Ajuste de la Prenda"
@@ -93,12 +93,7 @@ class Producto(models.Model):
     producto_color = models.ManyToManyField(Color)
     producto_marca = models.ManyToManyField(Marca)
     producto_ajuste = models.ManyToManyField(Ajuste)
-    producto_tipo_prenda = models.ForeignKey(
-        Tipo_Prenda,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-    )
+    producto_tipo_prenda = models.ManyToManyField(Tipo_Prenda)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
