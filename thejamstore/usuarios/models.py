@@ -146,3 +146,13 @@ class Comentario(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    
+class Peticiones(models.Model):
+    nombre_producto = models.CharField(max_length=255)
+    mensaje = models.TextField()
+    imagen = models.ImageField()
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
+    talla = models.CharField(max_length=20)
+    usuario = models.ForeignKey(Custom_User, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
+    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
