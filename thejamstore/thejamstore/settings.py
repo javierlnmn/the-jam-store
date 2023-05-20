@@ -180,3 +180,5 @@ JET_THEMES = [
         'title': 'Light Gray'
     }
 ]
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
