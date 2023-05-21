@@ -58,7 +58,9 @@ class Ajuste(models.Model):
 
 class Tipo_Prenda(models.Model):
     descripcion = models.CharField(max_length=255)
-    categoria_padre = models.ForeignKey(Categoria, on_delete=models.CASCADE, verbose_name='Categoría padre')
+    categoria_padre = models.ForeignKey(
+        Categoria, on_delete=models.CASCADE, verbose_name="Categoría padre"
+    )
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
@@ -71,10 +73,10 @@ class Tipo_Prenda(models.Model):
 
 
 class Talla(models.Model):
-    talla = models.CharField(max_length=20)
+    talla = models.CharField(max_length=20, unique=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
-    
+
     def __str__(self):
         return self.talla
 
@@ -103,7 +105,8 @@ class Producto(models.Model):
 
     @property
     def hay_stock(self):
-        pass
+        print(self.talla)
+        return
 
     def __str__(self):
         return self.nombre + ", " + self.referencia
@@ -120,11 +123,24 @@ class Producto_Talla(models.Model):
     cantidad = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return self.producto.__str__() + ". Talla " + self.talla.talla + ", "+ str(self.cantidad) + " uds."
-    
+        return (
+            self.producto.__str__()
+            + ". Talla "
+            + self.talla.talla
+            + ", "
+            + str(self.cantidad)
+            + " uds."
+        )
+
     def clean(self):
-        if Producto_Talla.objects.filter(producto=self.producto, talla=self.talla).exists():
-            raise ValidationError("Esta relación de talla producto ya está registrada. Establezca una relación no existente o modifique la ya creada.")
+        if not self.producto_id or not self.talla_id:
+            raise ValidationError('')
+
+        talla_producto = Producto_Talla.objects.filter(producto=self.producto, talla=self.talla).first()
+        if talla_producto:
+            self.id = talla_producto.id  # Override existing object by assigning its ID
+            self._state.adding = False
+            
 
     class Meta:
         verbose_name = "Tallas de Productos"
