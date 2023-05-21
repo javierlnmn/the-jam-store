@@ -4,7 +4,7 @@ from django.utils.html import format_html
 
 
 class ColorAdmin(admin.ModelAdmin):
-    list_display = ("display_color", "descripcion", "created", "updated")
+    list_display = ("display_color", "descripcion")
 
     def display_color(self, obj):
         return format_html(
