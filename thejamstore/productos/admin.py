@@ -31,7 +31,7 @@ class ProductoAdmin(admin.ModelAdmin):
         )
 
     display_imagen.short_description = "Vista previa"
-
+    
 
 class Producto_TallaAdmin(admin.ModelAdmin):
     list_display = ("display_imagen", "producto", "talla", "cantidad")

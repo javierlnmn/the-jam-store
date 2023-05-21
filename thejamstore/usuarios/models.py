@@ -98,7 +98,7 @@ class Direccion(models.Model):
     numero = models.CharField(max_length=20)
     piso = models.CharField(max_length=20, null=True)
     puerta = models.CharField(max_length=20, null=True)
-    datos_adicionales = models.TextField(null=True)
+    datos_adicionales = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 

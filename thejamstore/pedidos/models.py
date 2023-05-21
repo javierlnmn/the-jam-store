@@ -2,6 +2,8 @@ from django.db import models
 from usuarios.models import Custom_User, Direccion
 from productos.models import Producto
 
+import uuid
+
 
 class Estado_Pedido(models.Model):
     descripcion = models.CharField(max_length=255)
@@ -10,7 +12,7 @@ class Estado_Pedido(models.Model):
 
     def __str__(self):
         return self.descripcion
-    
+
     class Meta:
         verbose_name = "Estado del Pedido"
         verbose_name_plural = "Estados de Pedidos"
@@ -23,13 +25,24 @@ class Pedido(models.Model):
     direccion = models.ForeignKey(
         Direccion, on_delete=models.SET_NULL, null=True, blank=True
     )
+    codigo_pedido = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True,
+        verbose_name="Código del pedido",
+    )
     producto = models.ManyToManyField(Producto, through="Pedido_Producto")
-    estado = models.ForeignKey(Estado_Pedido, on_delete=models.SET_NULL, null=True, blank=True)
+    estado = models.ForeignKey(
+        Estado_Pedido, on_delete=models.SET_NULL, null=True, blank=True
+    )
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
 
+    class Meta:
+        ordering = ["codigo_pedido"]
+
     def save(self, *args, **kwargs):
-        if not self.usuario or not self.direccion or not self.estado:
-            raise ValueError("Hay que rellenar los campos obligatorios.")
+        if not self.codigo_pedido:
+            self.codigo_pedido = uuid.uuid4()
         super().save(*args, **kwargs)
 
 
