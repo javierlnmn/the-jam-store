@@ -10,7 +10,7 @@
 <li>Apps: Con '_' (ejemplo_nombre)</li>
 <li>Variables / Campos de modelos: Con '_' (ejemplo_nombre)</li>
 <li>Funciones: Con '_' (ejemplo_nombre)</li>
-<li>Clases: Con 'camelCase' (ejemploNombre)</li>
+<li>Clases: Con 'camelCase' (ejemploNombre). Excepto modelos, que serán con '_'</li>
 <li>Ficheros (imágenes, textos, htmls, etc...): Con '-' (ejemplo-nombre)</li>
 <li>Verbose names: Minúsculas y con espacios (ejemplo nombre)</li>
 </ul>
