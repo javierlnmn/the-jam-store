@@ -120,7 +120,7 @@ class Carrito_Productos(models.Model):
         verbose_name_plural = "Productos del Carrito"
 
 
-class ListaDeseos(models.Model):
+class Lista_Deseos(models.Model):
     usuario = models.ForeignKey(Custom_User, on_delete=models.CASCADE)
     producto = models.ManyToManyField(Producto)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
@@ -131,7 +131,7 @@ class ListaDeseos(models.Model):
         verbose_name_plural = "Listas de Deseos"
 
 
-class PuntuacionValoracion(models.IntegerChoices):
+class Puntuacion_Valoracion(models.IntegerChoices):
     MUY_MALO = 1, "Muy malo"
     MALO = 2, "Malo"
     ACEPTABLE = 3, "Aceptable"
@@ -141,7 +141,7 @@ class PuntuacionValoracion(models.IntegerChoices):
 
 class Comentario(models.Model):
     comentario = models.TextField(null=True)
-    valoracion = models.IntegerField(choices=PuntuacionValoracion.choices)
+    valoracion = models.IntegerField(choices=Puntuacion_Valoracion.choices)
     usuario = models.ForeignKey(Custom_User, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")

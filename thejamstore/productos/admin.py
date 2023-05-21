@@ -11,6 +11,19 @@ class ColorAdmin(admin.ModelAdmin):
             obj.codigo_hex
         )
     display_color.short_description = 'Color'
+    
+class ProductoAdmin(admin.ModelAdmin):
+    list_display = ('display_imagen', 'nombre')
+    list_filter = ('categoria',)
+    
+    def display_imagen(self, obj):
+        return format_html(
+            '<img src="{}" style="width: 8rem; height: 8rem; max-width: 100%; height: auto;">',
+            obj.imagen.url
+        )
+    
+        
+    display_imagen.short_description = 'Vista previa'
 
 
 admin.site.register(Categoria)
@@ -19,4 +32,4 @@ admin.site.register(Marca)
 admin.site.register(Ajuste)
 admin.site.register(Tipo_Prenda)
 admin.site.register(Talla)
-admin.site.register(Producto)
+admin.site.register(Producto, ProductoAdmin)

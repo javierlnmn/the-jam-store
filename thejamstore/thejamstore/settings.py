@@ -133,6 +133,11 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+# Media 
+MEDIA_URL='/media/'
+MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -141,11 +146,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Cambiar login_Redirect_url a administracion del perfil de usuario
 LOGIN_REDIRECT_URL = "inicio"
 LOGOUT_REDIRECT_URL = "inicio"
-
-
-# Media 
-MEDIA_URL='/media/'
-MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
 
 # Jet Admin Interface
 JET_THEMES = [

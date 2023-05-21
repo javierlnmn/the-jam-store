@@ -8,6 +8,10 @@ import django.db.models.deletion
 import django.utils.timezone
 
 
+def crear_categoria(apps, schema_editor):
+    Categoria_Usuario = apps.get_model('usuarios', 'Categoria_Usuario')
+    Categoria_Usuario.objects.create(categoria='usuario')
+
 class Migration(migrations.Migration):
 
     initial = True
@@ -135,4 +139,5 @@ class Migration(migrations.Migration):
             name='user_permissions',
             field=models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.permission', verbose_name='user permissions'),
         ),
+        migrations.RunPython(crear_categoria),
     ]

@@ -35,12 +35,12 @@ class Color(models.Model):
 
 
 class Marca(models.Model):
-    descripcion = models.CharField(max_length=255)
+    nombre = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
     def __str__(self):
-        return self.descripcion
+        return self.nombre
 
 
 class Ajuste(models.Model):
@@ -98,35 +98,39 @@ class Producto(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
-    # @property
-    # def hay_stock(self):
-    #     pass
+    @property
+    def hay_stock(self):
+        pass
 
     def __str__(self):
         return self.nombre + ", " + self.referencia
 
-
-    # EDITAR ESTO
-    # def save(self, *args, **kwargs):
-    #     print('pene')
-    #     self.full_clean()  # Validate the model instance
-    #     super().save(*args, **kwargs)
-    #     self.refresh_from_db()
-    #     tipo_prendas = self.producto_tipo_prenda.all()
-    #     for tipo_prenda in tipo_prendas:
-    #         print(tipo_prenda)
-
-    # def clean(self):
-    #     super().clean()
-    #     if self.categoria and self.producto_tipo_prenda:
-    #         if self.producto_tipo_prenda.categoria_padre != self.categoria:
-    #             raise ValidationError(
-    #                 {
-    #                     "producto_tipo_prenda": "El tipo de prenda no es válido para la categoría seleccionada"
-    #                 }
-    #             )
-
     def clean(self):
+        super().clean()
+
+        if not self.pk:  # Check if the instance is being created
+            # Save the instance to generate the primary key (id)
+            print('creando id')
+            self.save()
+
+        tipo_prenda_ids = self.producto_tipo_prenda.values_list("id", flat=True)
+        tipo_prendas = Tipo_Prenda.objects.filter(
+            id__in=tipo_prenda_ids, categoria_padre=self.categoria
+        )
+
+        if not tipo_prendas:
+            print(self.categoria)
+            print(self.producto_tipo_prenda)
+            raise ValidationError(
+                {
+                    "producto_tipo_prenda": "El tipo de prenda no es válido para la categoría seleccionada."
+                }
+            )
+
+        # Clear and re-add the validated tipo_prendas
+        self.producto_tipo_prenda.clear()
+        self.producto_tipo_prenda.add(*tipo_prendas)
+
         if not self.categoria:
             raise ValidationError({"categoria": "La categoría es obligatoria."})
 
@@ -137,7 +141,7 @@ class Producto_Talla(models.Model):
     cantidad = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return self.tala + "(" + self.cantidad + ")"
+        return self.talla + "(" + self.cantidad + ")"
 
     class Meta:
         verbose_name = "Talla del Producto"
