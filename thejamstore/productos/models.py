@@ -121,6 +121,10 @@ class Producto_Talla(models.Model):
 
     def __str__(self):
         return self.producto.__str__() + ". Talla " + self.talla.talla + ", "+ str(self.cantidad) + " uds."
+    
+    def clean(self):
+        if Producto_Talla.objects.filter(producto=self.producto, talla=self.talla).exists():
+            raise ValidationError("Esta relación de talla producto ya está registrada. Establezca una relación no existente o modifique la ya creada.")
 
     class Meta:
         verbose_name = "Tallas de Productos"
