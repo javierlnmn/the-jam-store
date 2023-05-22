@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from productos.models import Producto
+from django.core.exceptions import ValidationError
+
 
 PROVINCIAS_CHOICES = (
     ("AC", "A Coruña"),
@@ -62,7 +64,7 @@ class Categoria_Usuario(models.Model):
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
     
     def __str__(self):
-        return self.categoria
+        return (self.categoria).capitalize()
     
     class Meta:
         verbose_name = "Categoría de Usuario"
@@ -70,17 +72,17 @@ class Categoria_Usuario(models.Model):
 
 
 class Custom_User(AbstractUser):
-    telefono = models.CharField(max_length=20)
+    telefono = models.CharField(max_length=20, null=True, blank=True)
+    email = models.EmailField(blank=False, null=False)
     categoria = models.ForeignKey(
         Categoria_Usuario, on_delete=models.SET_NULL, null=True, blank=True, default='1'
     )
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
-    def save(self, *args, **kwargs):
+    def clean(self):
         if not self.categoria:
-            raise ValueError("La categoría es obligatoria.")
-        super().save(*args, **kwargs)
+            raise ValidationError({  "categoria": "Este campo es obligatorio" })
         
     class Meta:
         verbose_name = "Usuario"
@@ -104,15 +106,19 @@ class Direccion(models.Model):
 
 
 class Carrito(models.Model):
-    usuario = models.ForeignKey(Custom_User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Custom_User, on_delete=models.CASCADE, verbose_name='Usuario del carrito')
     producto = models.ManyToManyField(Producto, through="Carrito_Productos")
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    
+    def __str__(self):
+        return 'Carrito de ' + self.usuario.username
+    
 
 
 class Carrito_Productos(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE, )
     cantidad = models.PositiveIntegerField(default=1)
     
     class Meta:
@@ -125,6 +131,9 @@ class Lista_Deseos(models.Model):
     producto = models.ManyToManyField(Producto)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    
+    def __str__(self):
+        return 'Lista de deseos de ' + self.usuario.username
     
     class Meta:
         verbose_name = "Lista de Deseos"

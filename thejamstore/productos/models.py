@@ -112,9 +112,8 @@ class Producto(models.Model):
         return self.nombre + ", " + self.referencia
 
     def clean(self):
-        super().clean()
         if not self.categoria:
-            raise ValidationError({"categoria": "La categoría es obligatoria."})
+            raise ValidationError({"categoria": "Este campo es obligatorio"})
 
 
 class Producto_Talla(models.Model):
