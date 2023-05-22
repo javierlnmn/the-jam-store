@@ -6,7 +6,7 @@ import uuid
 
 
 class Estado_Pedido(models.Model):
-    descripcion = models.CharField(max_length=255)
+    descripcion = models.CharField(max_length=255, unique=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 

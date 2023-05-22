@@ -11,7 +11,7 @@ CATEGORIA_CHOICES = (
 
 
 class Categoria(models.Model):
-    nombre = models.CharField(max_length=100, choices=CATEGORIA_CHOICES)
+    nombre = models.CharField(max_length=100, choices=CATEGORIA_CHOICES, unique=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
@@ -21,8 +21,8 @@ class Categoria(models.Model):
 
 # Caracteristicas de los productos
 class Color(models.Model):
-    descripcion = models.CharField(max_length=255)
-    codigo_hex = models.CharField(max_length=7)
+    descripcion = models.CharField(max_length=255, unique=True)
+    codigo_hex = models.CharField(max_length=7, unique=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
@@ -35,16 +35,16 @@ class Color(models.Model):
 
 
 class Marca(models.Model):
-    nombre = models.CharField(max_length=255)
+    nombre = models.CharField(max_length=255, unique=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
     def __str__(self):
-        return self.nombre
+        return (self.nombre).capitalize()
 
 
 class Ajuste(models.Model):
-    descripcion = models.CharField(max_length=255)
+    descripcion = models.CharField(max_length=255, unique=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
@@ -57,7 +57,9 @@ class Ajuste(models.Model):
 
 
 class Tipo_Prenda(models.Model):
-    descripcion = models.CharField(max_length=255,)
+    descripcion = models.CharField(
+        max_length=255,
+    )
     categoria_padre = models.ForeignKey(
         Categoria, on_delete=models.CASCADE, verbose_name="Categoría padre"
     )
@@ -66,13 +68,15 @@ class Tipo_Prenda(models.Model):
 
     def __str__(self):
         return self.descripcion
-    
+
     def clean(self):
         if not self.categoria_padre_id:
-            raise ValidationError('')
-        tipo_prenda_registrado = Tipo_Prenda.objects.filter(descripcion=self.descripcion, categoria_padre=self.categoria_padre.id).first()
+            raise ValidationError("")
+        tipo_prenda_registrado = Tipo_Prenda.objects.filter(
+            descripcion=self.descripcion, categoria_padre=self.categoria_padre.id
+        ).first()
         if tipo_prenda_registrado:
-            raise ValidationError('El tipo de prenda ya existe en la categoría elegida')
+            raise ValidationError("El tipo de prenda ya existe en la categoría elegida")
 
     class Meta:
         verbose_name = "Tipo de Prenda"
@@ -103,10 +107,14 @@ class Producto(models.Model):
     )
     # A traves de la talla se sabe si hay o no disponibilidad del producto
     talla = models.ManyToManyField(Talla, through="Producto_Talla")
-    producto_color = models.ManyToManyField(Color, verbose_name='Color(es) del producto')
-    producto_marca = models.ManyToManyField(Marca)
-    producto_ajuste = models.ManyToManyField(Ajuste)
-    producto_tipo_prenda = models.ManyToManyField(Tipo_Prenda)
+    producto_color = models.ManyToManyField(
+        Color, verbose_name="Color(es) del producto"
+    )
+    producto_marca = models.ManyToManyField(Marca, verbose_name="Marca de la prenda")
+    producto_ajuste = models.ManyToManyField(Ajuste, verbose_name="Ajuste de la prenda")
+    producto_tipo_prenda = models.ManyToManyField(
+        Tipo_Prenda, verbose_name="Tipo de prenda"
+    )
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
@@ -140,14 +148,15 @@ class Producto_Talla(models.Model):
 
     def clean(self):
         if not self.producto_id or not self.talla_id:
-            raise ValidationError('')
+            raise ValidationError("")
 
-        talla_producto = Producto_Talla.objects.filter(producto=self.producto, talla=self.talla).first()
+        talla_producto = Producto_Talla.objects.filter(
+            producto=self.producto, talla=self.talla
+        ).first()
         if talla_producto:
             self.id = talla_producto.id  # Override existing object by assigning its ID
             self._state.adding = False
-            
 
     class Meta:
-        verbose_name = "Tallas de Productos"
-        verbose_name_plural = "Tallas de Productos"
+        verbose_name = "Inventario"
+        verbose_name_plural = "Inventario"
