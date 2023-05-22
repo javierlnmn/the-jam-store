@@ -62,10 +62,10 @@ class Categoria_Usuario(models.Model):
     categoria = models.CharField(max_length=255)  # USUARIO / EMPRESA (son las opciones)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
-    
+
     def __str__(self):
         return (self.categoria).capitalize()
-    
+
     class Meta:
         verbose_name = "Categoría de Usuario"
         verbose_name_plural = "Categorías de Usuario"
@@ -75,15 +75,15 @@ class Custom_User(AbstractUser):
     telefono = models.CharField(max_length=20, null=True, blank=True)
     email = models.EmailField(blank=False, null=False)
     categoria = models.ForeignKey(
-        Categoria_Usuario, on_delete=models.SET_NULL, null=True, blank=True, default='1'
+        Categoria_Usuario, on_delete=models.SET_NULL, null=True, blank=True, default="1"
     )
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
     def clean(self):
         if not self.categoria:
-            raise ValidationError({  "categoria": "Este campo es obligatorio" })
-        
+            raise ValidationError({"categoria": "Este campo es obligatorio"})
+
     class Meta:
         verbose_name = "Usuario"
         verbose_name_plural = "Usuarios"
@@ -104,23 +104,44 @@ class Direccion(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
 
+    def __str__(self):
+        return (
+            self.provincia
+            + ", "
+            + self.municipio
+            + ", "
+            + self.cod_postal
+            + ", "
+            + self.calle
+            + " "
+            + self.numero
+            + " Piso "
+            + self.piso
+            + " Puerta "
+            + self.puerta
+        )
+
 
 class Carrito(models.Model):
-    usuario = models.ForeignKey(Custom_User, on_delete=models.CASCADE, verbose_name='Usuario del carrito')
+    usuario = models.ForeignKey(
+        Custom_User, on_delete=models.CASCADE, verbose_name="Usuario del carrito"
+    )
     producto = models.ManyToManyField(Producto, through="Carrito_Productos")
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
-    
+
     def __str__(self):
-        return 'Carrito de ' + self.usuario.username
-    
+        return "Carrito de " + self.usuario.username
 
 
 class Carrito_Productos(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE, )
+    carrito = models.ForeignKey(
+        Carrito,
+        on_delete=models.CASCADE,
+    )
     cantidad = models.PositiveIntegerField(default=1)
-    
+
     class Meta:
         verbose_name = "Producto del Carrito"
         verbose_name_plural = "Productos del Carrito"
@@ -131,10 +152,10 @@ class Lista_Deseos(models.Model):
     producto = models.ManyToManyField(Producto)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
-    
+
     def __str__(self):
-        return 'Lista de deseos de ' + self.usuario.username
-    
+        return "Lista de deseos de " + self.usuario.username
+
     class Meta:
         verbose_name = "Lista de Deseos"
         verbose_name_plural = "Listas de Deseos"
@@ -155,7 +176,8 @@ class Comentario(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
-    
+
+
 class Peticiones(models.Model):
     nombre_producto = models.CharField(max_length=255)
     mensaje = models.TextField()
