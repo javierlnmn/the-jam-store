@@ -57,7 +57,7 @@ class Ajuste(models.Model):
 
 
 class Tipo_Prenda(models.Model):
-    descripcion = models.CharField(max_length=255)
+    descripcion = models.CharField(max_length=255,)
     categoria_padre = models.ForeignKey(
         Categoria, on_delete=models.CASCADE, verbose_name="Categoría padre"
     )
@@ -66,6 +66,13 @@ class Tipo_Prenda(models.Model):
 
     def __str__(self):
         return self.descripcion
+    
+    def clean(self):
+        if not self.categoria_padre_id:
+            raise ValidationError('')
+        tipo_prenda_registrado = Tipo_Prenda.objects.filter(descripcion=self.descripcion, categoria_padre=self.categoria_padre.id).first()
+        if tipo_prenda_registrado:
+            raise ValidationError('El tipo de prenda ya existe en la categoría elegida')
 
     class Meta:
         verbose_name = "Tipo de Prenda"
@@ -96,7 +103,7 @@ class Producto(models.Model):
     )
     # A traves de la talla se sabe si hay o no disponibilidad del producto
     talla = models.ManyToManyField(Talla, through="Producto_Talla")
-    producto_color = models.ManyToManyField(Color)
+    producto_color = models.ManyToManyField(Color, verbose_name='Color(es) del producto')
     producto_marca = models.ManyToManyField(Marca)
     producto_ajuste = models.ManyToManyField(Ajuste)
     producto_tipo_prenda = models.ManyToManyField(Tipo_Prenda)
