@@ -98,14 +98,14 @@ class Direccion(models.Model):
     cod_postal = models.CharField(max_length=10)
     calle = models.CharField(max_length=255)
     numero = models.CharField(max_length=20)
-    piso = models.CharField(max_length=20, null=True)
-    puerta = models.CharField(max_length=20, null=True)
+    piso = models.CharField(max_length=20, null=True, blank=True)
+    puerta = models.CharField(max_length=20, null=True, blank=True)
     datos_adicionales = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     def __str__(self):
-        return (
+        direccion_completa = (
             self.provincia
             + ", "
             + self.municipio
@@ -115,11 +115,17 @@ class Direccion(models.Model):
             + self.calle
             + " "
             + self.numero
-            + " Piso "
-            + self.piso
-            + " Puerta "
-            + self.puerta
         )
+        
+        if self.piso: direccion_completa += ' ' + self.piso
+        if self.puerta: direccion_completa += ' ' + self.puerta
+        
+        return direccion_completa
+
+    class Meta:
+        verbose_name = "Dirección"
+        verbose_name_plural = "Direcciones"
+
 
 
 class Carrito(models.Model):
@@ -177,6 +183,9 @@ class Comentario(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
+    def __str__(self):
+        return "Comentario de " + self.usuario.username + " en " + str(self.producto)
+
 
 class Peticiones(models.Model):
     nombre_producto = models.CharField(max_length=255)
@@ -187,3 +196,7 @@ class Peticiones(models.Model):
     usuario = models.ForeignKey(Custom_User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
+    
+    class Meta:
+        verbose_name = "Petición"
+        verbose_name_plural = "Peticiones"

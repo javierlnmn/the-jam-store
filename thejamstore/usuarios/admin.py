@@ -10,28 +10,56 @@ class Custom_UserAdmin(UserAdmin):
         "email",
         "first_name",
         "last_name",
-        'is_staff',
-        'is_superuser',
+        "is_staff",
+        "is_superuser",
     )
     fieldsets = (
-        (None, {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'telefono')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
-        ('Important dates', {'fields': ('last_login', 'date_joined')}),
+        (None, {"fields": ("username", "password")}),
+        ("Personal info", {"fields": ("first_name", "last_name", "email", "telefono")}),
+        (
+            "Permissions",
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions",
+                )
+            },
+        ),
+        ("Important dates", {"fields": ("last_login", "date_joined")}),
     )
 
-class Carrito_ProductosAdmin(admin.ModelAdmin):
+
+class DireccionAdmin(admin.ModelAdmin):
     list_display = (
-        'producto',
-        'cantidad',
-        'carrito'
+        "__str__",
+        "usuario",
+        "provincia",
+        "municipio",
+        "cod_postal",
+        "calle",
+        "numero",
     )
+
+
+class Carrito_ProductosAdmin(admin.ModelAdmin):
+    list_display = ("producto", "cantidad", "carrito")
+
+
+class ComentarioAdmin(admin.ModelAdmin):
+    list_display = ("display_comentario", "usuario", "producto", "valoracion")
+
+    def display_comentario(self, obj):
+        return (obj.comentario[:90] + '...') if len(obj.comentario) > 90 else obj.comentario
+
 
 admin.site.register(Categoria_Usuario)
 admin.site.register(Custom_User, Custom_UserAdmin)
-admin.site.register(Direccion)
+admin.site.register(Direccion, DireccionAdmin)
 admin.site.register(Carrito)
 admin.site.register(Carrito_Productos, Carrito_ProductosAdmin)
 admin.site.register(Lista_Deseos)
-admin.site.register(Comentario)
+admin.site.register(Comentario, ComentarioAdmin)
 admin.site.register(Peticiones)

@@ -1,6 +1,7 @@
 from django.db import models
 from usuarios.models import Custom_User, Direccion
 from productos.models import Producto
+from django.core.exceptions import ValidationError
 
 import uuid
 
@@ -44,6 +45,14 @@ class Pedido(models.Model):
         if not self.codigo_pedido:
             self.codigo_pedido = uuid.uuid4()
         super().save(*args, **kwargs)
+
+    def clean(self):
+        if not self.estado:
+            raise ValidationError({"estado": "Este campo es olbigatorio"})
+        if self.direccion.usuario != self.usuario:
+            raise ValidationError(
+                {"direccion": "La dirección seleccionada no pertenece al usuario seleccionado"}
+            )
 
     class Meta:
         ordering = ["codigo_pedido"]

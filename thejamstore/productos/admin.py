@@ -21,7 +21,7 @@ class Tipo_PrendaAdmin(admin.ModelAdmin):
 
 
 class ProductoAdmin(admin.ModelAdmin):
-    list_display = ("display_imagen", "nombre")
+    list_display = ("display_imagen", "nombre", "referencia", "display_hay_stock")
     list_filter = ("categoria",)
 
     def display_imagen(self, obj):
@@ -31,6 +31,11 @@ class ProductoAdmin(admin.ModelAdmin):
         )
 
     display_imagen.short_description = "Vista previa"
+    
+    def display_hay_stock(self, obj):
+        return obj.get_stock
+    display_hay_stock.boolean = True
+    display_hay_stock.short_description = 'Hay Stock'
     
 
 class Producto_TallaAdmin(admin.ModelAdmin):

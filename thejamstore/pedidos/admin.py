@@ -4,6 +4,7 @@ from .models import *
 
 class PedidoAdmin(admin.ModelAdmin):
     list_display = ("usuario", "direccion", "codigo_pedido", "estado")
+    list_display_links = ('codigo_pedido',)
     readonly_fields = ("codigo_pedido",)
     
 class Pedido_ProductoAdmin(admin.ModelAdmin):

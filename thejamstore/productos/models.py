@@ -2,10 +2,10 @@ from django.db import models
 from django.core.exceptions import ValidationError
 
 CATEGORIA_CHOICES = (
-    ("superior", "Superior"),
-    ("inferior", "Inferior"),
-    ("accesorios", "Accesorios"),
-    ("zapatillas", "Zapatillas"),
+    ("Superior", "Superior"),
+    ("Inferior", "Inferior"),
+    ("Accesorios", "Accesorios"),
+    ("Zapatillas", "Zapatillas"),
     # Añadir categorias podria alterar el comportamiento del header de la pagina, mejor no añadir demasiadas
 )
 
@@ -91,13 +91,20 @@ class Talla(models.Model):
     def __str__(self):
         return self.talla
 
+    class Meta:
+        ordering = ("talla",)
+
 
 class Producto(models.Model):
     nombre = models.CharField(max_length=255)
     referencia = models.CharField(max_length=255)
     descripcion = models.TextField()
     categoria = models.ForeignKey(
-        Categoria, on_delete=models.SET_NULL, null=True, blank=True
+        Categoria,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Categoría",
     )
     imagen = models.ImageField(verbose_name="foto producto", upload_to="productos")
     precio = models.DecimalField(max_digits=10, decimal_places=2)
@@ -119,9 +126,14 @@ class Producto(models.Model):
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     @property
-    def hay_stock(self):
-        print(self.talla)
-        return
+    def get_stock(self):
+        hay_stock = False
+        producto_tallas = self.producto_talla_set.all()
+        for talla in producto_tallas:
+            if talla.cantidad > 0: 
+                hay_stock = True
+                break
+        return hay_stock
 
     def __str__(self):
         return self.nombre + ", " + self.referencia
@@ -129,6 +141,11 @@ class Producto(models.Model):
     def clean(self):
         if not self.categoria:
             raise ValidationError({"categoria": "Este campo es obligatorio"})
+        if (self.precio_oferta and self.oferta == None) or (self.oferta and self.precio_oferta == None):
+            if (self.oferta == None):
+                raise ValidationError({"oferta": "Rellena este campo para poder poner un precio de oferta"})
+            elif(self.precio_oferta == None):
+                raise ValidationError({"precio_oferta": "Rellena este campo para poder poner el producto en oferta"})
 
 
 class Producto_Talla(models.Model):
