@@ -12,8 +12,8 @@ CATEGORIA_CHOICES = (
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=100, choices=CATEGORIA_CHOICES, unique=True)
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     def __str__(self):
         return self.nombre
@@ -23,8 +23,8 @@ class Categoria(models.Model):
 class Color(models.Model):
     descripcion = models.CharField(max_length=255, unique=True)
     codigo_hex = models.CharField(max_length=7, unique=True)
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     def __str__(self):
         return self.descripcion
@@ -36,8 +36,8 @@ class Color(models.Model):
 
 class Marca(models.Model):
     nombre = models.CharField(max_length=255, unique=True)
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     def __str__(self):
         return (self.nombre).capitalize()
@@ -45,8 +45,8 @@ class Marca(models.Model):
 
 class Ajuste(models.Model):
     descripcion = models.CharField(max_length=255, unique=True)
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     def __str__(self):
         return self.descripcion
@@ -63,8 +63,8 @@ class Tipo_Prenda(models.Model):
     categoria_padre = models.ForeignKey(
         Categoria, on_delete=models.CASCADE, verbose_name="Categoría padre"
     )
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     def __str__(self):
         return self.descripcion
@@ -85,8 +85,8 @@ class Tipo_Prenda(models.Model):
 
 class Talla(models.Model):
     talla = models.CharField(max_length=20, unique=True)
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     def __str__(self):
         return self.talla
@@ -115,8 +115,8 @@ class Producto(models.Model):
     producto_tipo_prenda = models.ManyToManyField(
         Tipo_Prenda, verbose_name="Tipo de prenda"
     )
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     @property
     def hay_stock(self):

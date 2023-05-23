@@ -60,8 +60,8 @@ PROVINCIAS_CHOICES = (
 
 class Categoria_Usuario(models.Model):
     categoria = models.CharField(max_length=255)  # USUARIO / EMPRESA (son las opciones)
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     def __str__(self):
         return (self.categoria).capitalize()
@@ -77,8 +77,8 @@ class Custom_User(AbstractUser):
     categoria = models.ForeignKey(
         Categoria_Usuario, on_delete=models.SET_NULL, null=True, blank=True, default="1"
     )
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     def clean(self):
         if not self.categoria:
@@ -101,8 +101,8 @@ class Direccion(models.Model):
     piso = models.CharField(max_length=20, null=True)
     puerta = models.CharField(max_length=20, null=True)
     datos_adicionales = models.TextField(null=True, blank=True)
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     def __str__(self):
         return (
@@ -127,8 +127,8 @@ class Carrito(models.Model):
         Custom_User, on_delete=models.CASCADE, verbose_name="Usuario del carrito"
     )
     producto = models.ManyToManyField(Producto, through="Carrito_Productos")
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     def __str__(self):
         return "Carrito de " + self.usuario.username
@@ -150,8 +150,8 @@ class Carrito_Productos(models.Model):
 class Lista_Deseos(models.Model):
     usuario = models.ForeignKey(Custom_User, on_delete=models.CASCADE)
     producto = models.ManyToManyField(Producto)
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     def __str__(self):
         return "Lista de deseos de " + self.usuario.username
@@ -174,8 +174,8 @@ class Comentario(models.Model):
     valoracion = models.IntegerField(choices=Puntuacion_Valoracion.choices)
     usuario = models.ForeignKey(Custom_User, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
 
 class Peticiones(models.Model):
@@ -185,5 +185,5 @@ class Peticiones(models.Model):
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     talla = models.CharField(max_length=20)
     usuario = models.ForeignKey(Custom_User, on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")

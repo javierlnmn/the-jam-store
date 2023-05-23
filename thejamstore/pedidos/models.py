@@ -7,8 +7,8 @@ import uuid
 
 class Estado_Pedido(models.Model):
     descripcion = models.CharField(max_length=255, unique=True)
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     def __str__(self):
         return self.descripcion
@@ -35,23 +35,26 @@ class Pedido(models.Model):
     estado = models.ForeignKey(
         Estado_Pedido, on_delete=models.SET_NULL, null=True, blank=True
     )
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
 
-    class Meta:
-        ordering = ["codigo_pedido"]
+    def __str__(self):
+        return "Pedido de " + self.usuario.username + ", " + str(self.codigo_pedido)
 
     def save(self, *args, **kwargs):
         if not self.codigo_pedido:
             self.codigo_pedido = uuid.uuid4()
         super().save(*args, **kwargs)
 
+    class Meta:
+        ordering = ["codigo_pedido"]
+
 
 class Pedido_Producto(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField(default=1)
-    created = models.DateTimeField(auto_now_add=True, verbose_name="fecha de creacion")
-    updated = models.DateTimeField(auto_now=True, verbose_name="fecha de modificacion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
     class Meta:
         verbose_name = "Productos en Pedidos"
