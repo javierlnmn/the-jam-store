@@ -62,6 +62,13 @@ class ComentarioAdmin(admin.ModelAdmin):
 
     def display_comentario(self, obj):
         return (obj.comentario[:90] + '...') if len(obj.comentario) > 90 else obj.comentario
+    
+class PeticionesAdmin(admin.ModelAdmin):
+    list_display = ('nombre_producto', 'usuario', 'precio_display', 'talla')
+    
+    def precio_display(self, obj):
+        return str(obj.precio) + '€'
+    precio_display.short_description = "Precio solicitado"
 
 
 admin.site.register(Categoria_Usuario)
@@ -70,4 +77,4 @@ admin.site.register(Direccion, DireccionAdmin)
 admin.site.register(Carrito, CarritoAdmin)
 admin.site.register(Lista_Deseos)
 admin.site.register(Comentario, ComentarioAdmin)
-admin.site.register(Peticiones)
+admin.site.register(Peticiones, PeticionesAdmin)

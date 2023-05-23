@@ -116,10 +116,10 @@ class Direccion(models.Model):
             + " "
             + self.numero
         )
-        
-        direccion_completa += ' ' + self.piso if self.piso else ''
-        direccion_completa += ' ' + self.puerta if self.puerta else ''
-        
+
+        direccion_completa += " " + self.piso if self.piso else ""
+        direccion_completa += " " + self.puerta if self.puerta else ""
+
         return direccion_completa
 
     class Meta:
@@ -127,10 +127,9 @@ class Direccion(models.Model):
         verbose_name_plural = "Direcciones"
 
 
-
 class Carrito(models.Model):
-    usuario = models.ForeignKey(
-        Custom_User, on_delete=models.CASCADE, verbose_name="Usuario del carrito", unique=True
+    usuario = models.OneToOneField(
+        Custom_User, on_delete=models.CASCADE, verbose_name="Usuario del carrito"
     )
     producto = models.ManyToManyField(Producto, through="Carrito_Productos")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
@@ -191,12 +190,14 @@ class Peticiones(models.Model):
     nombre_producto = models.CharField(max_length=255)
     mensaje = models.TextField()
     imagen = models.ImageField()
-    precio = models.DecimalField(max_digits=10, decimal_places=2)
+    precio = models.DecimalField(
+        max_digits=10, decimal_places=2, verbose_name="Precio solicitado",
+    )
     talla = models.CharField(max_length=20)
     usuario = models.ForeignKey(Custom_User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
-    
+
     class Meta:
         verbose_name = "Petición"
         verbose_name_plural = "Peticiones"

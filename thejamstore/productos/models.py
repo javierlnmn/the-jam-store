@@ -141,11 +141,8 @@ class Producto(models.Model):
     def clean(self):
         if not self.categoria:
             raise ValidationError({"categoria": "Este campo es obligatorio"})
-        if (self.precio_oferta and self.oferta == None) or (self.oferta and self.precio_oferta == None):
-            if (self.oferta == None):
-                raise ValidationError({"oferta": "Rellena este campo para poder poner un precio de oferta"})
-            elif(self.precio_oferta == None):
-                raise ValidationError({"precio_oferta": "Rellena este campo para poder poner el producto en oferta"})
+        if self.precio_oferta and self.oferta == None : raise ValidationError({"oferta": "Rellena este campo para poder poner un precio de oferta"})
+        if self.oferta and self.precio_oferta == None : raise ValidationError({"precio_oferta": "Rellena este campo para poder poner el producto en oferta"})
 
 
 class Producto_Talla(models.Model):
