@@ -42,11 +42,20 @@ class DireccionAdmin(admin.ModelAdmin):
         "calle",
         "numero",
     )
+    
+class Carrito_ProductoInline(admin.TabularInline):
+    model = Carrito_Productos
+    extra = 1
 
 
-class Carrito_ProductosAdmin(admin.ModelAdmin):
-    list_display = ("producto", "cantidad", "carrito")
-
+class CarritoAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'display_productos_list')
+    inlines = [Carrito_ProductoInline]
+    
+    def display_productos_list(self, obj):
+        productos = obj.producto.all()
+        return ", ".join([producto.nombre for producto in productos])
+    display_productos_list.short_description = "Productos del carrito"
 
 class ComentarioAdmin(admin.ModelAdmin):
     list_display = ("display_comentario", "usuario", "producto", "valoracion")
@@ -58,8 +67,7 @@ class ComentarioAdmin(admin.ModelAdmin):
 admin.site.register(Categoria_Usuario)
 admin.site.register(Custom_User, Custom_UserAdmin)
 admin.site.register(Direccion, DireccionAdmin)
-admin.site.register(Carrito)
-admin.site.register(Carrito_Productos, Carrito_ProductosAdmin)
+admin.site.register(Carrito, CarritoAdmin)
 admin.site.register(Lista_Deseos)
 admin.site.register(Comentario, ComentarioAdmin)
 admin.site.register(Peticiones)

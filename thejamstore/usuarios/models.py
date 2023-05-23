@@ -130,7 +130,7 @@ class Direccion(models.Model):
 
 class Carrito(models.Model):
     usuario = models.ForeignKey(
-        Custom_User, on_delete=models.CASCADE, verbose_name="Usuario del carrito"
+        Custom_User, on_delete=models.CASCADE, verbose_name="Usuario del carrito", unique=True
     )
     producto = models.ManyToManyField(Producto, through="Carrito_Productos")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
