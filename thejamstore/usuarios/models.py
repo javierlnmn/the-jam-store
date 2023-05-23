@@ -117,8 +117,8 @@ class Direccion(models.Model):
             + self.numero
         )
         
-        if self.piso: direccion_completa += ' ' + self.piso
-        if self.puerta: direccion_completa += ' ' + self.puerta
+        direccion_completa += ' ' + self.piso if self.piso else ''
+        direccion_completa += ' ' + self.puerta if self.puerta else ''
         
         return direccion_completa
 
