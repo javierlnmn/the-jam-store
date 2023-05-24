@@ -2,6 +2,8 @@ from django.db import models
 from usuarios.models import Custom_User, Direccion
 from productos.models import Producto, Talla, Producto_Talla
 from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
+
 
 import uuid
 
@@ -30,7 +32,10 @@ class Pedido(models.Model):
         unique=True,
         verbose_name="Código del pedido",
     )
-    producto = models.ManyToManyField(Producto, through="Pedido_Producto")
+    producto = models.ManyToManyField(
+        Producto,
+        through="Pedido_Producto",
+    )
     estado = models.ForeignKey(
         Estado_Pedido, on_delete=models.SET_NULL, null=True, blank=True
     )
@@ -47,6 +52,7 @@ class Pedido(models.Model):
     def clean(self):
         if not self.estado:
             raise ValidationError({"estado": "Este campo es olbigatorio"})
+
         if self:
             if self.direccion.usuario != self.usuario:
                 raise ValidationError(
@@ -54,49 +60,76 @@ class Pedido(models.Model):
                         "direccion": "La dirección seleccionada no pertenece al usuario seleccionado"
                     }
                 )
-
+                
     class Meta:
-        ordering = ["codigo_pedido"]
+        ordering = ["usuario"]
 
 
 class Pedido_Producto(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    cantidad = models.PositiveIntegerField(default=1)
-    talla = models.ForeignKey(Talla, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE, null=False)
+    cantidad = models.PositiveIntegerField(
+        null=False,
+        validators=[MinValueValidator(1)],
+    )
+    talla = models.ForeignKey(Talla, on_delete=models.CASCADE, null=False)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
-
     def clean(self):
+        try:
+            producto = Producto.objects.get(pk=self.producto.id)
+            inventario_tallas = Producto_Talla.objects.filter(producto=producto.id)
+        except:
+            raise ValidationError("")
+
+        if not self.producto or not self.cantidad or not self.talla_id:
+            raise ValidationError("")
         
-        producto = Producto.objects.get(pk=self.producto.id)
+
+        hay_duplicados = False        
+        productos_del_pedido = Pedido_Producto.objects.filter(producto=producto, pedido_id=self.pedido.id)
+
+        if productos_del_pedido.count() > 1:
+            
+            tallas_del_producto = []
+            
+            for producto in productos_del_pedido:
+                tallas_del_producto.append(producto.talla)
+                print(producto)
         
-        inventario_tallas = Producto_Talla.objects.filter(producto=producto.id)
-        
+            print(tallas_del_producto)
+            print(set(tallas_del_producto))
+            if len(set(tallas_del_producto)) < len(tallas_del_producto):
+                hay_duplicados = True
+
+            if hay_duplicados:
+                raise ValidationError('No se puede añadir productos duplicados a un pedido')
+                
+
+        talla_valida = False
+        cantidad_valida = False
+
         for inventario in inventario_tallas:
-            
+
             if self.talla == inventario.talla:
+                talla_valida = True
                 
-                if self.cantidad > inventario.cantidad:
-                    
-                    raise ValidationError(
-                        {
-                            "cantidad": "No disponemos de esta cantidad del producto en el inventario"
-                        }
-                    )
-                    
-                return
-            
-            else: 
+                if self.cantidad <= inventario.cantidad:
+                    cantidad_valida = True
                 
-                raise ValidationError(
-                        {
-                            "talla": "No disponemos de esta talla en el inventario"
-                        }
-                    )
+                break
             
+        if not talla_valida:
+            raise ValidationError(
+                    {"talla": "No disponemos de esta talla en el inventario"}
+                )
+            
+        if not cantidad_valida:
+            raise ValidationError(
+                    {"cantidad": "No disponemos de esta cantidad en el inventario"}
+                )
 
     class Meta:
-        verbose_name = "Productos en Pedidos"
-        verbose_name_plural = verbose_name
+        verbose_name = "Productos del pedido"
+        verbose_name_plural = "Productos del pedido"
