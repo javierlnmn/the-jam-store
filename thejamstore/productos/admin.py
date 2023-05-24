@@ -22,6 +22,7 @@ class Tipo_PrendaAdmin(admin.ModelAdmin):
 
 class ProductoAdmin(admin.ModelAdmin):
     list_display = ("display_imagen", "nombre", "referencia", "display_hay_stock")
+    list_display_links = ("display_imagen", "nombre")
     list_filter = ("categoria",)
 
     def display_imagen(self, obj):
@@ -31,15 +32,18 @@ class ProductoAdmin(admin.ModelAdmin):
         )
 
     display_imagen.short_description = "Vista previa"
-    
+
     def display_hay_stock(self, obj):
         return obj.get_stock
+
     display_hay_stock.boolean = True
-    display_hay_stock.short_description = 'Hay Stock'
-    
+    display_hay_stock.short_description = "Hay Stock"
+
 
 class Producto_TallaAdmin(admin.ModelAdmin):
     list_display = ("display_imagen", "producto", "talla", "cantidad")
+    list_filter = ("talla",)
+
 
     def display_imagen(self, obj):
         return format_html(

@@ -1,6 +1,6 @@
 from django.db import models
 from usuarios.models import Custom_User, Direccion
-from productos.models import Producto
+from productos.models import Producto, Talla, Producto_Talla
 from django.core.exceptions import ValidationError
 
 import uuid
@@ -23,9 +23,7 @@ class Pedido(models.Model):
     usuario = models.ForeignKey(
         Custom_User, on_delete=models.SET_NULL, null=True, blank=True
     )
-    direccion = models.ForeignKey(
-        Direccion, on_delete=models.SET_NULL, null=True, blank=True
-    )
+    direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
     codigo_pedido = models.UUIDField(
         default=uuid.uuid4,
         editable=False,
@@ -49,10 +47,13 @@ class Pedido(models.Model):
     def clean(self):
         if not self.estado:
             raise ValidationError({"estado": "Este campo es olbigatorio"})
-        if self.direccion.usuario != self.usuario:
-            raise ValidationError(
-                {"direccion": "La dirección seleccionada no pertenece al usuario seleccionado"}
-            )
+        if self:
+            if self.direccion.usuario != self.usuario:
+                raise ValidationError(
+                    {
+                        "direccion": "La dirección seleccionada no pertenece al usuario seleccionado"
+                    }
+                )
 
     class Meta:
         ordering = ["codigo_pedido"]
@@ -62,8 +63,39 @@ class Pedido_Producto(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField(default=1)
+    talla = models.ForeignKey(Talla, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
+
+
+    def clean(self):
+        
+        producto = Producto.objects.get(pk=self.producto.id)
+        
+        inventario_tallas = Producto_Talla.objects.filter(producto=producto.id)
+        
+        for inventario in inventario_tallas:
+            
+            if self.talla == inventario.talla:
+                
+                if self.cantidad > inventario.cantidad:
+                    
+                    raise ValidationError(
+                        {
+                            "cantidad": "No disponemos de esta cantidad del producto en el inventario"
+                        }
+                    )
+                    
+                return
+            
+            else: 
+                
+                raise ValidationError(
+                        {
+                            "talla": "No disponemos de esta talla en el inventario"
+                        }
+                    )
+            
 
     class Meta:
         verbose_name = "Productos en Pedidos"
