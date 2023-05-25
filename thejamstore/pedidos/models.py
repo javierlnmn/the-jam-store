@@ -86,25 +86,6 @@ class Pedido_Producto(models.Model):
         if not self.producto or not self.cantidad or not self.talla_id:
             raise ValidationError("")
 
-        # hay_duplicados = False
-        # productos_del_pedido = Pedido_Producto.objects.filter(producto=producto, pedido_id=self.pedido.id)
-
-        # if productos_del_pedido.count() > 1:
-
-        #     tallas_del_producto = []
-
-        #     for producto in productos_del_pedido:
-        #         tallas_del_producto.append(producto.talla)
-        #         print(producto)
-
-        #     print(tallas_del_producto)
-        #     print(set(tallas_del_producto))
-        #     if len(set(tallas_del_producto)) < len(tallas_del_producto):
-        #         hay_duplicados = True
-
-        #     if hay_duplicados:
-        #         raise ValidationError('No se puede añadir productos duplicados a un pedido')
-
         talla_valida = False
         cantidad_valida = False
 
