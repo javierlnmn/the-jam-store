@@ -2,20 +2,27 @@ from django.contrib import admin
 from django.forms.models import BaseInlineFormSet
 from .models import *
 from django.core.exceptions import ValidationError
+from django.utils.html import format_html
 
 
 class PedidoProductoFormSet(BaseInlineFormSet):
     def clean(self):
         super().clean()
-        productos = []
-        for form in self.forms:
-            productos.append(
-                (form.cleaned_data.get("producto"), form.cleaned_data.get("talla"))
+        productos = [
+            (form.cleaned_data.get("producto"), form.cleaned_data.get("talla"))
+            for form in self.forms
+            if (form.cleaned_data.get("producto") or form.cleaned_data.get("talla")) and not form.cleaned_data.get("DELETE")
+        ]
+
+        if not productos:
+            raise ValidationError(
+                format_html('<div style="padding: 10px 0;">No se puede crear un pedido sin productos.</div>')
             )
+            
         productos_no_duplicados = set(productos)
         if len(productos_no_duplicados) < len(productos):
             raise ValidationError(
-                "Hay productos duplicados. Modifique el producto o seleccione otra talla."
+               format_html('<div style="padding: 10px 0;">Hay productos duplicados. Modifique el producto o seleccione otra talla.</div>')
             )
 
 

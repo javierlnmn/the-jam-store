@@ -147,7 +147,7 @@ class Producto(models.Model):
 
 class Producto_Talla(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    talla = models.ForeignKey(Talla, on_delete=models.CASCADE)
+    talla = models.ForeignKey(Talla, on_delete=models.CASCADE, verbose_name = 'Talla')
     cantidad = models.PositiveIntegerField(default=0)
 
     def __str__(self):
@@ -167,6 +167,7 @@ class Producto_Talla(models.Model):
         talla_producto = Producto_Talla.objects.filter(
             producto=self.producto, talla=self.talla
         ).first()
+        
         if talla_producto:
             self.id = talla_producto.id  # Override existing object by assigning its ID
             self._state.adding = False

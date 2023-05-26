@@ -83,6 +83,9 @@ class Custom_User(AbstractUser):
     def clean(self):
         if not self.categoria:
             raise ValidationError({"categoria": "Este campo es obligatorio"})
+        
+    def __str__(self):
+        return self.username
 
     class Meta:
         verbose_name = "Usuario"

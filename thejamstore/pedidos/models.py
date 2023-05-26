@@ -84,7 +84,7 @@ class Pedido_Producto(models.Model):
             raise ValidationError("")
 
         if not self.producto or not self.cantidad or not self.talla_id:
-            raise ValidationError("")
+            return
 
         talla_valida = False
         cantidad_valida = False

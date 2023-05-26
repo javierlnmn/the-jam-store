@@ -5,10 +5,11 @@ from django.utils.html import format_html
 
 class ColorAdmin(admin.ModelAdmin):
     list_display = ("display_color", "descripcion")
+    list_display_links = ("display_color", "descripcion")
 
     def display_color(self, obj):
         return format_html(
-            '<div style="background-color: {}; width: 1rem; height: 1rem;">&nbsp;</div>',
+            '<div style="background-color: {}; width: 5rem; height: 1rem;">&nbsp;</div>',
             obj.codigo_hex,
         )
 
