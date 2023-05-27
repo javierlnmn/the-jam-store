@@ -85,6 +85,7 @@ function letterAnimation(el, cls) {
 let modalBusqueda = $('#modal-busqueda');
 
 $('#boton-busqueda').on('click', function () {
+    console.log(modalBusqueda);
     modalBusqueda.show();
     $('body').css('overflow', 'hidden');
 });

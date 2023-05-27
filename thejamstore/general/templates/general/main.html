@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% comment %} Head, donde están los links a estilos y cosas varias {% endcomment %}
+{% include 'general/base/head.html' %}
+
+<body>
+
+    {% comment %} Cabecera de la página {% endcomment %}
+    {% include 'general/base/header.html' %}
+
+    {% comment %} Contenido de la página {% endcomment %}
+    {% block contenido %}
+    {% endblock %}
+
+    {% comment %} Pie de página de la página {% endcomment %}
+    {% include 'general/base/footer.html' %}
+
+    {% comment %} Modales de la página {% endcomment %}
+    {% include 'general/modales/busqueda.html' %}
+    {% include 'general/modales/inicio-sesion.html' %}
+
+    {% comment %} Scripts necesarios para la página. Los globales en el include y los individuales de cada página en el bloque {% endcomment %}
+    {% include 'general/base/scripts.html' %}
+    {% block scripts %}
+    {% endblock %}
+
+</body>
+
+</html>
+
+<!-- Nada de esto hubiera sido posible sin la ayudda de nuestro amigo ChatGPT. Gracias por tanto, perdón por tan poco -->
