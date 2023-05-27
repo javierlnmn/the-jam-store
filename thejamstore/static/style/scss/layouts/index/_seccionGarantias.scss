@@ -1,0 +1,46 @@
+.seccion-garantias {
+
+    @include ondas('garantias');
+
+    .titulo span {
+        color: $azul;
+    }
+
+    .contenedor-garantias {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5rem;
+
+        @include desktop {
+            grid-template-columns: repeat(2, 1fr);
+            & .garantia:nth-last-child(1) {
+                grid-column: 1 / -1;
+            }
+            width: 90%;
+        }
+
+        @include tablet {
+            grid-template-columns: auto;
+            gap: 0;
+        }
+
+        .garantia {
+
+            .titulo-secundario {
+                font-weight: $regular-bold;
+                text-align: center;
+
+                span {
+                    font-weight: $extra-bold;
+                    color: $amarillo;
+                }
+            }
+
+            p {
+                text-align: justify;
+            }
+
+        }
+
+    }
+}

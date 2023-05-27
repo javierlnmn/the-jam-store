@@ -1,0 +1,71 @@
+.contenedor-boton-radio {
+    font-family: system-ui, sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1.1;
+
+    &+.contenedor-boton-radio {
+        margin-top: 1em;
+    }
+
+    .boton-radio {
+        appearance: none;
+        outline: transparent;
+        margin: 0;
+        font: inherit;
+        width: 2.5rem;
+        height: 2.5rem;
+        box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 1),
+            inset -1px -1px 1.5px -0.5px rgba(0, 0, 0, 0.2),
+            inset 0px 0px 100px rgba(0, 0, 0, 0), 1px 1px 2px -1px rgba(0, 0, 0, 0.1),
+            0px -0.5px 2px rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        display: grid;
+        place-content: center;
+        transition: 100ms box-shadow ease-in-out, 100ms outline ease-in-out;
+        cursor: pointer;
+
+        &::before {
+            content: "";
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            transition: 140ms box-shadow ease-in-out, 100ms background-color ease-in-out;
+            box-shadow: inset 1px 1px 1px -0.75px rgba(0, 0, 0, 0.1),
+                inset -1px -1px 2px -1px rgba(0, 0, 0, 0.1),
+                inset 0px 0px 100px rgba(0, 0, 0, 0.01);
+            outline: 0.1px solid rgba(0, 0, 0, 0.01);
+            outline-offset: -0.5px;
+        } 
+
+        &:checked::before {
+            background-color: white;
+            box-shadow: inset 1px 1px 1px -0.5px rgba(255, 255, 255, 1),
+                inset -2px -2px 1px -0.5px rgba(0, 0, 0, 0.07),
+                1px 1px 1.5px -1px rgba(0, 0, 0, 0.25),
+                inset 0px 0px 100px rgba(0, 0, 0, 0.005);
+        }
+
+        &:checked {
+            box-shadow: inset 1px 1px 2px 0.25px rgba(0, 0, 0, 0.2),
+                inset -1px -1px 2px 0.25px rgba(255, 255, 255, 1),
+                inset 0px 0px 100px rgba(0, 0, 0, 0.1);
+            outline: 0.1px solid rgba(0, 0, 0, 0.01);
+            outline-offset: -0.5px;
+        }
+
+        &:focus::before {
+            box-shadow: inset 2px 2px 2px -1.75px rgba(255, 255, 255, 0.3),
+            inset -1px -1px 1px -1px rgba(0, 0, 0, 0.1),
+            1px 1px 1.5px -1px rgba(0, 0, 0, 0.25);
+            background-color: rgb(0, 159, 183);
+        }
+
+        &:focus {
+            outline: 2px solid rgb(0, 159, 183);
+            outline-offset: -3px;
+        } 
+
+    }
+    
+}

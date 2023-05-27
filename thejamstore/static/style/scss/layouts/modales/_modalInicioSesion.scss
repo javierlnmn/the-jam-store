@@ -1,0 +1,42 @@
+.modal .modal-inicio-sesion-contenido {
+
+    max-width: 50rem;
+    width: 90%;
+    min-width: 30rem;
+
+    h4 {
+        margin: 0;
+    }
+
+    .texto-secundario {
+        margin: 0 0 1.8rem 0;
+    }
+
+    .contenedor-formulario {
+
+        margin-top: 1rem;
+
+        .formulario {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+
+            @include estilo-enlace($azul);
+        }
+
+        .enlaces {
+
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: .5rem;
+
+            @include estilo-enlace($gris) {
+                font-weight: $delgada;
+                text-decoration: underline;
+            }
+        }
+    }
+
+}

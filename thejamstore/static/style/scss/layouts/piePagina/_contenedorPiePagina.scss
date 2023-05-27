@@ -1,0 +1,36 @@
+.contenedor-footer {
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    .seccion-doble {
+        grid-column: span 2;
+    }
+
+    .texto-derechos-reservados {
+        color: $gris;
+        grid-column: 1 / -1;
+        text-align: center;
+        font-size: 1.4rem;
+        margin-top: 4rem;
+
+        span.logo-animado {
+            color: $gris;
+
+            .logo-animado__palabra .logo-animado__caracter-interior:after {
+                color: $blanco;
+            }
+        }
+    }
+
+    @include desktop{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include telefono {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+}

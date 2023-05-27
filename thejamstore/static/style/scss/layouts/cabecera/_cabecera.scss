@@ -1,0 +1,29 @@
+.cabecera {
+
+    min-height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: $blanco;
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    transition: background-color .3s ease,
+    box-shadow .3s ease;
+
+    @include desktop {
+        flex-direction: column;
+        gap: 2rem;
+        padding-bottom: 3rem;
+
+        .logo-animado {
+            margin-bottom: 0
+        }
+
+    }
+
+    @include telefono {
+        position: static;
+    }
+
+}

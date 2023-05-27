@@ -1,0 +1,30 @@
+.logo-animado {
+
+    font-weight: $bold;
+    color: $azul;
+
+    * {
+        pointer-events: none;
+    }
+
+    .logo-animado__palabra {
+
+        display: inline-flex;
+        position: relative;
+        overflow: hidden;
+
+        .logo-animado__caracter-interior {
+            display: inline-block;
+        }
+
+        .logo-animado__caracter-interior:after {
+            content: attr(letra);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            color: $amarillo;
+        }
+
+    }
+
+}

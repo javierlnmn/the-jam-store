@@ -1,0 +1,50 @@
+/** Base **/
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/globales';
+
+/** Common **/
+@import 'common/logoAnimado';
+@import 'common/utils';
+@import 'common/estiloEnlaces';
+@import 'common/inputNumeroArticulos';
+@import 'common/inputCheckbox';
+@import 'common/inputText';
+@import 'common/inputRadio';
+@import 'common/displayProductos';
+@import 'common/productoCard';
+@import 'common/productoRow';
+@import 'common/bannerOndas';
+@import 'common/seccionProductosRecomendados';
+@import 'common/seccionAjustesBusqueda';
+
+/** Layouts **/
+@import 'layouts/cabecera/cabecera';
+@import 'layouts/cabecera/navegacionPrincipal';
+@import 'layouts/cabecera/navegacionSecundaria';
+@import 'layouts/cabecera/cabeceraOnScroll';
+
+@import 'layouts/index/seccionVideo';
+@import 'layouts/index/seccionDescuentos';
+@import 'layouts/index/seccionDestacado';
+@import 'layouts/index/seccionGarantias';
+
+@import 'layouts/articulo/seccionProducto';
+@import 'layouts/articulo/seccionValoraciones';
+
+@import 'layouts/listaDeseos/seccionEncabezado';
+@import 'layouts/listaDeseos/seccionListaDeseos';
+
+@import 'layouts/carrito/seccionCarrito';
+@import 'layouts/carrito/seccionCarritoDescripcion';
+
+@import 'layouts/seccionRopa/seccionRopa';
+
+@import 'layouts/piePagina/piePagina';
+@import 'layouts/piePagina/contenedorPiePagina';
+@import 'layouts/piePagina/seccionesPiePagina';
+
+@import 'layouts/modales/modal';
+@import 'layouts/modales/modalBusqueda';
+@import 'layouts/modales/modalVaciarCarrito';
+@import 'layouts/modales/modalInicioSesion';

@@ -1,0 +1,24 @@
+.modal .modal-vaciar-carrito-contenido {
+
+    max-width: 50rem;
+    width: 90%;
+    min-width: 30rem;
+
+    .botones {
+        display: flex;
+        gap: 2rem;
+
+        @include estilo-enlace($negro) {
+            width: 8rem;
+            text-align: center;
+        }
+
+        .enlace-rojo {
+            display: grid;
+            place-items: center;
+            @include estilo-enlace($rojo);
+        }
+
+    }
+
+}

@@ -1,0 +1,70 @@
+.modal .modal-busqueda-contenido {
+    
+    width: 90%;
+    max-width: 90rem;
+    min-width: 32rem;
+    padding-top: 3rem;
+
+    @include tablet {
+        .cuadro-busqueda svg {
+            display: none;
+        }
+
+        .cuadro-busqueda input {
+            min-width: 0;
+        }
+
+        .titulo-secundario {
+            font-size: 2rem;
+        }
+    }
+
+    .cuadro-busqueda {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        align-items: center;
+
+        svg {
+            color: $negro;
+        }
+
+        .input {
+            flex: 1;
+        }
+    }
+
+    .titulo-secundario {
+        margin-bottom: 1rem;
+    }
+
+    .lista-recomendaciones {
+        li {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            &>svg {
+                color: $gris;
+            }
+        }
+        .titulo-lista {
+            font-size: 2rem;
+            font-weight: $bold;
+            margin-top: 2rem;
+        }
+        .elemento-lista {
+            padding: 1rem;
+            padding-left: .4rem;
+            &+.elemento-lista {
+                border-top: .1rem solid $gris;
+            }
+
+            &:hover {
+                background-color: darken($blanco, 5%);
+                cursor: pointer;
+            }
+        }
+    }
+
+}

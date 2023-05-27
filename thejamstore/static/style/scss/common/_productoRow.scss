@@ -1,0 +1,92 @@
+.producto-display_row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+
+    .imagen {
+        place-self: center;
+
+        .marcador-oferta {
+            position: absolute;
+            z-index: 0;
+            padding: .1rem .3rem;
+            margin: 1rem;
+            background-color: $amarillo;
+            border-radius: .2rem;
+            color: $blanco;
+            font-size: 1.5rem;
+            font-weight: $bold;
+
+            @include tablet {
+                font-size: 1.3rem;
+            }
+
+            @include telefono {
+                font-size: 1.2rem;
+            }
+        }
+
+        img {
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: .5rem;
+        }
+    }
+
+    .informacion {
+        grid-column: 2 / -1;
+
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+
+        p {
+            margin: 0;
+            &.nombre-articulo {
+                font-size: 2.5rem;
+            }
+        }
+
+        gap: 1rem;
+
+        .botones {
+            margin: auto 0 0 auto;
+            display: flex;
+            gap: 1rem;
+
+            @include desktop {
+                flex-direction: column;
+
+                &>a {
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+
+            @include tablet {
+                margin: 0;
+            }
+
+            @include estilo-enlace(lighten($negro, 10%)) {
+                margin: auto 0 0 auto;
+            }
+
+        }
+
+
+    }
+
+    @include desktop {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include tablet {
+        grid-template-columns: 1fr;
+        gap: 0;
+        margin: 0 auto;
+
+        .informacion {
+            grid-column: 1 / 1;
+        }
+    }
+}

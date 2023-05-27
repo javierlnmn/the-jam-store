@@ -1,0 +1,94 @@
+.seccion-valoraciones {
+
+     @include ondas('valoraciones');
+
+     .contenedor .valoraciones {
+
+          .valoracion {
+
+               &+.valoracion {
+                    border-top: .1rem solid $gris;
+               }
+
+               display: flex;
+               gap: 3rem;
+               padding: 2rem 0;
+
+               .informacion-valoracion {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    .usuario {
+                         display: flex;
+                         flex-direction: row;
+                         align-items: center;
+                         gap: 2rem;
+
+                         p {
+                              font-weight: $bold;
+                              font-size: 2.4rem;
+                              @include telefono { font-size: 2rem; }
+                         }
+
+                         .foto-perfil {
+                              max-width: 3.5rem;
+                              aspect-ratio: 1;
+                              object-fit: contain;
+                         }
+
+                         .puntuacion {
+                              display: flex;
+                              align-items: center;
+                              gap: 1rem;
+
+                              img {
+                                   max-width: 2.3rem;
+                              }
+                         }
+                    }
+               }
+
+               .votacion {
+
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                    align-items: center;
+                    justify-content: center;
+
+                    img {
+                         max-width: 3.5rem;
+                         cursor: pointer;
+
+                         &:nth-child(1) {
+                              transform: rotate(90deg);
+                         }
+
+                         &:nth-child(3) {
+                              transform: rotate(270deg);
+                         }
+                    }
+               }
+          }
+
+          .ver-mas {
+
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               gap: 2rem;
+
+               span {
+                    background-color: $gris;
+                    height: .1rem;
+                    flex: 1;
+               }
+
+               p {
+                    cursor: pointer;
+               }
+          }
+     }
+}

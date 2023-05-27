@@ -1,0 +1,64 @@
+.seccion-carrito {
+    display: flex;
+    flex-direction: column;
+
+    @include display-productos(1, 2rem, false);
+
+    .pie-carrito {
+
+        position: sticky;
+
+        @include desktop {
+            position: static;
+        }
+
+        bottom: 0;
+        background-color: $blanco;
+        padding-bottom: 2rem;
+        margin-top: 3rem;
+        box-shadow: 0 -.2rem .6rem rgba(0, 0, 0, 0.1),
+        .2rem 0 .6rem rgba(0, 0, 0, 0.1),
+        -.2rem 0 .6rem rgba(0, 0, 0, 0.1);
+        transition: box-shadow .5s ease,
+        border-top .5s ease;
+
+        .contenedor {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 1rem;
+            gap: 2rem;
+
+            @include tablet {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .botones {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+
+                @include tablet {
+                    flex-direction: column;
+                }
+
+                @include estilo-enlace($negro) {
+                    width: fit-content;
+                    height: fit-content;
+
+                    @include tablet {
+                        width: 100%;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+
+    }
+
+    .pie-carrito_sin-sombra {
+        box-shadow: none;
+        border-top: .1rem solid lighten($gris, 20%);
+    }
+}

@@ -1,0 +1,47 @@
+.cabecera {
+    .navegacion-secundaria {
+
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+
+        a {
+            cursor: pointer;
+            position: relative;
+
+            .icono {
+                color: $negro;
+                transition: color .3s ease;
+                
+                &:hover {
+                    color: lighten($negro, 20%);
+                }
+            }
+
+            .icono-corazon {
+                color: $rojo;
+
+                &:hover {
+                    color: lighten($rojo, 10%);
+                }
+            }
+
+            &.carrito .carrito-numero-productos {
+                position: absolute;
+                top: -1rem;
+                left: 2rem;
+                height: 2rem;
+                width: 2rem;
+                background-color: $rojo;
+                font-size: 1.3rem;
+                color: $blanco;
+                font-weight: $regular-bold;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+            }
+
+        }
+
+    }
+}

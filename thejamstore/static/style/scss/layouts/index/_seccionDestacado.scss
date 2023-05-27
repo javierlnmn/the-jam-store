@@ -1,0 +1,55 @@
+.seccion-destacado {
+
+    margin-bottom: 3rem;
+
+    article {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+
+        .imagen-destacado {
+            border-radius: 1rem;
+            grid-column: 1 / 2;
+        }
+
+        .informacion-destacado {
+
+            grid-column: 2 / -1;
+            display: flex;
+            flex-direction: column;
+
+            p {
+                color: lighten($gris, 20%);
+                border-radius: 2rem;
+                transition: color 1s ease;
+            }
+
+            .texto-animado {
+                color: $negro;
+            }
+
+            @include estilo-enlace($negro) {
+                margin: auto 0 0 auto;
+
+                @include tablet {
+                    margin: 0;
+                    text-align: center;
+                }
+            }
+
+        }
+
+        @include desktop {
+            grid-template-columns: repeat(2, 1fr);
+            grid-column: 1 / 1;
+        }
+
+        @include tablet {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+    }
+
+}

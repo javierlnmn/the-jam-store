@@ -1,0 +1,4 @@
+.seccion-productos-recomendados {
+    margin-top: 6rem;
+    @include display-productos(4, 3rem, true);
+}

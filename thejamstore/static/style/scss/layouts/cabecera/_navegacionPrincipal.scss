@@ -1,0 +1,39 @@
+.cabecera {
+
+    .navegacion-principal {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 4rem;
+
+        .opcion-menu {
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+
+            @include estilo-enlace($negro);
+
+            &.enlace-busqueda {
+                svg {
+                    transition: stroke .3s ease;
+                }
+
+                &:hover svg {
+                    stroke: $azul;
+                }
+            }
+
+            
+        }
+
+        @include tablet {
+            gap: 2rem;
+        }
+
+        @include telefono {
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+    }
+}

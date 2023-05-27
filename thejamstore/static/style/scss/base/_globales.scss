@@ -1,0 +1,84 @@
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    font-family: $fuente_principal;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0rem;
+    background-color: $blanco;
+    font-family: $fuente-principal;
+    font-size: 1.6rem;
+    line-height: 1.8;
+    overflow-x: hidden;
+}
+
+/* Cambiar el color por defecto de los textos de negro #000000 a negro #1C1C1C */
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a {
+    color: $negro;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+img,
+picture {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+h1,
+h2,
+h3 {
+    margin: 2.2rem 0;
+    font-weight: 300;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3.8rem;
+}
+
+h2 {
+    font-size: 3.4rem;
+}
+
+h3 {
+    font-size: 3rem;
+}
+
+h4 {
+    font-size: 2.6rem;
+}
+
+p {
+    font-size: 1.8rem;
+
+    @include telefono {
+        font-size: 1.7rem;
+    }
+}

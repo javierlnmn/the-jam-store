@@ -1,0 +1,30 @@
+.seccion-carrito-descripcion {
+
+    .contenedor-informacion {
+
+        max-width: 90rem;
+
+        .lista {
+
+            list-style: none;
+
+            .elemento-lista {
+
+                display: flex;
+                align-items: flex-start;
+                gap: 1rem;
+
+                svg {
+                    margin-top: .4rem;
+                    min-width: 2rem;
+                    max-width: 2rem;
+                    min-height: 2rem;
+                    max-height: 2rem;
+                }
+
+            }
+        }
+    }
+}
+
+@include ondas('carrito');

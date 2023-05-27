@@ -1,0 +1,68 @@
+.contenedor {
+    width: 95%;
+    max-width: 140rem;
+    margin: 0 auto;
+}
+
+.negrita {
+    font-weight: $bold;
+}
+
+.titulo {
+    font-weight: $black;
+    color: $negro;
+    font-size: 4.2rem;
+
+    @include telefono {
+        font-size: 3.8rem;
+    }
+
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.titulo-secundario {
+    font-weight: $extra-bold;
+    color: $negro;
+    text-align: left;
+    text-transform: uppercase;
+
+    @include tablet {
+        text-align: center;
+    }
+}
+
+.texto-izquierda {
+    text-align: left;
+}
+
+.texto-derecha {
+    text-align: right;
+}
+
+.texto-centrado {
+    text-align: center;
+}
+
+.texto-secundario {
+    color: $gris;
+    font-weight: $delgada;
+}
+
+.texto-pequeno {
+    font-size: 1.3rem;
+}
+
+.texto-tachado {
+    text-decoration: line-through;
+    color: $gris;
+    font-weight: $delgada;
+}
+
+.texto-rojo {
+    color: $rojo;
+}
+
+.texto-verde {
+    color: $verde;
+}

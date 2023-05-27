@@ -1,0 +1,43 @@
+@mixin estilo-enlace($color) {
+    .enlace {
+        color: $color;
+        transition: color .3s ease;
+        font-weight: $regular-bold;
+
+        &:hover {
+            color: $azul;
+        }
+
+        &_boton {
+
+            @if $color ==$blanco {
+                background-color: $negro;
+
+                &:hover {
+                    color: $negro;
+                }
+            }
+
+            @else {
+                background-color: $blanco;
+
+                &:hover {
+                    color: $blanco;
+                }
+            }
+
+            padding: 1rem 2rem;
+            color: $color;
+            border: 1px solid $color;
+            transition: background-color .3s ease;
+
+            &:hover {
+                background-color: $color;
+            }
+
+            @content;
+        }
+
+        @content;
+    }
+}

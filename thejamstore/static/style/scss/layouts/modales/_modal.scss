@@ -1,0 +1,45 @@
+.modal {
+
+    display: none;
+    position: fixed;
+    z-index: 3;
+    padding-top: 9rem;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: rgba(0, 0, 0, 0.4);
+
+    .modal-contenido {
+        background-color: $blanco;
+        margin: auto;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        border: .1rem solid $gris;
+        position: relative;
+
+        @include tablet {
+            min-width: auto;
+            width: 90%;
+        }
+
+        .close {
+            color: $gris;
+            font-size: 2.8rem;
+            line-height: 2.8rem;
+            margin: -.5rem -.5rem 0 0;
+            float: right;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: $negro;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+    }
+
+}

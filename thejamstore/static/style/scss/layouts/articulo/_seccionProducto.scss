@@ -1,0 +1,63 @@
+.seccion-producto {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem;
+    margin-top: 3rem;
+
+    img {
+        aspect-ratio: 1;
+        object-fit: cover;
+        position: sticky;
+        top: 14rem;
+    }
+
+    @include desktop {
+        display: flex;
+        flex-direction: column;
+
+        img {
+            max-width: 60rem;
+            margin: 0 auto;
+            position: static;
+        }
+    }
+
+    .precio {
+        color: darken($gris, 20%);
+        font-size: 1.8rem;
+        font-weight: $regular-bold;
+    }
+
+    .botones {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        @include estilo-enlace($negro) {
+            text-align: center;
+        }
+
+        > a  {
+            flex: 1;
+        }
+
+        .icono-corazon {
+            color: $gris;
+            cursor: pointer;
+        }
+
+        .icono-corazon_activo {
+            color: $rojo;
+        }
+
+        @include tablet {
+            flex-direction: column;
+            align-items: baseline;
+            > a {
+                width: 100%;
+            }
+        }
+
+    }
+
+}

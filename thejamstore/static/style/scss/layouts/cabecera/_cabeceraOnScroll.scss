@@ -1,0 +1,38 @@
+.cabecera-onScroll {
+    background-color: $negro;
+    box-shadow: $sombra;
+
+    .navegacion-principal .opcion-menu {
+        @include estilo-enlace($blanco);
+
+        .enlace-busqueda svg {
+            stroke: $blanco;
+        }
+    }
+
+    .navegacion-secundaria {
+
+        a .icono {
+            color: $blanco;
+            &:hover {
+                color: $azul;
+            }
+        }
+
+        a .icono-corazon {
+            color: $rojo;
+            &:hover {
+                color: lighten($rojo, 10%);
+            }
+        }
+
+    }
+
+    .logo-animado {
+        color: $amarillo;
+        .logo-animado__caracter-interior:after {
+            color: $azul;
+        }
+    }
+
+}

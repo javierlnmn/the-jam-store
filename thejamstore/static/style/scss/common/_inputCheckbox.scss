@@ -1,0 +1,65 @@
+.contenedor-input-checkbox {
+
+    &>*,
+    >*::after,
+    >*::before {
+        box-sizing: content-box;
+    }
+
+    display: inline-flex;
+
+    span {
+        cursor: pointer;
+    }
+
+    input {
+        visibility: hidden;
+        position: absolute;
+
+        &:not(:checked)~.el svg {
+            opacity: 0;
+        }
+    }
+
+    .el {
+        width: 18px;
+        height: 18px;
+        border: solid 1px $gris;
+        border-radius: 3px;
+
+        svg {
+            transition: 0.3s ease;
+        }
+    }
+
+    &.style-cyan {
+        svg {
+            fill: $azul;
+        }
+
+        .el {
+            transition: border-color .3s ease, background-color .3s ease;
+        }
+
+        & input:checked~.el {
+            background-color: rgba($azul, 0.2);
+            border-color: $azul;
+        }
+        
+        &:hover .el {
+            border-color: $azul;
+        }
+    }
+
+    &.translate input:not(:checked)~.el svg {
+        transform: translateX(-20px);
+    }
+
+    &.scale input:not(:checked)~.el svg {
+        transform: scale(3);
+    }
+
+    &.rotate input:not(:checked)~.el svg {
+        transform: rotate(360deg);
+    }
+}
