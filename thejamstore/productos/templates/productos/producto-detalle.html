@@ -9,22 +9,15 @@
             <div class="informacion-producto">
                 <p class="referencia">{{producto_detalle.referencia}}</p>
                 <h2 class="titulo-secundario">{{producto_detalle.nombre}}</h2>
+                <div>
+                    {% for color in producto_detalle.producto_color.all %}
+                        <div style="background-color: {{color.codigo_hex}}; display: inline-block; width: 5rem; height: 5rem; border-radius: 3rem; margin-right: 1rem;"></div>
+                    {% endfor %}
+                </div>
                 <p class="precio">259,99€</p>
                 <p>
                     {{producto_detalle.descripcion}}
                 </p>
-                <div>
-                    {% comment %} ACABAR ESTOOOOOOO {% endcomment %}
-                    {% comment %} ACABAR ESTOOOOOOO {% endcomment %}
-                    {% comment %} ACABAR ESTOOOOOOO {% endcomment %}
-                    {% comment %} ACABAR ESTOOOOOOO {% endcomment %}
-                    {% comment %} ACABAR ESTOOOOOOO {% endcomment %}
-                    {% comment %} ACABAR ESTOOOOOOO {% endcomment %}
-                    {% comment %} ACABAR ESTOOOOOOO {% endcomment %}
-                    {% for color in producto_detalle.color_set %}
-                        <span style="background-color: {{color}}; width: 3rem; height: 3rem;">&nbsp;</span>
-                    {% endfor %}
-                </div>
                 <div class="botones">
                     <a class="enlace_boton">
                         Añadir al carrito

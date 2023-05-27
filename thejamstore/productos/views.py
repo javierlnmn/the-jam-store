@@ -12,5 +12,7 @@ def producto_detalle(request, id_producto):
     contexto = {
         "producto_detalle": producto_detalle,
     }
+    
+    print(producto_detalle.producto_color.all())
 
     return render(request, directorio_templates + "/producto-detalle.html", contexto)
