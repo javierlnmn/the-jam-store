@@ -13,4 +13,6 @@
 <li>Clases: Con 'camelCase' (ejemploNombre). Excepto modelos, que serán con '_'</li>
 <li>Ficheros (imágenes, textos, htmls, etc...): Con '-' (ejemplo-nombre)</li>
 <li>Verbose names: Minúsculas y con espacios (ejemplo nombre)</li>
+<li>Para devolver un contexto hay que crear una variable y devolverla</li>
+<li>Para comparar 2 objetos utilizamos el id</li>
 </ul>

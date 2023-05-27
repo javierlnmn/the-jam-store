@@ -1,8 +1,8 @@
 from django.urls import path, include
-from .views import *
+from .views import indice
 
 app_name = 'general'
 
 urlpatterns = [
-    path('', IndiceView.as_view(), name='indice'),
+    path('', indice, name='indice'),
 ]
