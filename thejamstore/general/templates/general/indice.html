@@ -24,59 +24,32 @@
 
         <section class="contenedor seccion-descuentos">
 
-            <h2 class="titulo-secundario">Descuentos semanales</h2>
+            <h2 class="titulo-secundario">Ofertas Recientes</h2>
 
             <div class="display-productos">
 
-                <div class="producto-display_card">
-                    <div class="imagen">
-                        <span class="marcador-oferta">Oferta</span>
-                        <img src="media/img/camiseta-rip-n-dip.jpg" alt="">
-                    </div>
-                    <div class="informacion">
-                        <p class="negrita">Camiseta Ripndip</p>
-                        <p><span class="negrita"><span
-                                    class="texto-tachado">63,99€</span>&nbsp;&nbsp;&nbsp;45,50</span>€</p>
-                        <a class="enlace" href="articulo.html">Ver producto</a>
-                    </div>
-                </div>
+                {% if ofertas_recientes %}
 
-                <div class="producto-display_card">
-                    <div class="imagen">
-                        <span class="marcador-oferta">Oferta</span>
-                        <img src="media/img/grin-t-shirt.jpg" alt="">
-                    </div>
-                    <div class="informacion">
-                        <p class="negrita">Camiseta Carhartt Grin</p>
-                        <p><span class="negrita">56,80</span>€</p>
-                        <a class="enlace" href="articulo.html">Ver producto</a>
-                    </div>
-                </div>
+                    {% for producto in ofertas_recientes %}
 
-                <div class="producto-display_card">
-                    <div class="imagen">
-                        <span class="marcador-oferta">Oferta</span>
-                        <img src="media/img/camiseta-dortmund.jpg" alt="">
-                    </div>
-                    <div class="informacion">
-                        <p class="negrita">Camiseta Dortmund</p>
-                        <p><span class="negrita">64,99</span>€</p>
-                        <a class="enlace" href="articulo.html">Ver producto</a>
-                    </div>
-                </div>
+                        <div class="producto-display_card">
+                            <div class="imagen">
+                                <span class="marcador-oferta">Oferta</span>
+                                <img src="{{producto.imagen.url}}" alt="Imagen del Producto">
+                            </div>
+                            <div class="informacion">
+                                <p class="negrita">{{producto.nombre}}</p>
+                                <p><span class="negrita"><span
+                                            class="texto-tachado">{{producto.precio}}€</span>&nbsp;&nbsp;&nbsp;{{producto.precio_oferta}}</span>€</p>
+                                <a class="enlace" href="articulo.html">Ver producto</a>
+                            </div>
+                        </div>
 
-                <div class="producto-display_card">
-                    <div class="imagen">
-                        <span class="marcador-oferta">Oferta</span>
-                        <img src="media/img/gorra-nike.jpg">
-                    </div>
-                    <div class="informacion">
-                        <p class="negrita">Gorra Nike</p>
-                        <p><span class="negrita">15,00</span>€</p>
-                        <a class="enlace" href="articulo.html">Ver producto</a>
-                    </div>
-                </div>
+                    {% endfor %}
 
+                {% else %}
+                    <p class="texto-secundario">Vaya, esta semana no hay descuentos...</p>
+                {% endif %}
 
             </div>
 
@@ -84,25 +57,18 @@
 
         <section class="contenedor seccion-destacado">
 
-            <h2 class="titulo-secundario">Destacado</h2>
+            <h2 class="titulo-secundario">Novedad</h2>
 
             <article>
 
-                <img class="imagen-destacado" src="media/img/jordan-1-high-fearless.png" alt="">
+                <img class="imagen-destacado" src="{{producto_novedad.imagen.url}}" alt="">
 
                 <div class="informacion-destacado">
 
-                    <p id="descripcion-destacado">
-                        En 2019, hacía 10 años que Michael Jordan dio su primer discurso en el Salón de la Fama del
-                        Baloncesto. Ese día pronunció un discurso memorable que nadie olvidará. Las Jordan 1 High
-                        Fearless rinden homenaje al discurso que pronunció ese día. Michael Jordan usó las palabras
-                        <i>"Limits, like fears, are often just an illusion"</i> ("Los límites, como los miedos, a menudo
-                        son solo una ilusión"). <br><br>
+                    <h4 class="negrita titulo-secundario">{{producto_novedad.nombre}}</h4>
 
-                        ¿Sabías ya que en la plantilla están impresas estas palabras <i>"Limits, like fears, are often
-                            just an illusion"</i>? Encima de estas palabras encontrará la palabra <i>"FEAR"</i>
-                        ("MIEDO"), pero
-                        tachada.
+                    <p id="descripcion-destacado">
+                        {{producto_novedad.descripcion}}
                     </p>
 
                     <a class="enlace_boton" href="articulo.html">Saber más</a>

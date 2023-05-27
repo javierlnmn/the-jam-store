@@ -16,3 +16,8 @@
 <li>Para devolver un contexto hay que crear una variable y devolverla</li>
 <li>Para comparar 2 objetos utilizamos el id</li>
 </ul>
+
+
+<h3>Para compilar el scss al fichero app.css del proyecto:</h3>
+
+    python manage.py sass static/style/scss/app.scss static/style/css/app.css

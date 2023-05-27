@@ -1,0 +1,179 @@
+{% extends 'general/main.html' %}
+
+{% block contenido %}
+    {% load static %}
+    <main>
+
+        <section class="contenedor seccion-producto">
+            <img src="{{producto_detalle.imagen.url}}" alt="producto">
+            <div class="informacion-producto">
+                <p class="referencia">{{producto_detalle.referencia}}</p>
+                <h2 class="titulo-secundario">{{producto_detalle.nombre}}</h2>
+                <p class="precio">259,99€</p>
+                <p>
+                    {{producto_detalle.descripcion}}
+                </p>
+                <div>
+                    {% comment %} ACABAR ESTOOOOOOO {% endcomment %}
+                    {% comment %} ACABAR ESTOOOOOOO {% endcomment %}
+                    {% comment %} ACABAR ESTOOOOOOO {% endcomment %}
+                    {% comment %} ACABAR ESTOOOOOOO {% endcomment %}
+                    {% comment %} ACABAR ESTOOOOOOO {% endcomment %}
+                    {% comment %} ACABAR ESTOOOOOOO {% endcomment %}
+                    {% comment %} ACABAR ESTOOOOOOO {% endcomment %}
+                    {% for color in producto_detalle.color_set %}
+                        <span style="background-color: {{color}}; width: 3rem; height: 3rem;">&nbsp;</span>
+                    {% endfor %}
+                </div>
+                <div class="botones">
+                    <a class="enlace_boton">
+                        Añadir al carrito
+                    </a>
+                    <a class="enlace_boton">
+                        Ver zapatillas
+                    </a>
+                    <svg class="icono-corazon" id="boton-anadir-lista-deseos" width="28px" height="28px"
+                        viewBox="0 0 22 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M19.3 5.71002C18.841 5.24601 18.2943 4.87797 17.6917 4.62731C17.0891 4.37666 16.4426 4.2484 15.79 4.25002C15.1373 4.2484 14.4909 4.37666 13.8883 4.62731C13.2857 4.87797 12.739 5.24601 12.28 5.71002L12 6.00002L11.72 5.72001C10.7917 4.79182 9.53273 4.27037 8.22 4.27037C6.90726 4.27037 5.64829 4.79182 4.72 5.72001C3.80386 6.65466 3.29071 7.91125 3.29071 9.22002C3.29071 10.5288 3.80386 11.7854 4.72 12.72L11.49 19.51C11.6306 19.6505 11.8212 19.7294 12.02 19.7294C12.2187 19.7294 12.4094 19.6505 12.55 19.51L19.32 12.72C20.2365 11.7823 20.7479 10.5221 20.7442 9.21092C20.7405 7.89973 20.2218 6.64248 19.3 5.71002Z">
+                    </svg>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="contenedor seccion-productos-recomendados">
+
+            <h3 class="titulo-secundario">A otros clientes también les gustó...</h3>
+
+            <div class="display-productos">
+                <div class="producto-display_card">
+                    <div class="imagen">
+                        <img src="media/img/blue-chil.jpg" alt="">
+                    </div>
+
+                    <div class="informacion">
+                        <p class="negrita">Jordan 1 High OG Blue Chill</p>
+                        <p><span class="negrita">483,50</span>€</p>
+                        <a class="enlace" href="articulo.html">Ver producto</a>
+                    </div>
+                </div>
+                <div class="producto-display_card">
+                    <div class="imagen">
+                        <span class="marcador-oferta">Oferta</span>
+                        <img src="media/img/dunk-strangelove.jpg" alt="">
+                    </div>
+                    <div class="informacion">
+                        <p class="negrita">Nike Dunk SB Low Strangelove</p>
+                        <p><span class="negrita"><span class="texto-tachado">300,00€</span>&nbsp;&nbsp;&nbsp;265,00</span>€</p>
+                        <a class="enlace" href="articulo.html">Ver producto</a>
+                    </div>
+                </div>
+                <div class="producto-display_card">
+                    <div class="imagen">
+                        <img src="media/img/etnies-marana.jpg" alt="">
+                    </div>
+                    <div class="informacion">
+                        <p class="negrita">Etnies Marana</p>
+                        <p><span class="negrita">89,00</span>€</p>
+                        <a class="enlace" href="articulo.html">Ver producto</a>
+                    </div>
+
+                </div>
+                <div class="producto-display_card">
+                    <div class="imagen">
+                        <img src="media/img/camiseta-thrasher.jpg" alt="">
+                    </div>
+                    <div class="informacion">
+                        <p class="negrita">Camiseta Thrasher</p>
+                        <p><span class="negrita">44,99</span>€</p>
+                        <a class="enlace" href="articulo.html">Ver producto</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <section class="seccion-valoraciones">
+
+            <div class="ondas"></div>
+
+            <div class="contenedor">
+                <h3 class="titulo-secundario">Opiniones del producto</h3>
+                <p class="texto-secundario">Mostrando 2 valoraciones de 8 - Orden: más destacadas</p>
+
+                <div class="valoraciones contenedor">
+
+                    <div class="valoracion">
+                        <div class="informacion-valoracion">
+                            <div class="usuario">
+                                <img class="foto-perfil" src="media/img/usuario.webp" alt="">
+                                <p>Diego Linares Gutiérrez</p>
+                                <div class="puntuacion">
+                                    <p>4.7</p>
+                                    <img src="media/img/estrella.png" alt="">
+                                </div>
+                            </div>
+                            <p>Qui eiusmod non qui duis exercitation exercitation nisi. Velit reprehenderit proident
+                                dolore culpa culpa incididunt aute voluptate eiusmod tempor proident est tempor dolore.
+                                Deserunt duis qui ex nisi id id dolor. Deserunt sint tempor exercitation minim
+                                incididunt qui ex. Eu magna ad ad minim nisi aliquip exercitation non incididunt elit
+                                proident esse. Aute irure proident eiusmod commodo id est adipisicing anim Lorem ad
+                                voluptate. Culpa deserunt eu ad dolor est ut esse enim ipsum mollit.
+                            </p>
+                            <p class="texto-secundario">Publicado el 7 Feb. 2023</p>
+                        </div>
+
+                        <div class="votacion">
+                            <img src="media/img/flecha.png" alt="">
+                            <p>450</p>
+                            <img src="media/img/flecha.png" alt="">
+                        </div>
+                    </div>
+
+                    <div class="valoracion">
+                        <div class="informacion-valoracion">
+                            <div class="usuario">
+                                <img class="foto-perfil" src="media/img/usuario.webp" alt="">
+                                <p>Diego Linares Gutiérrez</p>
+                                <div class="puntuacion">
+                                    <p>4.7</p>
+                                    <img src="media/img/estrella.png" alt="">
+                                </div>
+                            </div>
+                            <p>Cupidatat ex cillum in duis esse dolore. Eu aliquip irure
+                                pariatur eu cillum consequat enim enim elit consequat culpa incididunt non eiusmod.
+                                Pariatur consectetur deserunt sit laborum ut occaecat dolore in labore excepteur
+                                ullamco. Esse quis nisi aliqua nostrud elit reprehenderit mollit id id. Ut magna nostrud
+                                nulla veniam sunt Lorem eu eiusmod aliqua aute. Ut occaecat velit tempor laboris non
+                                labore elit labore adipisicing dolore anim ipsum. Excepteur do excepteur aliquip magna
+                                minim deserunt proident exercitation consectetur irure pariatur eiusmod.
+                            </p>
+                            <p class="texto-secundario">Publicado el 7 Feb. 2023</p>
+                        </div>
+
+                        <div class="votacion">
+                            <img src="media/img/flecha.png" alt="">
+                            <p>450</p>
+                            <img src="media/img/flecha.png" alt="">
+                        </div>
+                    </div>
+
+
+
+                    <div class="ver-mas">
+                        <span></span>
+                        <p class="texto-secundario">Ver más valoraciones</p>
+                        <span></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+{% endblock %}

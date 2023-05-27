@@ -28,7 +28,7 @@ class ProductoAdmin(admin.ModelAdmin):
 
     def display_imagen(self, obj):
         return format_html(
-            '<img src="{}" style="width: 8rem; height: 8rem; max-width: 100%; height: auto;">',
+            '<img src="{}" style="width: 8rem; height: 8rem; max-width: 100%; height: auto; aspect-ratio: 1; object-fit: cover;">',
             obj.imagen.url,
         )
 
