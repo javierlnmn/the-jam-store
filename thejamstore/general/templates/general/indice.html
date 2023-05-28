@@ -57,21 +57,23 @@
 
         <section class="contenedor seccion-destacado">
 
+            
+
             <h2 class="titulo-secundario">Destacado</h2>
 
             <article>
 
-                <img class="imagen-destacado" src="{{producto_novedad.imagen.url}}" alt="">
+                <img class="imagen-destacado" src="{{producto_destacado.imagen.url}}" alt="">
 
                 <div class="informacion-destacado">
 
-                    <h3 class="titulo-secundario">{{producto_novedad.nombre}}</h3>
+                    <h3 class="titulo-secundario">{{producto_destacado.nombre}}</h3>
 
                     <p id="descripcion-destacado">
-                        {{producto_novedad.descripcion}}
+                        {{producto_destacado.descripcion}}
                     </p>
 
-                    <a class="enlace_boton" href="{% url 'productos:producto_detalle' producto_novedad.id %}">Saber más</a>
+                    <a class="enlace_boton" href="{% url 'productos:producto_detalle' producto_destacado.id %}">Saber más</a>
 
                 </div>
 

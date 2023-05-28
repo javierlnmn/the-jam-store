@@ -175,3 +175,26 @@ class Producto_Talla(models.Model):
     class Meta:
         verbose_name = "Inventario"
         verbose_name_plural = "Inventario"
+        
+class Producto_Destacado(models.Model):
+    producto = models.OneToOneField(
+        Producto,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name='destacado',
+        verbose_name='Producto destacado'
+    )
+    
+    def __str__(self):
+        return self.producto.nombre + ", " + self.producto.referencia
+    
+    def save(self, *args, **kwargs):
+        if self.pk:
+            Producto_Destacado.objects.exclude(pk=self.pk).delete()
+        else:
+            Producto_Destacado.objects.all().delete()
+        super().save(*args, **kwargs)
+    
+    class Meta:
+        verbose_name = "Producto destacado"
+        verbose_name_plural = "Producto destacado"

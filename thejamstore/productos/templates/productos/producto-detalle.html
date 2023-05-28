@@ -7,7 +7,7 @@
         <section class="contenedor seccion-producto">
             <img src="{{producto_detalle.imagen.url}}" alt="producto">
             <div class="informacion-producto">
-                <p class="referencia">{{producto_detalle.referencia}}</p>
+                <p class="referencia">REF: {{producto_detalle.referencia}}</p>
                 <h2 class="titulo-secundario">{{producto_detalle.nombre}}</h2>
                 <div>
                     {% for color in producto_detalle.producto_color.all %}
@@ -20,7 +20,7 @@
                 {% else %}
                     <p><span class="negrita">{{ producto_detalle.precio }}</span>€</p>
                 {% endif %}
-                
+
                 <p>
                     {{producto_detalle.descripcion}}
                 </p>
@@ -64,7 +64,7 @@
                                 <p><span class="negrita">{{ producto.precio }}</span>€</p>
                             {% endif %}
                             
-                            <a class="enlace" href="articulo.html">Ver producto</a>
+                            <a class="enlace" href="{% url 'productos:producto_detalle' producto.id %}">Ver producto</a>
                         </div>
                     </div>
 

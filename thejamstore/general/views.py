@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from productos.models import Producto
+from productos.models import Producto, Producto_Destacado
 
 directorio_templates = "general/"
 
@@ -24,11 +24,16 @@ def indice(request):
         elif len(ofertas_recientes) >= 4:
             break
 
-    producto_novedad = Producto.objects.latest("created")
+    producto_destacado = None
+    destacados = Producto_Destacado.objects.first()
+    if destacados:
+        producto_destacado = destacados.producto
+        
+    # En caso de que no haya producto destacado, salta error 500
 
     contexto = {
         "ofertas_recientes": ofertas_recientes,
-        "producto_novedad": producto_novedad,
+        "producto_destacado": producto_destacado,
     }
 
     return render(request, directorio_templates+"/indice.html", contexto)
