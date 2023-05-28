@@ -12,11 +12,17 @@ html {
 
 body {
     margin: 0rem;
-    background-color: $blanco;
+    background-color: $negro;
     font-family: $fuente-principal;
     font-size: 1.6rem;
     line-height: 1.8;
     overflow-x: hidden;
+}
+
+main {
+    background-color: $blanco;
+    padding-bottom: 6rem;
+    padding-top: .1rem;
 }
 
 /* Cambiar el color por defecto de los textos de negro #000000 a negro #1C1C1C */

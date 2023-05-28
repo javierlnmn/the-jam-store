@@ -22,42 +22,50 @@
         }
     }
 
-    .precio {
-        color: darken($gris, 20%);
-        font-size: 1.8rem;
-        font-weight: $regular-bold;
-    }
-
-    .botones {
+    .informacion-producto {
         display: flex;
-        align-items: center;
-        gap: 1rem;
-
-        @include estilo-enlace($negro) {
-            text-align: center;
+        flex-direction: column;
+        .precio {
+            color: darken($gris, 20%);
+            font-size: 1.8rem;
+            font-weight: $regular-bold;
         }
 
-        > a  {
-            flex: 1;
+        .numero-articulos {
+            margin-bottom: 2rem;
         }
-
-        .icono-corazon {
-            color: $gris;
-            cursor: pointer;
-        }
-
-        .icono-corazon_activo {
-            color: $rojo;
-        }
-
-        @include tablet {
-            flex-direction: column;
-            align-items: baseline;
-            > a {
-                width: 100%;
+    
+        .botones {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+    
+            @include estilo-enlace($negro) {
+                text-align: center;
             }
+    
+            > a  {
+                flex: 1;
+            }
+    
+            .icono-corazon {
+                color: $gris;
+                cursor: pointer;
+            }
+    
+            .icono-corazon_activo {
+                color: $rojo;
+            }
+    
+            @include tablet {
+                flex-direction: column;
+                align-items: baseline;
+                > a {
+                    width: 100%;
+                }
+            }
+    
         }
-
-    }
+    }   
 
 }
