@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView
 from productos.models import Producto, Producto_Destacado
 
@@ -25,11 +25,8 @@ def indice(request):
             break
 
     producto_destacado = None
-    destacados = Producto_Destacado.objects.first()
-    if destacados:
-        producto_destacado = destacados.producto
-        
-    # En caso de que no haya producto destacado, salta error 500
+    destacados = get_object_or_404(Producto_Destacado,)
+    producto_destacado = destacados.producto
 
     contexto = {
         "ofertas_recientes": ofertas_recientes,

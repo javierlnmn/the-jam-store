@@ -22,42 +22,57 @@
         }
     }
 
-    .precio {
-        color: darken($gris, 20%);
-        font-size: 1.8rem;
-        font-weight: $regular-bold;
-    }
-
-    .botones {
+    .informacion-producto {
         display: flex;
-        align-items: center;
-        gap: 1rem;
+        flex-direction: column;
 
-        @include estilo-enlace($negro) {
-            text-align: center;
+        .referencia {
+            margin-top: 0;
         }
 
-        > a  {
-            flex: 1;
+        .precio {
+            color: darken($gris, 20%);
+            font-size: 1.8rem;
+            font-weight: $regular-bold;
         }
 
-        .icono-corazon {
-            color: $gris;
-            cursor: pointer;
+        .seleccion-producto {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
-
-        .icono-corazon_activo {
-            color: $rojo;
-        }
-
-        @include tablet {
-            flex-direction: column;
-            align-items: baseline;
-            > a {
-                width: 100%;
+    
+        .botones {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+    
+            @include estilo-enlace($negro) {
+                text-align: center;
             }
+    
+            > a  {
+                flex: 1;
+            }
+    
+            .icono-corazon {
+                color: $gris;
+                cursor: pointer;
+            }
+    
+            .icono-corazon_activo {
+                color: $rojo;
+            }
+    
+            @include tablet {
+                flex-direction: column;
+                align-items: baseline;
+                > a {
+                    width: 100%;
+                }
+            }
+    
         }
-
-    }
+    }   
 
 }
