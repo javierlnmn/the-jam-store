@@ -17,35 +17,43 @@
 
             <div class="display-productos">
 
+            {% with counter=0 %}
+
             {% for producto in productos %}
-            
+                            
             {% for tipo_prenda_producto in producto.producto_tipo_prenda.all %}
 
                 {% if tipo_prenda_producto == tipo_prenda %}
 
-                <div class="producto-display_card">
-                    <div class="imagen">
-                        {% if producto.oferta %}
-                        <span class="marcador-oferta">Oferta</span>
-                        {% endif %}
-                        <img src="{{producto.imagen.url}}" alt="Imagen del producto">
+                {% if counter < 4 %}
+                    <div class="producto-display_card">
+                        <div class="imagen">
+                            {% if producto.oferta %}
+                            <span class="marcador-oferta">Oferta</span>
+                            {% endif %}
+                            <img src="{{producto.imagen.url}}" alt="Imagen del producto">
+                        </div>
+                        <div class="informacion">
+                            <p class="negrita">{{producto.nombre}}</p>
+                            {% if producto.oferta %}
+                                <p><span class="negrita"><span class="texto-tachado">{{ producto.precio }}</span>&nbsp;&nbsp;&nbsp;{{ producto.precio_oferta }}</span>€</p>
+                            {% else %}
+                                <p><span class="negrita">{{ producto.precio }}</span>€</p>
+                            {% endif %}
+                            <a class="enlace" href="{% url 'productos:producto_detalle' producto.id %}">Ver producto</a>
+                        </div>
                     </div>
-                    <div class="informacion">
-                        <p class="negrita">{{producto.nombre}}</p>
-                        {% if producto.oferta %}
-                            <p><span class="negrita"><span class="texto-tachado">{{ producto.precio }}</span>&nbsp;&nbsp;&nbsp;{{ producto.precio_oferta }}</span>€</p>
-                        {% else %}
-                            <p><span class="negrita">{{ producto.precio }}</span>€</p>
-                        {% endif %}
-                        <a class="enlace" href="{% url 'productos:producto_detalle' producto.id %}">Ver producto</a>
-                    </div>
-                </div>
+                    {% with counter=counter|add:1 %}
+                    {% endwith %}
+                {% endif %}
 
                 {% endif %}
 
             {% endfor %}
 
             {% endfor %}
+            
+            {% endwith %}
 
             </div>
         {% endfor %}
