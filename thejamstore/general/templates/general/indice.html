@@ -41,7 +41,7 @@
                                 <p class="negrita">{{producto.nombre}}</p>
                                 <p><span class="negrita"><span
                                             class="texto-tachado">{{producto.precio}}€</span>&nbsp;&nbsp;&nbsp;{{producto.precio_oferta}}</span>€</p>
-                                <a class="enlace" href="articulo.html">Ver producto</a>
+                                <a class="enlace" href="{% url 'productos:producto_detalle' producto.id %}">Ver producto</a>
                             </div>
                         </div>
 
@@ -57,7 +57,7 @@
 
         <section class="contenedor seccion-destacado">
 
-            <h2 class="titulo-secundario">Novedad</h2>
+            <h2 class="titulo-secundario">Destacado</h2>
 
             <article>
 
@@ -71,7 +71,7 @@
                         {{producto_novedad.descripcion}}
                     </p>
 
-                    <a class="enlace_boton" href="articulo.html">Saber más</a>
+                    <a class="enlace_boton" href="{% url 'productos:producto_detalle' producto_novedad.id %}">Saber más</a>
 
                 </div>
 

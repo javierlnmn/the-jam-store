@@ -14,7 +14,13 @@
                         <div style="border: .1rem solid #CCC; background-color: {{color.codigo_hex}}; display: inline-block; width: 3rem; height: 3rem; border-radius: 3rem; margin-right: 1rem;"></div>
                     {% endfor %}
                 </div>
-                <p class="precio">{{ producto_detalle.precio }}€</p>
+
+                {% if producto_detalle.oferta %}
+                    <p><span class="texto-tachado">{{ producto_detalle.precio }}</span>&nbsp;&nbsp;&nbsp;<span class="negrita"> {{ producto_detalle.precio_oferta }}</span>€</p>
+                {% else %}
+                    <p><span class="negrita">{{ producto_detalle.precio }}</span>€</p>
+                {% endif %}
+                
                 <p>
                     {{producto_detalle.descripcion}}
                 </p>
@@ -40,50 +46,30 @@
             <h3 class="titulo-secundario">A otros clientes también les gustó...</h3>
 
             <div class="display-productos">
-                <div class="producto-display_card">
-                    <div class="imagen">
-                        <img src="media/img/blue-chil.jpg" alt="">
+
+                {% for producto in productos_recomendados %}
+
+                    <div class="producto-display_card">
+                        <div class="imagen">
+                            {% if producto.oferta %}
+                                <span class="marcador-oferta">Oferta</span>
+                            {% endif %}
+                            <img src="{{ producto.imagen.url }}" alt="">
+                        </div>
+                        <div class="informacion">
+                            <p class="negrita">{{ producto.nombre }}</p>
+                            {% if producto.oferta %}
+                                <p><span class="negrita"><span class="texto-tachado">{{ producto.precio }}</span>&nbsp;&nbsp;&nbsp;{{ producto.precio_oferta }}</span>€</p>
+                            {% else %}
+                                <p><span class="negrita">{{ producto.precio }}</span>€</p>
+                            {% endif %}
+                            
+                            <a class="enlace" href="articulo.html">Ver producto</a>
+                        </div>
                     </div>
 
-                    <div class="informacion">
-                        <p class="negrita">Jordan 1 High OG Blue Chill</p>
-                        <p><span class="negrita">483,50</span>€</p>
-                        <a class="enlace" href="articulo.html">Ver producto</a>
-                    </div>
-                </div>
-                <div class="producto-display_card">
-                    <div class="imagen">
-                        <span class="marcador-oferta">Oferta</span>
-                        <img src="media/img/dunk-strangelove.jpg" alt="">
-                    </div>
-                    <div class="informacion">
-                        <p class="negrita">Nike Dunk SB Low Strangelove</p>
-                        <p><span class="negrita"><span class="texto-tachado">300,00€</span>&nbsp;&nbsp;&nbsp;265,00</span>€</p>
-                        <a class="enlace" href="articulo.html">Ver producto</a>
-                    </div>
-                </div>
-                <div class="producto-display_card">
-                    <div class="imagen">
-                        <img src="media/img/etnies-marana.jpg" alt="">
-                    </div>
-                    <div class="informacion">
-                        <p class="negrita">Etnies Marana</p>
-                        <p><span class="negrita">89,00</span>€</p>
-                        <a class="enlace" href="articulo.html">Ver producto</a>
-                    </div>
+                {% endfor %}
 
-                </div>
-                <div class="producto-display_card">
-                    <div class="imagen">
-                        <img src="media/img/camiseta-thrasher.jpg" alt="">
-                    </div>
-                    <div class="informacion">
-                        <p class="negrita">Camiseta Thrasher</p>
-                        <p><span class="negrita">44,99</span>€</p>
-                        <a class="enlace" href="articulo.html">Ver producto</a>
-                    </div>
-
-                </div>
             </div>
 
         </section>
