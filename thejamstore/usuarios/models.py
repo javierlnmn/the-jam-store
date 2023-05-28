@@ -109,6 +109,8 @@ class Direccion(models.Model):
 
     def __str__(self):
         direccion_completa = (
+            "("+self.usuario.username
+            + ") " +
             self.provincia
             + ", "
             + self.municipio
