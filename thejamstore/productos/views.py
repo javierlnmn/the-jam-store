@@ -26,10 +26,15 @@ def seccion_productos(request, categoria=None):
         productos = Producto.objects.all()
     
     tipo_prenda_list = Tipo_Prenda.objects.filter(producto__in=productos).distinct()
-
+    
+    productos_por_tipo_prenda = {}
+    
+    for tipo_prenda in tipo_prenda_list:
+        productos_por_tipo_prenda[tipo_prenda] = productos.filter(producto_tipo_prenda=tipo_prenda)[:4]
+        
     context = {
-        'productos': productos,
-        'tipo_prendas': tipo_prenda_list,
+        'productos_por_tipo_prenda': productos_por_tipo_prenda,
         'categoria': categoria
     }
+        
     return render(request, directorio_templates + 'seccion.html', context)
