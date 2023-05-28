@@ -24,17 +24,23 @@
                 <p>
                     {{producto_detalle.descripcion}}
                 </p>
-                {% comment %} ARREGLAR ESTO {% endcomment %}
                 {% if producto_detalle.get_stock %}
-                    <p>Tallas disponibles: <span class="negrita">
-                    {% for talla in producto_detalle.producto_talla_set.all %}
-                        {{talla.talla}}{% if forloop.last %}.{% else %}, {% endif %}
-                    {% endfor %}</span></p>
-                    <div class="numero-articulos">
-                        <input type="number" min="1" max="91" step="1" value="1">
-                        <div class="numero-articulos-nav">
-                            <div class="numero-articulos-button numero-articulos-up">+</div>
-                            <div class="numero-articulos-button numero-articulos-down">-</div>
+                    <p class="texto-secundario">Utilizamos tallas europeas para nuestras prendas</p>
+                    <div class="seleccion-producto">
+                        <div class="contenedor-input-select-talla">
+                            <select name="" id="">
+                                <option value="" selected disabled>Talla</option>
+                                {% for talla in producto_detalle.producto_talla_set.all %}
+                                <option value="{{talla.id}}">{{talla.talla}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="numero-articulos">
+                            <input type="number" min="1" max="91" step="1" value="1">
+                            <div class="numero-articulos-nav">
+                                <div class="numero-articulos-button numero-articulos-up">+</div>
+                                <div class="numero-articulos-button numero-articulos-down">-</div>
+                            </div>
                         </div>
                     </div>
                 {% else %}

@@ -25,13 +25,20 @@
     .informacion-producto {
         display: flex;
         flex-direction: column;
+
+        .referencia {
+            margin-top: 0;
+        }
+
         .precio {
             color: darken($gris, 20%);
             font-size: 1.8rem;
             font-weight: $regular-bold;
         }
 
-        .numero-articulos {
+        .seleccion-producto {
+            display: flex;
+            gap: 1rem;
             margin-bottom: 2rem;
         }
     
