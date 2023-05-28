@@ -21,3 +21,13 @@
 <h3>Para compilar el scss al fichero app.css del proyecto:</h3>
 
     python manage.py sass static/style/scss/app.scss static/style/css/app.css
+
+
+<h3>Para exportar los datos guardados en la base de datos de una aplicación:</h3>
+
+    python -Xutf8 manage.py dumpdata productos > productos.json
+
+
+<h3>Para importar los datos guardados en el fichero a la base de datos:</h3>
+
+    python manage.py loaddata productos.json
