@@ -7,16 +7,16 @@
     <nav>
         <ul class="navegacion-principal">
             <li class="opcion-menu">
-                <a class="enlace" href="seccion.html">Superior</a>
+                <a class="enlace" href="{% url 'productos:seccion' 'superior' %}">Superior</a>
             </li>
             <li class="opcion-menu">
-                <a class="enlace" href="seccion.html">Inferior</a>
+                <a class="enlace" href="{% url 'productos:seccion' 'inferior' %}">Inferior</a>
             </li>
             <li class="opcion-menu">
-                <a class="enlace" href="seccion.html">Zapatillas</a>
+                <a class="enlace" href="{% url 'productos:seccion' 'zapatillas' %}">Zapatillas</a>
             </li>
             <li class="opcion-menu">
-                <a class="enlace" href="seccion.html">Accesorios</a>
+                <a class="enlace" href="{% url 'productos:seccion' 'accesorios' %}">Accesorios</a>
             </li>
         </ul>
     </nav>

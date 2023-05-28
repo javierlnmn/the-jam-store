@@ -1,0 +1,55 @@
+{% extends 'general/main.html' %}
+
+{% block contenido %}
+    <main>
+
+        <h2 class="titulo">{{categoria}}</h2>
+
+        <section class="contenedor seccion-ropa-productos">
+
+        {% for tipo_prenda in tipo_prendas %}
+
+            <div class="contenedor-ver-mas">
+                <h3 class="titulo-secundario">{{tipo_prenda.descripcion}}</h3>
+                <span></span>
+                <a class="enlace" href="">Ver todo</a>
+            </div>
+
+            <div class="display-productos">
+
+            {% for producto in productos %}
+            
+            {% for tipo_prenda_producto in producto.producto_tipo_prenda.all %}
+
+                {% if tipo_prenda_producto == tipo_prenda %}
+
+                <div class="producto-display_card">
+                    <div class="imagen">
+                        {% if producto.oferta %}
+                        <span class="marcador-oferta">Oferta</span>
+                        {% endif %}
+                        <img src="{{producto.imagen.url}}" alt="Imagen del producto">
+                    </div>
+                    <div class="informacion">
+                        <p class="negrita">{{producto.nombre}}</p>
+                        {% if producto.oferta %}
+                            <p><span class="negrita"><span class="texto-tachado">{{ producto.precio }}</span>&nbsp;&nbsp;&nbsp;{{ producto.precio_oferta }}</span>€</p>
+                        {% else %}
+                            <p><span class="negrita">{{ producto.precio }}</span>€</p>
+                        {% endif %}
+                        <a class="enlace" href="{% url 'productos:producto_detalle' producto.id %}">Ver producto</a>
+                    </div>
+                </div>
+
+                {% endif %}
+
+            {% endfor %}
+
+            {% endfor %}
+
+            </div>
+        {% endfor %}
+        </section>
+        
+    </main>
+{% endblock %}

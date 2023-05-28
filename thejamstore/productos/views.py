@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import DetailView
-from .models import Producto
+from django.views.generic import ListView
+from .models import Producto, Tipo_Prenda
 
 directorio_templates = "productos/"
 
@@ -17,3 +17,19 @@ def producto_detalle(request, id_producto):
     }
 
     return render(request, directorio_templates + "/producto-detalle.html", contexto)
+
+def seccion_productos(request, categoria=None):
+    if categoria:
+        productos = Producto.objects.filter(categoria__nombre=categoria)
+    else:
+        # 404
+        productos = Producto.objects.all()
+    
+    tipo_prenda_list = Tipo_Prenda.objects.filter(producto__in=productos).distinct()
+
+    context = {
+        'productos': productos,
+        'tipo_prendas': tipo_prenda_list,
+        'categoria': categoria
+    }
+    return render(request, directorio_templates + 'seccion.html', context)
