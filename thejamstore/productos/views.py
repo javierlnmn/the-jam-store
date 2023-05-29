@@ -25,7 +25,7 @@ def seccion_productos(request, categoria=None):
         # 404
         productos = Producto.objects.all()
     
-    tipo_prenda_list = Tipo_Prenda.objects.filter(producto__in=productos).distinct()
+    tipo_prenda_list = Tipo_Prenda.objects.filter(producto__in=productos, categoria_padre__nombre=categoria).distinct()
     
     productos_por_tipo_prenda = {}
     
