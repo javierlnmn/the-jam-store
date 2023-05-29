@@ -1,0 +1,23 @@
+<div id="modal-usuario" class="modal">
+
+    <div class="modal-contenido modal-usuario-contenido">
+
+        <span id="boton-cerrar-modal-usuario" class="close">&times;</span>
+
+        <h4>Regístrate</h4>
+
+        <p class="texto-secundario">Crea una nueva cuenta</p>
+
+        <div class="contenedor-formulario">
+            
+            <form action="{% url 'usuarios:registro' %}" method="post" class="formulario">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="enlace_boton">Registrarse</button>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

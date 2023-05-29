@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
+from usuarios.forms import RegistrationForm
+
 
 def iniciar_sesion(request):
     if request.method == 'POST':
@@ -22,3 +24,16 @@ def cerrar_sesion(request):
     logout(request)
     request.user = None
     return HttpResponseRedirect('/')
+
+def registrar_usuario(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '¡Registro exitoso! Ahora puedes iniciar sesión.')
+
+            return redirect('general:indice')
+        else:
+            messages.error(request, 'Se produjo un error en el registro. Inténtelo de nuevo.')
+   
+        return render(request, 'usuarios/modales/registro.html', {'form': form})
