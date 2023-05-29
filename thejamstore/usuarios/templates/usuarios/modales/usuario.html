@@ -22,6 +22,7 @@
                     <input name="password" type="password" class="login-input" />
                     <label for="input-buscar" unselectable="on">Contraseña</label>
                 </div>
+                
                 <button type="submit" class="enlace_boton">Iniciar Sesión</button>
             </form>
 
@@ -43,19 +44,21 @@
         <div class="contenedor-formulario">
             
             <form action="" class="formulario">
+                {% csrf_token %}
                 <div class="contenedor-input-texto">
-                    <input type="text" class="login-input" />
+                    <input type="text" name="username" maxlength="150" required="" id="id_username">
                     <label for="input-buscar" unselectable="on">Usuario</label>
                 </div>
                 <div class="contenedor-input-texto">
-                    <input type="text" class="login-input" />
-                    <label for="input-buscar" unselectable="on">Email</label>
+                    <input type="text" name="email" maxlength="128" id="id_email">
+                    <label for="input-buscar" unselectable="on">Correo electrónico</label>
                 </div>
                 <div class="contenedor-input-texto">
-                    <input type="password" class="login-input" />
+                    <input type="password" name="password" maxlength="128" required="" id="id_password">
                     <label for="input-buscar" unselectable="on">Contraseña</label>
                 </div>
-                <input type="submit" class="enlace_boton" value="Regístrame">
+
+                <button type="submit" class="enlace_boton">Registrarse</button>
             </form>
 
             <div class="enlaces">
