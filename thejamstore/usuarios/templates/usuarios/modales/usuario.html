@@ -34,20 +34,6 @@
 
     </div>
 
-    {% else %}
-
-    <div class="modal-contenido modal-usuario-contenido">
-
-        <span id="boton-cerrar-modal-usuario" class="close">&times;</span>
-
-        <h4>Bienvenido, {{ user.username }}</h4>
-
-        <a class="enlace_boton" href=""{% comment %} link al perfil de usuario {% endcomment %} >Ver mi perfil</a>
-        <a class="enlace_boton" href="{% url 'usuarios:cerrar_sesion' %}">Cerrar sersión</a>
-    </div>
-
-    {% endif %}
-
     <div class="modal-contenido modal-usuario-contenido" id="modal-usuario_registro" style="display: none;">
 
         <span id="boton-cerrar-modal-usuario" class="close">&times;</span>
@@ -79,5 +65,19 @@
         </div>
 
     </div>
+
+    {% else %}
+
+    <div class="modal-contenido modal-usuario-contenido">
+
+        <span id="boton-cerrar-modal-usuario" class="close">&times;</span>
+
+        <h4>Bienvenido, {{ user.username }}</h4>
+
+        <a class="enlace_boton" href=""{% comment %} link al perfil de usuario {% endcomment %} >Ver mi perfil</a>
+        <a class="enlace_boton" href="{% url 'usuarios:cerrar_sesion' %}">Cerrar sersión</a>
+    </div>
+
+    {% endif %}
 
 </div>
