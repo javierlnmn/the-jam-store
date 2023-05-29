@@ -102,31 +102,32 @@
 
             <div class="contenedor">
                 <h3 class="titulo-secundario">Opiniones del producto</h3>
-                <p class="texto-secundario">Mostrando 2 valoraciones de 8 - Orden: más destacadas</p>
 
-                <div class="valoraciones contenedor">
-                {% for comentario in comentarios %}
+                {% if comentarios %}
+                    <p class="texto-secundario">Mostrando 2 valoraciones de 8 - Orden: más destacadas</p>
+                    <div class="valoraciones contenedor">   
+                    {% for comentario in comentarios %}
 
-                    <div class="valoracion">
-                        <div class="informacion-valoracion">
-                            <div class="usuario">
-                                <img class="foto-perfil" src="{{ comentario.usuario.foto_perfil.url }}" alt="">
-                                <p>{{ comentario.usuario.first_name }} {{ comentario.usuario.last_name }}</p>
-                                <div class="puntuacion">
-                                    <p>{{ comentario.valoracion }}</p>
-                                    {% comment %} {% for i in comentario.valoracion %} {% endcomment %}
-                                    <img src="{% static 'media/img/estrella.png' %}" alt="">
-                                    {% comment %} {% endfor %} {% endcomment %}
+                        <div class="valoracion">
+                            <div class="informacion-valoracion">
+                                <div class="usuario">
+                                    <img class="foto-perfil" src="{{ comentario.usuario.foto_perfil.url }}" alt="">
+                                    <p>{{ comentario.usuario.first_name }} {{ comentario.usuario.last_name }}</p>
+                                    <div class="puntuacion">
+                                        <p>{{ comentario.valoracion }}</p>
+                                        <img src="{% static 'media/img/estrella.png' %}" alt="">
+                                    </div>
                                 </div>
+                                <p>{{ comentario.comentario }}</p>
+                                <p class="texto-secundario">Publicado el {{ comentario.created }}</p>
                             </div>
-                            <p>{{ comentario.comentario }}</p>
-                            <p class="texto-secundario">Publicado el {{ comentario.created }}</p>
                         </div>
+
+                    {% endfor %}
                     </div>
-
-                {% endfor %}
-                </div>
-
+                {% else %}
+                    <p class="negrita texto-secundario">Vaya, nadie ha comentado aún...</p>
+                {% endif %}
             </div>
 
         </section>
