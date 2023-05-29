@@ -18,7 +18,7 @@ def iniciar_sesion(request):
             return redirect('general:indice')
         else:
             messages.error(request, 'Los datos son incorrectos. Inténtelo con otros distintos.')
-            return HttpResponseRedirect('/')
+            return redirect('general:indice')
         
 def cerrar_sesion(request):
     logout(request)
@@ -31,7 +31,7 @@ def registrar_usuario(request):
         if form.is_valid():
             form.save()
             messages.success(request, '¡Registro exitoso! Ahora puedes iniciar sesión.')
-
             return redirect('general:indice')
         else:
             messages.error(request, 'Se produjo un error en el registro. Inténtelo de nuevo.')
+            return redirect('general:indice')

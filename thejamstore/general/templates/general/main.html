@@ -20,6 +20,9 @@
     {% include 'general/modales/busqueda.html' %}
     {% include 'usuarios/modales/usuario.html' %}
 
+    {% comment %} Pop ups de errores y éxitos {% endcomment %}
+    {% include 'general/base/mensajes-popup.html' %}
+
     {% comment %} Scripts necesarios para la página. Los globales en el include y los individuales de cada página en el bloque {% endcomment %}
     {% include 'general/base/scripts.html' %}
     {% block scripts %}

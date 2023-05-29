@@ -210,3 +210,11 @@ botonVerFormularioInicioSesion.on('click', function() {
     modalUsuarioRegistro.hide();
     modalUsuarioInicioSesion.show();
 });
+
+// Hacer que los mensajes de popup desaparezcan tras unos segundos
+
+let contenedorMensajesPopup = $('.contenedor-mensajes-popup') 
+
+setTimeout(function() {
+    contenedorMensajesPopup.fadeOut(2000);
+}, 2500);

@@ -27,8 +27,6 @@ def indice(request):
     producto_destacado = None
     destacados = get_object_or_404(Producto_Destacado,)
     producto_destacado = destacados.producto
-    
-    print(request.user)
 
     contexto = {
         "ofertas_recientes": ofertas_recientes,
