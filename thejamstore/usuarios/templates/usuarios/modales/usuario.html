@@ -12,7 +12,7 @@
 
         <div class="contenedor-formulario">
             
-            <form action="{% url 'usuarios:iniciar_sesion' %}" method="post" class="formulario">
+            <form action="{% url 'usuarios:iniciar_sesion' %}" method="POST" class="formulario">
                 {% csrf_token %}
                 <div class="contenedor-input-texto">
                     <input name="username" type="text" class="login-input" />
@@ -45,7 +45,7 @@
 
         <div class="contenedor-formulario">
             
-            <form action="{% url 'usuarios:registrar_usuario' %}" class="formulario">
+            <form action="{% url 'usuarios:registrar_usuario' %}" method="POST" class="formulario">
                 {% csrf_token %}
                 <div class="contenedor-input-texto">
                     <input type="text" name="username" maxlength="150" required="" id="id_username" class="login-input" />
@@ -73,9 +73,9 @@
 
     {% else %}
 
-    <div class="modal-contenido modal-usuario-contenido">
+    <div class="modal-contenido modal-usuario-contenido" style="max-width: 70rem;">
 
-        <span id="boton-cerrar-modal-usuario" class="close">&times;</span>
+        <span class="close boton-cerrar-modal-usuario">&times;</span>
 
         <h4>Bienvenido, {{ user.username }}</h4>
 
