@@ -105,70 +105,24 @@
                 <p class="texto-secundario">Mostrando 2 valoraciones de 8 - Orden: más destacadas</p>
 
                 <div class="valoraciones contenedor">
+                {% for comentario in comentarios %}
 
                     <div class="valoracion">
                         <div class="informacion-valoracion">
                             <div class="usuario">
-                                <img class="foto-perfil" src="media/img/usuario.webp" alt="">
-                                <p>Diego Linares Gutiérrez</p>
+                                <img class="foto-perfil" src="{{ comentario.usuario.foto_perfil.url }}" alt="">
+                                <p>{{ comentario.usuario }} {{ comentario.usuario.apellidos }}</p>
                                 <div class="puntuacion">
-                                    <p>4.7</p>
-                                    <img src="media/img/estrella.png" alt="">
+                                    <p>{{ comentario.valoracion }}</p>
+                                    <img src="{% static 'media/img/estrella.png' %}" alt="">
                                 </div>
                             </div>
-                            <p>Qui eiusmod non qui duis exercitation exercitation nisi. Velit reprehenderit proident
-                                dolore culpa culpa incididunt aute voluptate eiusmod tempor proident est tempor dolore.
-                                Deserunt duis qui ex nisi id id dolor. Deserunt sint tempor exercitation minim
-                                incididunt qui ex. Eu magna ad ad minim nisi aliquip exercitation non incididunt elit
-                                proident esse. Aute irure proident eiusmod commodo id est adipisicing anim Lorem ad
-                                voluptate. Culpa deserunt eu ad dolor est ut esse enim ipsum mollit.
-                            </p>
-                            <p class="texto-secundario">Publicado el 7 Feb. 2023</p>
-                        </div>
-
-                        <div class="votacion">
-                            <img src="media/img/flecha.png" alt="">
-                            <p>450</p>
-                            <img src="media/img/flecha.png" alt="">
+                            <p>{{ comentario.comentario }}</p>
+                            <p class="texto-secundario">Publicado el {{ comentario.created }}</p>
                         </div>
                     </div>
 
-                    <div class="valoracion">
-                        <div class="informacion-valoracion">
-                            <div class="usuario">
-                                <img class="foto-perfil" src="media/img/usuario.webp" alt="">
-                                <p>Diego Linares Gutiérrez</p>
-                                <div class="puntuacion">
-                                    <p>4.7</p>
-                                    <img src="media/img/estrella.png" alt="">
-                                </div>
-                            </div>
-                            <p>Cupidatat ex cillum in duis esse dolore. Eu aliquip irure
-                                pariatur eu cillum consequat enim enim elit consequat culpa incididunt non eiusmod.
-                                Pariatur consectetur deserunt sit laborum ut occaecat dolore in labore excepteur
-                                ullamco. Esse quis nisi aliqua nostrud elit reprehenderit mollit id id. Ut magna nostrud
-                                nulla veniam sunt Lorem eu eiusmod aliqua aute. Ut occaecat velit tempor laboris non
-                                labore elit labore adipisicing dolore anim ipsum. Excepteur do excepteur aliquip magna
-                                minim deserunt proident exercitation consectetur irure pariatur eiusmod.
-                            </p>
-                            <p class="texto-secundario">Publicado el 7 Feb. 2023</p>
-                        </div>
-
-                        <div class="votacion">
-                            <img src="media/img/flecha.png" alt="">
-                            <p>450</p>
-                            <img src="media/img/flecha.png" alt="">
-                        </div>
-                    </div>
-
-
-
-                    <div class="ver-mas">
-                        <span></span>
-                        <p class="texto-secundario">Ver más valoraciones</p>
-                        <span></span>
-                    </div>
-
+                {% endfor %}
                 </div>
 
             </div>

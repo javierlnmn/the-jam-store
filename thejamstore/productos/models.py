@@ -106,7 +106,7 @@ class Producto(models.Model):
         blank=True,
         verbose_name="Categoría",
     )
-    imagen = models.ImageField(verbose_name="foto producto", upload_to="productos")
+    imagen = models.ImageField(verbose_name="Foto del producto", upload_to="productos")
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     oferta = models.BooleanField(null=True, blank=True)
     precio_oferta = models.DecimalField(
