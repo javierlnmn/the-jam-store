@@ -39,4 +39,14 @@
         }
     }
 
+    @include estilo-enlace($azul) {
+        margin-top: 2rem;
+    }
+
+    .enlace_boton {
+        width: 100%;
+        text-align: center;
+        display: block;
+    }
+
 }
