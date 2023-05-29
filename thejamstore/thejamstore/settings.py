@@ -145,8 +145,8 @@ MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Cambiar login_Redirect_url a administracion del perfil de usuario
-LOGIN_REDIRECT_URL = "inicio"
-LOGOUT_REDIRECT_URL = "inicio"
+LOGIN_REDIRECT_URL = "general:indice"
+LOGOUT_REDIRECT_URL = "general:indice"
 
 # Jet Admin Interface
 JET_THEMES = [
