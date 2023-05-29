@@ -10,16 +10,17 @@
 
         <div class="contenedor-formulario">
             
-            <form action="" class="formulario">
+            <form action="{% url 'usuarios:iniciar_sesion' %}" method="post" class="formulario">
+                {% csrf_token %}
                 <div class="contenedor-input-texto">
-                    <input type="text" class="login-input" />
+                    <input name="username" type="text" class="login-input" />
                     <label for="input-buscar" unselectable="on">Usuario</label>
                 </div>
                 <div class="contenedor-input-texto">
-                    <input type="password" class="login-input" />
+                    <input name="password" type="password" class="login-input" />
                     <label for="input-buscar" unselectable="on">Contraseña</label>
                 </div>
-                <input type="submit" class="enlace_boton" value="Iniciar sesión">
+                <button type="submit" class="enlace_boton">Iniciar Sesión</button>
             </form>
 
             <div class="enlaces">

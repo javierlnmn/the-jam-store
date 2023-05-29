@@ -34,10 +34,10 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "jet.dashboard",
     "jet",
-    "general.apps.GeneralConfig",
     "productos.apps.ProductosConfig",
     "usuarios.apps.UsuariosConfig",
     "pedidos.apps.PedidosConfig",
+    "general.apps.GeneralConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

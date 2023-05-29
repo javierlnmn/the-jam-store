@@ -1,3 +1,5 @@
+{% load static %}
+
 <header class="cabecera" id="cabecera">
 
     <a href="{% url 'general:indice' %}">
@@ -45,6 +47,12 @@
                 </svg>
                 <span class="carrito-numero-productos">5</span>
             </a>
+
+            {% if user.is_authenticated %}
+            <a href="#" id="boton-inicio-sesion">
+                <img style="width: 3rem; aspect-ratio: 1; object-fit: cover; border-radius: 2.8rem; margin-bottom: .5rem;" src="{% if user.foto_perfil %}{{ user.foto_perfil.url }}{% else %}{% static 'media/img/usuario.webp' %}{% endif %}" alt="Avatar del usuario" >
+            </a>
+            {% else %}
             <a href="#" id="boton-inicio-sesion">
                 <svg class="icono" width="24px" height="24px" viewBox="0 0 24 24" fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg">
@@ -54,6 +62,8 @@
                         d="M12.0002 14.5C6.99016 14.5 2.91016 17.86 2.91016 22C2.91016 22.28 3.13016 22.5 3.41016 22.5H20.5902C20.8702 22.5 21.0902 22.28 21.0902 22C21.0902 17.86 17.0102 14.5 12.0002 14.5Z" />
                 </svg>
             </a>
+            {% endif %}
+            
         </div>
     </nav>
 
