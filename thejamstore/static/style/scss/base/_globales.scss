@@ -10,6 +10,11 @@ html {
     box-sizing: border-box;
 }
 
+::selection {
+    background-color: lighten($azul, 55%);
+    color: $rojo;
+}
+
 body {
     margin: 0rem;
     background-color: $negro;
