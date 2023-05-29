@@ -35,5 +35,7 @@ def registrar_usuario(request):
             return redirect('general:indice')
         else:
             messages.error(request, 'Se produjo un error en el registro. Inténtelo de nuevo.')
-   
+            
+    else:
+        form = RegistrationForm()
         return render(request, 'usuarios/modales/registro.html', {'form': form})

@@ -12,8 +12,34 @@
             
             <form action="{% url 'usuarios:registro' %}" method="post" class="formulario">
                 {% csrf_token %}
-                {{ form.as_p }}
+
+                <div class="contenedor-input-texto">
+                    <input type="text" name="username" maxlength="150" required="" id="id_username">
+                    <label for="input-buscar" unselectable="on">Usuario</label>
+                </div>
+                <div class="contenedor-input-texto">
+                    <input type="text" name="email" maxlength="128" id="id_email">
+                    <label for="input-buscar" unselectable="on">Correo electrónico</label>
+                </div>
+                <div class="contenedor-input-texto">
+                    <input type="password" name="password" maxlength="128" required="" id="id_password">
+                    <label for="input-buscar" unselectable="on">Contraseña</label>
+                </div>
+
                 <button type="submit" class="enlace_boton">Registrarse</button>
+            </form>
+
+            <form action="{% url 'usuarios:iniciar_sesion' %}" method="post" class="formulario">
+                {% csrf_token %}
+                <div class="contenedor-input-texto">
+                    <input name="username" type="text" class="login-input" />
+                    <label for="input-buscar" unselectable="on">Usuario</label>
+                </div>
+                <div class="contenedor-input-texto">
+                    <input name="password" type="password" class="login-input" />
+                    <label for="input-buscar" unselectable="on">Contraseña</label>
+                </div>
+                <button type="submit" class="enlace_boton">Iniciar Sesión</button>
             </form>
 
         </div>

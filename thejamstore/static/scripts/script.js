@@ -193,3 +193,22 @@ $(".login-input").focusout(function () {
         $(this).parent().removeClass("contenedor-input-texto_animacion");
     $(this).parent().removeClass("contenedor-input-texto_animacion-color");
 })
+
+// Intercambiar entre modales de inicio de sesión y de registro
+
+let modalUsuarioInicioSesion = $('#modal-usuario_inicio-sesion');
+let modalUsuarioRegistro = $('#modal-usuario_registro');
+
+let botonVerFormularioRegistro = $('#boton-formulario-registro');
+let botonVerFormularioInicioSesion = $('#boton-formulario-inicio-sesion');
+
+botonVerFormularioRegistro.on('click', function() {
+    console.log('click');
+    modalUsuarioInicioSesion.hide();
+    modalUsuarioRegistro.show();
+});
+
+botonVerFormularioInicioSesion.on('click', function() {
+    modalUsuarioRegistro.hide();
+    modalUsuarioInicioSesion.show();
+});
