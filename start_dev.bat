@@ -1,0 +1,1 @@
+python thejamstore\manage.py runserver
