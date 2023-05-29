@@ -112,7 +112,7 @@ $('#boton-usuario').on('click', function () {
     $('body').css('overflow', 'hidden');
 });
 
-$('#boton-cerrar-modal-usuario').on('click', function () {
+$('.boton-cerrar-modal-usuario').on('click', function () {
     modalInicioSesion.hide();
     $('body').css('overflow', 'auto');
 });
@@ -182,12 +182,10 @@ $(".input-login").each(function () {
     }
 });
 
-//Add animation when input is focused
 $(".login-input").focus(function () {
     $(this).parent().addClass("contenedor-input-texto_animacion contenedor-input-texto_animacion-color");
 });
 
-//Remove animation(s) when input is no longer focused
 $(".login-input").focusout(function () {
     if ($(this).val() === "")
         $(this).parent().removeClass("contenedor-input-texto_animacion");

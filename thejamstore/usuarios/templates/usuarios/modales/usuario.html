@@ -4,7 +4,7 @@
 
     <div class="modal-contenido modal-usuario-contenido" id="modal-usuario_inicio-sesion">
 
-        <span id="boton-cerrar-modal-usuario" class="close">&times;</span>
+        <span class="close boton-cerrar-modal-usuario">&times;</span>
 
         <h4>Te echábamos de menos</h4>
 
@@ -22,7 +22,7 @@
                     <input name="password" type="password" class="login-input" />
                     <label for="input-buscar" unselectable="on">Contraseña</label>
                 </div>
-                
+
                 <button type="submit" class="enlace_boton">Iniciar Sesión</button>
             </form>
 
@@ -37,24 +37,26 @@
 
     <div class="modal-contenido modal-usuario-contenido" id="modal-usuario_registro" style="display: none;">
 
-        <span id="boton-cerrar-modal-usuario" class="close">&times;</span>
+        <span class="close boton-cerrar-modal-usuario">&times;</span>
 
         <h4>Regístrate</h4>
 
+        <p class="texto-secundario">Regístrate con un nombre de usuario, correo electrónico y contraseña. Tus datos estarán seguros con nosotros</p>
+
         <div class="contenedor-formulario">
             
-            <form action="" class="formulario">
+            <form action="{% url 'usuarios:registrar_usuario' %}" class="formulario">
                 {% csrf_token %}
                 <div class="contenedor-input-texto">
-                    <input type="text" name="username" maxlength="150" required="" id="id_username">
+                    <input type="text" name="username" maxlength="150" required="" id="id_username" class="login-input" />
                     <label for="input-buscar" unselectable="on">Usuario</label>
                 </div>
                 <div class="contenedor-input-texto">
-                    <input type="text" name="email" maxlength="128" id="id_email">
+                    <input type="text" name="email" maxlength="128" id="id_email" class="login-input" />
                     <label for="input-buscar" unselectable="on">Correo electrónico</label>
                 </div>
                 <div class="contenedor-input-texto">
-                    <input type="password" name="password" maxlength="128" required="" id="id_password">
+                    <input type="password" name="password" maxlength="128" required="" id="id_password" class="login-input" />
                     <label for="input-buscar" unselectable="on">Contraseña</label>
                 </div>
 
