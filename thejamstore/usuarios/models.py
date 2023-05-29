@@ -77,7 +77,7 @@ class Custom_User(AbstractUser):
     categoria = models.ForeignKey(
         Categoria_Usuario, on_delete=models.SET_NULL, null=True, blank=True, default="1"
     )
-    foto_perfil = models.ImageField(verbose_name="Avatar de usuario", upload_to="usuarios")
+    foto_perfil = models.ImageField(null=True, blank=True, verbose_name="Avatar de usuario", upload_to="usuarios")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
 
