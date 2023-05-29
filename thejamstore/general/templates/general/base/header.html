@@ -49,11 +49,11 @@
             </a>
 
             {% if user.is_authenticated %}
-            <a href="#" id="boton-inicio-sesion">
+            <a href="#" id="boton-usuario">
                 <img style="width: 3rem; aspect-ratio: 1; object-fit: cover; border-radius: 2.8rem; margin-bottom: .5rem;" src="{% if user.foto_perfil %}{{ user.foto_perfil.url }}{% else %}{% static 'media/img/usuario.webp' %}{% endif %}" alt="Avatar del usuario" >
             </a>
             {% else %}
-            <a href="#" id="boton-inicio-sesion">
+            <a href="#" id="boton-usuario">
                 <svg class="icono" width="24px" height="24px" viewBox="0 0 24 24" fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg">
                     <path

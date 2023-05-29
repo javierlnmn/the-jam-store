@@ -1,8 +1,10 @@
-<div id="modal-inicio-sesion" class="modal">
+<div id="modal-usuario" class="modal">
 
-    <div class="modal-contenido modal-inicio-sesion-contenido">
+    {% if not user.is_authenticated %}
 
-        <span id="boton-cerrar-modal-inicio-sesion" class="close">&times;</span>
+    <div class="modal-contenido modal-usuario-contenido">
+
+        <span id="boton-cerrar-modal-usuario" class="close">&times;</span>
 
         <h4>Te echábamos de menos</h4>
 
@@ -31,5 +33,17 @@
         </div>
 
     </div>
+
+    {% else %}
+
+    <div class="modal-contenido modal-usuario-contenido">
+
+        <span id="boton-cerrar-modal-usuario" class="close">&times;</span>
+
+        
+
+    </div>
+
+    {% endif %}
 
 </div>
