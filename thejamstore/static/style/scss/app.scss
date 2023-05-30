@@ -19,6 +19,7 @@
 @import 'common/bannerOndas';
 @import 'common/seccionProductosRecomendados';
 @import 'common/seccionAjustesBusqueda';
+@import 'common/seccionPaginacion';
 
 /** Layouts **/
 @import 'layouts/cabecera/cabecera';
@@ -41,6 +42,8 @@
 @import 'layouts/carrito/seccionCarritoDescripcion';
 
 @import 'layouts/seccionRopa/seccionRopa';
+
+@import 'layouts/seccionRopaTipoPrenda/seccionRopaTipoPrenda';
 
 @import 'layouts/piePagina/piePagina';
 @import 'layouts/piePagina/contenedorPiePagina';

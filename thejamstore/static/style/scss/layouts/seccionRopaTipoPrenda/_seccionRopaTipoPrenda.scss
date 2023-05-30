@@ -1,0 +1,29 @@
+.seccion-ropa-productos-tipo-prenda {
+
+    .contenedor-titulos {
+        display: flex;
+        gap: 3rem;
+        justify-content: left;
+        align-items: center;
+        @include tablet {
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .flecha {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            @include tablet {
+                display: none;
+            }
+        }
+
+    }
+
+    @include display-productos(4, 3rem, true);
+}
