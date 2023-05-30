@@ -2,17 +2,24 @@
 
     width: 100%;
     position: fixed;
-    top: 6rem;
-    left: 0;
+    bottom: 0;
+    right: 0;
     z-index: 5;
     display: flex;
     flex-direction: column;
     gap: 2rem;
 
     .mensaje-popup {
-        width: 60%;
-        min-width: 34rem;
-        margin: 0 auto;
+        width: fit-content;
+        padding: 0 2rem;
+        max-width: $tablet;
+
+        @include tablet {
+            width: 90%;
+            margin: 2rem auto;
+        }
+
+        margin: auto 2rem 2rem auto;
         height: fit-content;
         backdrop-filter: blur(1rem);
         border-radius: .5rem;
@@ -40,6 +47,7 @@
         }
 
         p {
+            font-size: 1.5rem;
             text-align: center;
         }
     }
