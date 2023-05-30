@@ -7,7 +7,6 @@ directorio_templates = "productos/"
 
 
 def producto_detalle(request, id_producto):
-    
     productos_recomendados = Producto.objects.exclude(id=id_producto).order_by('?')[:4]
     
     producto_detalle = get_object_or_404(Producto, pk=id_producto)
@@ -42,3 +41,19 @@ def seccion_productos(request, categoria=None):
     }
         
     return render(request, directorio_templates + 'seccion.html', context)
+
+# Usamos una clase para esta vista porque es mas facil hacer la paginacion asi
+def seccion_productos_tipo_prenda(request, categoria=None, tipo_prenda=None):
+    tipo_prenda_descripcion_formateada = tipo_prenda.replace('-', ' ').capitalize()
+    tipo_prenda_id = Tipo_Prenda.objects.get(descripcion = tipo_prenda_descripcion_formateada, categoria_padre__nombre=categoria)
+    
+    productos = Producto.objects.filter(categoria__nombre=categoria, producto_tipo_prenda=tipo_prenda_id)
+    
+    context = {
+        'productos': productos,
+        'categoria': categoria,
+        'tipo_prenda': tipo_prenda_descripcion_formateada,
+    }
+    
+    return render(request, directorio_templates + 'seccion-tipo-prenda.html', context)
+   

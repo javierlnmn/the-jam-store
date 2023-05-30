@@ -13,25 +13,32 @@ def iniciar_sesion(request):
         password = request.POST.get('password')
         user = authenticate(username = username, password = password)
         
+        pagina_previa = request.META.get('HTTP_REFERER')
+        
         if user != None:
             login(request, user)
-            return redirect('general:indice')
+            return HttpResponseRedirect(pagina_previa)
         else:
             messages.error(request, 'Los datos son incorrectos. Inténtelo con otros distintos.')
-            return redirect('general:indice')
+            return HttpResponseRedirect(pagina_previa)
         
 def cerrar_sesion(request):
     logout(request)
+    messages.success(request, 'Has cerrado sesión.')
     request.user = None
-    return HttpResponseRedirect('/')
+    
+    pagina_previa = request.META.get('HTTP_REFERER')
+    
+    return HttpResponseRedirect(pagina_previa)
 
 def registrar_usuario(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
+        pagina_previa = request.META.get('HTTP_REFERER')
         if form.is_valid():
             form.save()
             messages.success(request, '¡Registro exitoso! Ahora puedes iniciar sesión.')
-            return redirect('general:indice')
+            return HttpResponseRedirect(pagina_previa)
         else:
             messages.error(request, 'Se produjo un error en el registro. Inténtelo de nuevo.')
-            return redirect('general:indice')
+            return HttpResponseRedirect(pagina_previa)

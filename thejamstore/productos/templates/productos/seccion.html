@@ -11,7 +11,7 @@
             <div class="contenedor-ver-mas">
                 <h3 class="titulo-secundario">{{tipo_prenda.descripcion}}</h3>
                 <span></span>
-                <a class="enlace" href="">Ver todo</a>
+                <a class="enlace" href="{% url 'productos:seccion_tipo_prenda' categoria|slugify tipo_prenda|slugify %}">Ver todo</a>
             </div>
  
             <div class="display-productos">

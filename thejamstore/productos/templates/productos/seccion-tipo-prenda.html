@@ -1,0 +1,12 @@
+{% extends 'general/main.html' %}
+
+{% block contenido %}
+    <main>
+        {{ tipo_prenda }}
+        <section class="contenedor seccion-ropa-productos">
+        {% for producto in productos %}
+            {{producto}}
+        {% endfor %}
+        </section>
+    </main>
+{% endblock %}
