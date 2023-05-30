@@ -50,8 +50,8 @@
                     <a class="enlace_boton">
                         Añadir al carrito
                     </a>
-                    <a class="enlace_boton">
-                        Más {{ producto_detalle.producto_tipo_prenda.first|lower }}s
+                    <a class="enlace_boton" href="{% url 'productos:seccion_tipo_prenda' producto_detalle.categoria producto_detalle.producto_tipo_prenda.first|slugify %}">
+                        Sección {{ producto_detalle.producto_tipo_prenda.first|lower }}
                     </a>
                     <svg class="icono-corazon" id="boton-anadir-lista-deseos" width="28px" height="28px"
                         viewBox="0 0 22 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
