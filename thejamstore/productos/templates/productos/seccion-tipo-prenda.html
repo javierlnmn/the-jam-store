@@ -2,12 +2,39 @@
 
 {% block contenido %}
     <main>
-        {{ tipo_prenda }}
-        <section class="contenedor seccion-ropa-productos">
-        {% for producto in productos %}
-            {{producto}}
-        {% endfor %}
+
+        <section class="contenedor seccion-ropa-productos-tipo-prenda">
+
+            <div class="contenedor-titulos">
+                <h2 class="titulo">{{categoria}}</h2>
+                <h2 class="titulo flecha"> > </h2>
+                <h3 class="titulo-secundario">{{ tipo_prenda }}</h3>
+            </div>
+
+            <div class="display-productos">
+                {% for producto in productos %}
+                    <div class="producto-display_card">
+                        <div class="imagen">
+                            {% if producto.oferta %}
+                            <span class="marcador-oferta">Oferta</span>
+                            {% endif %}
+                            <img src="{{producto.imagen.url}}" alt="Imagen de la prenda">
+                        </div>
+                        <div class="informacion">
+                            <p class="negrita">{{ producto.nombre }}</p>
+                            {% if producto.oferta %}
+                                <p><span class="negrita"><span class="texto-tachado">{{ producto.precio }}</span>&nbsp;&nbsp;&nbsp;{{ producto.precio_oferta }}</span>€</p>
+                            {% else %}
+                                <p><span class="negrita">{{ producto.precio }}</span>€</p>
+                            {% endif %}
+                            <a class="enlace" href="articulo.html">Ver producto</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
         </section>
+
 
         {% include 'general/base/paginacion.html' with objetos_paginas=productos %}
 

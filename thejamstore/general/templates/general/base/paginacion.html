@@ -1,10 +1,20 @@
 {% if objetos_paginas.has_other_pages %}
 <section class="contenedor seccion-paginacion">
             
-    {% if  objetos_paginas.has_previous %}
+    {% if not objetos_paginas.has_previous %}
+    <div class="contenedor-botones desactivado">
+        <div class="botones">
+            <a class="contenedor-boton">
+                <span class="boton">&lt;&lt;</span>
+            </a>
+            <a class="contenedor-boton">
+                <span class="boton">&lt;</span>
+            </a>
+        </div>
+    </div>
+    {% else %}
     <div class="contenedor-botones">
         <div class="botones">
-
             <a href="?pag={{objetos_paginas.paginator.first_page_number}}" class="contenedor-boton">
                 <span class="boton">&lt;&lt;</span>
             </a>
@@ -12,9 +22,8 @@
             <a href="?pag={{objetos_paginas.previous_page_number}}" class="contenedor-boton">
                 <span class="boton">&lt;</span>
             </a>
-            
         </div>
-    </div>
+    </div>    
     {% endif %}
 
     <div class="contenedor-botones paginas">
@@ -31,19 +40,29 @@
 
     </div>
 
-    {% if  objetos_paginas.has_next %}
+    {% if not objetos_paginas.has_next %}
+    <div class="contenedor-botones desactivado">
+        <div class="botones">
+            <a class="contenedor-boton">
+                <span class="boton">&gt;&gt;</span>
+            </a>
+            <a class="contenedor-boton">
+                <span class="boton">&gt;</span>
+            </a>
+        </div>
+    </div>
+    {% else %}
     <div class="contenedor-botones">
         <div class="botones">
-
             <a href="?pag={{objetos_paginas.next_page_number}}" class="contenedor-boton">
                 <span class="boton">&gt;</span>
             </a>
-            <a href="?pag={{objetos_paginas.paginator.last_page_number}}" class="contenedor-boton">
+
+            <a href="?pag={{objetos_paginas.paginator.num_pages}}" class="contenedor-boton">
                 <span class="boton">&gt;&gt;</span>
             </a>
-
         </div>
-    </div>
+    </div>    
     {% endif %}
 
 </section>

@@ -13,7 +13,7 @@ $altura-paginacion: 5rem;
         gap: 1rem;
     }
 
-    
+
     .contenedor-botones {
         border: .1rem solid $gris;
         background-color: rgba($gris, .1);
@@ -23,6 +23,24 @@ $altura-paginacion: 5rem;
         align-items: center;
         width: 15%;
 
+        &.desactivado {
+            background-color: rgba($gris, .05);
+            border-color: rgba($gris, .4);
+
+            & .contenedor-boton {
+                &:hover {
+                    background-color: inherit;
+                    cursor: default !important;
+                }
+                &+.contenedor-boton {
+                    border-color: rgba($gris, .4) !important;
+                }
+                .boton {
+                    color: $gris;
+                }
+            }
+        }
+
         .botones {
 
             flex: 1;
@@ -30,7 +48,7 @@ $altura-paginacion: 5rem;
             align-items: center;
             min-height: $altura-paginacion;
 
-            
+
 
             .contenedor-boton {
                 min-height: $altura-paginacion;
@@ -50,7 +68,7 @@ $altura-paginacion: 5rem;
                 &.actual {
                     background-color: $azul;
                     color: $blanco;
-                    
+
                     &:hover {
                         background-color: darken($azul, 4%);
                         cursor: pointer;
@@ -64,7 +82,7 @@ $altura-paginacion: 5rem;
 
             }
 
-            
+
         }
 
         &.paginas {

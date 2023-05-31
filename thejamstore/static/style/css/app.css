@@ -884,6 +884,24 @@ p {
   width: 15%;
 }
 
+.seccion-paginacion .contenedor-botones.desactivado {
+  background-color: rgba(177, 177, 177, 0.05);
+  border-color: rgba(177, 177, 177, 0.4);
+}
+
+.seccion-paginacion .contenedor-botones.desactivado .contenedor-boton:hover {
+  background-color: inherit;
+  cursor: default !important;
+}
+
+.seccion-paginacion .contenedor-botones.desactivado .contenedor-boton + .contenedor-boton {
+  border-color: rgba(177, 177, 177, 0.4) !important;
+}
+
+.seccion-paginacion .contenedor-botones.desactivado .contenedor-boton .boton {
+  color: #b1b1b1;
+}
+
 .seccion-paginacion .contenedor-botones .botones {
   flex: 1;
   display: flex;
