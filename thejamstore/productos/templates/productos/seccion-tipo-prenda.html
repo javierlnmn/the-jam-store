@@ -6,7 +6,7 @@
         <section class="contenedor seccion-ropa-productos-tipo-prenda">
 
             <div class="contenedor-titulos">
-                <h2 class="titulo">{{categoria}}</h2>
+                <a href="{% url 'productos:seccion' categoria %}"><h2 class="titulo">{{categoria}}</h2></a>
                 <h2 class="titulo flecha"> > </h2>
                 <h3 class="titulo-secundario">{{ tipo_prenda }}</h3>
             </div>

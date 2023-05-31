@@ -43,7 +43,6 @@ def seccion_productos(request, categoria=None):
         
     return render(request, directorio_templates + 'seccion.html', context)
 
-# Usamos una clase para esta vista porque es mas facil hacer la paginacion asi
 def seccion_productos_tipo_prenda(request, categoria=None, tipo_prenda=None):
     tipo_prenda_descripcion_formateada = tipo_prenda.replace('-', ' ').capitalize()
     tipo_prenda_id = Tipo_Prenda.objects.get(descripcion = tipo_prenda_descripcion_formateada, categoria_padre__nombre=categoria)
