@@ -1,0 +1,50 @@
+{% if objetos_paginas.has_other_pages %}
+<section class="contenedor seccion-paginacion">
+            
+    {% if  objetos_paginas.has_previous %}
+    <div class="contenedor-botones">
+        <div class="botones">
+
+            <a href="?pag={{objetos_paginas.paginator.first_page_number}}" class="contenedor-boton">
+                <span class="boton">&lt;&lt;</span>
+            </a>
+
+            <a href="?pag={{objetos_paginas.previous_page_number}}" class="contenedor-boton">
+                <span class="boton">&lt;</span>
+            </a>
+            
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="contenedor-botones paginas">
+
+        <div class="botones">
+
+            {% for pagina in objetos_paginas.paginator.page_range  %}
+                <a href="?pag={{pagina}}" class="contenedor-boton {% if objetos_paginas.number is pagina %}actual{% endif %}">
+                    <span class="boton">{{ pagina }}</span>
+                </a>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% if  objetos_paginas.has_next %}
+    <div class="contenedor-botones">
+        <div class="botones">
+
+            <a href="?pag={{objetos_paginas.next_page_number}}" class="contenedor-boton">
+                <span class="boton">&gt;</span>
+            </a>
+            <a href="?pag={{objetos_paginas.paginator.last_page_number}}" class="contenedor-boton">
+                <span class="boton">&gt;&gt;</span>
+            </a>
+
+        </div>
+    </div>
+    {% endif %}
+
+</section>
+{% endif %}

@@ -8,5 +8,8 @@
             {{producto}}
         {% endfor %}
         </section>
+
+        {% include 'general/base/paginacion.html' with objetos_paginas=productos %}
+
     </main>
 {% endblock %}
