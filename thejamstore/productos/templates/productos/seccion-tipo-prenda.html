@@ -12,6 +12,7 @@
             </div>
 
             <div class="display-productos">
+
                 {% for producto in productos %}
                     <div class="producto-display_card">
                         <div class="imagen">
@@ -27,10 +28,11 @@
                             {% else %}
                                 <p><span class="negrita">{{ producto.precio }}</span>€</p>
                             {% endif %}
-                            <a class="enlace" href="articulo.html">Ver producto</a>
+                            <a class="enlace" href="{% url 'productos:producto_detalle' producto.id %}">Ver producto</a>
                         </div>
                     </div>
                 {% endfor %}
+                
             </div>
 
         </section>
