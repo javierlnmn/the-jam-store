@@ -7,10 +7,11 @@ directorio_templates = "productos/"
 
 
 def producto_detalle(request, id_producto):
-    productos_recomendados = Producto.objects.exclude(id=id_producto).order_by('?')[:4]
     
     # 404
     producto_detalle = get_object_or_404(Producto, pk=id_producto)
+    
+    productos_recomendados = Producto.objects.exclude(id=id_producto).order_by('?')[:4]
     
     comentarios_producto = Comentario.objects.filter(producto__id=id_producto)
 

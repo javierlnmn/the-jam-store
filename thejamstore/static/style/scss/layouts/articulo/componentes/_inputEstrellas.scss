@@ -1,0 +1,46 @@
+.contenedor-input-estrellas {
+                         
+    .texto-secundario {
+         font-weight: $regular;
+         font-size: 1.6rem;
+         margin: 0;
+    }
+
+    .valoracion {
+         border: none;
+         display: flex;
+         flex-direction: row-reverse;
+         justify-content: flex-end;
+         gap: .5rem;
+
+         &>.estrella {
+              color: $gris;
+              transition: color .3s ease;
+         }
+
+         &>.estrella:before {
+              font-size: 2em;
+              font-family: FontAwesome;
+              content: "\f005";
+         }
+
+         &>.input-valoracion {
+              display: none;
+         }
+
+         &>.input-valoracion:checked~.estrella,
+         &:not(:checked)>.estrella:hover,
+         &:not(:checked)>.estrella:hover~.estrella {
+              color: $amarillo;
+         }
+
+         &>.input-valoracion:checked+.estrella:hover,
+         &>.input-valoracion:checked~.estrella:hover,
+         &>.estrella:hover~.input-valoracion:checked~.estrella,
+         &>.input-valoracion:checked~.estrella:hover~.estrella {
+              color: lighten($amarillo, 10%);
+         }
+
+    }
+
+} 

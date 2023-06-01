@@ -42,3 +42,17 @@ def registrar_usuario(request):
         else:
             messages.error(request, 'Se produjo un error en el registro. Inténtelo de nuevo.')
             return HttpResponseRedirect(pagina_previa)
+        
+def valorar_producto(request, id_producto):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            
+            # VERIFICAR E INSERTAR COMENTARIO
+            
+            pagina_previa = request.META.get('HTTP_REFERER')
+            
+            return HttpResponseRedirect(pagina_previa)
+        else:
+            pagina_previa = request.META.get('HTTP_REFERER')
+            messages.error(request, 'Para valorar un producto debes haber iniciado sesión.')
+            return HttpResponseRedirect(pagina_previa)

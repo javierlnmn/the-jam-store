@@ -96,42 +96,7 @@
 
         </section>
 
-        <section class="seccion-valoraciones">
-
-            <div class="ondas"></div>
-
-            <div class="contenedor">
-                <h3 class="titulo-secundario">Opiniones del producto</h3>
-
-                {% if comentarios %}
-                    <p class="texto-secundario">Total de valoraciones: {{ comentarios|length }}</p>
-                    <div class="valoraciones contenedor">   
-                    {% for comentario in comentarios %}
-
-                        <div class="valoracion">
-                            <div class="informacion-valoracion">
-                                <div class="usuario">
-                                    <img class="foto-perfil" src="{{ comentario.usuario.foto_perfil.url }}" alt="">
-                                    <p>{{ comentario.usuario.first_name }} {{ comentario.usuario.last_name }}</p>
-                                    <div class="puntuacion">
-                                        <p>{{ comentario.valoracion }}</p>
-                                        <img src="{% static 'media/img/estrella.png' %}" alt="">
-                                    </div>
-                                </div>
-                                <p>{{ comentario.comentario }}</p>
-                                <p class="texto-secundario">Publicado el {{ comentario.created|date:"d \d\e F \d\e Y" }}</p>
-                            </div>
-                        </div>
-
-                    {% endfor %}
-                    </div>
-                {% else %}
-                    <p class="negrita texto-secundario">Vaya, nadie ha comentado aún...</p>
-                {% endif %}
-            </div>
-
-        </section>
-
+        {% include 'usuarios/valoraciones.html' %}
 
     </main>
 {% endblock %}
