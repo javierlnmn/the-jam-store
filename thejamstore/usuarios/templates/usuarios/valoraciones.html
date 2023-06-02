@@ -1,3 +1,5 @@
+{% load static %}
+
 <section class="seccion-valoraciones">
 
     <div class="ondas"></div>
@@ -15,17 +17,17 @@
                     {% csrf_token %}
 
                     <div class="contenedor-input-texto contenedor-input-texto_textarea">
-                        <textarea type="text" id="input-buscar" name="comentario" class="login-input"></textarea>
-                        <label for="input-buscar" unselectable="on">Escribe aquí tu opinión</label>
+                        <textarea type="text" id="input-buscar" name="texto" class="login-input"></textarea>
+                        <label for="input-buscar" unselectable="on">Escribe aquí tu opinión (opcional)</label>
                     </div>
                 
                     <div class="contenedor-doble">
                         
                         <div class="contenedor-input-estrellas">
 
-                            <p class="texto-secundario">Valora el producto</p>
+                            <p class="texto-secundario">Valora el producto *</p>
                             <div class="valoracion">
-                                <input class="input-valoracion" type="radio" id="estrella5" name="valoracion" value="5" />
+                                <input class="input-valoracion" type="radio" id="estrella5" name="valoracion" value="5" required />
                                 <label class="estrella" for="estrella5">
                                 </label>
                                 <input class="input-valoracion" type="radio" id="estrella4" name="valoracion" value="4" />
@@ -73,18 +75,22 @@
                 <div class="valoracion">
                     <div class="informacion-valoracion">
                         <div class="usuario">
-                            <img class="foto-perfil" src="{{ comentario.usuario.foto_perfil.url }}" alt="">
+                            <img class="foto-perfil" src="{% if comentario.usuario.foto_perfil  %}{{ comentario.usuario.foto_perfil.url }}{% else %}{% static 'media/img/usuario.webp' %}{% endif %}" alt="">
                             <p>{{ comentario.usuario.first_name }} {{ comentario.usuario.last_name }}</p>
                         </div>
                         <div class="puntuacion">
                             <div class="estrellas">
-                                {% comment %} {% for punto in  comentario.valoracion %}
+                                {% with ''|center:comentario.valoracion as range %}
+                                {% for _ in range %}
                                     <span class="estrella"></span>
-                                {% endfor %} {% endcomment %}
-                                {{comentario.valoracion}}<span class="estrella"></span>
+                                {% endfor %}
+                                {% endwith %}
+                                <span class="texto-secundario centrar-texto" style="align-self: center; margin-left: 1rem;">{{comentario.get_valoracion_display}}</span>
                             </div>
                         </div>
+                        {% if comentario.comentario %}
                         <p class="comentario">{{ comentario.comentario }}</p>
+                        {% endif %}
                         <p class="texto-secundario">Publicado el {{ comentario.created|date:"d \d\e F \d\e Y" }}</p>
                     </div>
                 </div>

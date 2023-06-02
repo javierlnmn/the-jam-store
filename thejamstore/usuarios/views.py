@@ -4,7 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
-from usuarios.forms import RegistrationForm
+from .forms import RegistrationForm
+from .models import Comentario, Producto
 
 
 def iniciar_sesion(request):
@@ -46,13 +47,29 @@ def registrar_usuario(request):
 def valorar_producto(request, id_producto):
     if request.method == 'POST':
         if request.user.is_authenticated:
-            
-            # VERIFICAR E INSERTAR COMENTARIO
-            
             pagina_previa = request.META.get('HTTP_REFERER')
+            
+            texto = request.POST.get('texto')
+            valoracion = request.POST.get('valoracion')
+            producto = Producto.objects.get(pk=id_producto)
+            
+            try:
+                comentario = Comentario.objects.create(
+                    comentario=texto,
+                    valoracion=valoracion,
+                    usuario=request.user,
+                    producto=producto
+                )
+                
+                comentario.save()
+            except:
+                messages.error(request, 'Ha habido un error al añadir la valoración. Inténtalo de nuevo.')
             
             return HttpResponseRedirect(pagina_previa)
         else:
             pagina_previa = request.META.get('HTTP_REFERER')
             messages.error(request, 'Para valorar un producto debes haber iniciado sesión.')
             return HttpResponseRedirect(pagina_previa)
+    else:
+        pass # 404    
+    
