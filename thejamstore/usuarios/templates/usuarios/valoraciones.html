@@ -2,60 +2,63 @@
 
     <div class="ondas"></div>
 
-    <div class="contenedor contenedor-anadir-valoracion">
+    {% if user.is_authenticated %}
+    
+        {% if pedido_por_usuario.recibido %}
 
-        {% if user.is_authenticated %}
+        <div class="contenedor contenedor-anadir-valoracion">
 
-        <h4 class="titulo-secundario">¡Danos tu opinión!</h4>
+                <h4 class="titulo-secundario">¡Danos tu opinión!</h4>
 
-        <form action="{% url 'usuarios:valorar_producto' producto_detalle.id %}" method="post" class="formulario-valoracion">
+                <form action="{% url 'usuarios:valorar_producto' producto_detalle.id %}" method="post" class="formulario-valoracion">
 
-            {% csrf_token %}
+                    {% csrf_token %}
 
-            <div class="contenedor-input-texto contenedor-input-texto_textarea">
-                <textarea type="text" id="input-buscar" name="comentario" class="login-input"></textarea>
-                <label for="input-buscar" unselectable="on">Escribe aquí tu opinión</label>
-            </div>
-        
-            <div class="contenedor-doble">
-                
-                <div class="contenedor-input-estrellas">
-
-                    <p class="texto-secundario">Valora el producto</p>
-                    <div class="valoracion">
-                        <input class="input-valoracion" type="radio" id="estrella5" name="valoracion" value="5" />
-                        <label class="estrella" for="estrella5">
-                        </label>
-                        <input class="input-valoracion" type="radio" id="estrella4" name="valoracion" value="4" />
-                        <label class="estrella" for="estrella4">
-                        </label>
-                        <input class="input-valoracion" type="radio" id="estrella3" name="valoracion" value="3" />
-                        <label class="estrella" for="estrella3">
-                        </label>
-                        <input class="input-valoracion" type="radio" id="estrella2" name="valoracion" value="2" />
-                        <label class="estrella" for="estrella2">
-                        </label>
-                        <input class="input-valoracion" type="radio" id="estrella1" name="valoracion" value="1" />
-                        <label class="estrella" for="estrella1">
-                        </label>
+                    <div class="contenedor-input-texto contenedor-input-texto_textarea">
+                        <textarea type="text" id="input-buscar" name="comentario" class="login-input"></textarea>
+                        <label for="input-buscar" unselectable="on">Escribe aquí tu opinión</label>
                     </div>
-                </div>
                 
-                <button class="enlace_boton" type="submit">Publicar Valoración</button>
-            </div>
+                    <div class="contenedor-doble">
+                        
+                        <div class="contenedor-input-estrellas">
 
-        </form>
+                            <p class="texto-secundario">Valora el producto</p>
+                            <div class="valoracion">
+                                <input class="input-valoracion" type="radio" id="estrella5" name="valoracion" value="5" />
+                                <label class="estrella" for="estrella5">
+                                </label>
+                                <input class="input-valoracion" type="radio" id="estrella4" name="valoracion" value="4" />
+                                <label class="estrella" for="estrella4">
+                                </label>
+                                <input class="input-valoracion" type="radio" id="estrella3" name="valoracion" value="3" />
+                                <label class="estrella" for="estrella3">
+                                </label>
+                                <input class="input-valoracion" type="radio" id="estrella2" name="valoracion" value="2" />
+                                <label class="estrella" for="estrella2">
+                                </label>
+                                <input class="input-valoracion" type="radio" id="estrella1" name="valoracion" value="1" />
+                                <label class="estrella" for="estrella1">
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button class="enlace_boton" type="submit">Publicar Valoración</button>
+                    </div>
 
-        {% else %}
+                </form>
 
-        <h4>Inicia sesión para valorar el producto</h4>
+        </div>
+
+        {% elif pedido_por_usuario.comprado %}
+
+        <div class="contenedor">
+            <p class="texto-secundario texto-verde">Podrás valorar el producto una vez recibido</p>
+        </div>
 
         {% endif %}
-    </div>
 
-    
-
-  
+    {% endif %}
 
     <div class="contenedor contenedor-valoraciones">
         <h3 class="titulo-secundario">Opiniones del producto</h3>
@@ -90,17 +93,18 @@
 
             </div>
 
+            <div class="ver-mas">
+                <span></span>
+                <p class="texto-secundario">Ver todas las valoraciones</p>
+                <span></span>
+            </div>
+
         {% else %}
 
             <p class="negrita texto-secundario">Vaya, nadie ha comentado aún...</p>
 
         {% endif %}
 
-            <div class="ver-mas">
-                <span></span>
-                <p class="texto-secundario">Ver todas las valoraciones</p>
-                <span></span>
-            </div>
 
         </div>
 
