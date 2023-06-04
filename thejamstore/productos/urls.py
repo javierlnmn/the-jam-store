@@ -4,6 +4,7 @@ from .views import producto_detalle, seccion_productos, seccion_productos_tipo_p
 app_name = 'productos'
 
 urlpatterns = [
+    path('', producto_detalle, name='busqueda_productos'),
     path('producto/<int:id_producto>', producto_detalle, name='producto_detalle'),
     path('<str:categoria>/', seccion_productos, name='seccion'),
     # slug convierte los string a minusculas, y convierte los espacios a guiones

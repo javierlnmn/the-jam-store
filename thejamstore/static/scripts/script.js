@@ -102,6 +102,13 @@ $(document).on('keydown', function (event) {
     }
 });
 
+// Buscar producto al hacer click en el icono (svg) de buscar
+
+let formularioBusqueda = $('#formulario-busqueda');
+
+$('#boton-buscar').on('click', function(){
+    formularioBusqueda.submit();
+});
 
 // Desplegar el modal de usuario
 

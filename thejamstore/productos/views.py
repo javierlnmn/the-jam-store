@@ -6,6 +6,11 @@ from usuarios.models import Comentario
 
 directorio_templates = "productos/"
 
+def busqueda_productos(request):
+    
+    
+    return None
+
 
 def producto_detalle(request, id_producto):
     
