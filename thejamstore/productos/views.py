@@ -14,7 +14,17 @@ def busqueda_productos(request):
     busqueda = request.GET.get("busqueda")
     palabras_busqueda = busqueda.split()
 
-    resultado_busqueda = filtrar_productos(palabras_busqueda)
+    resultado_busqueda = []
+    for palabra in palabras_busqueda:
+        # Se busca a traves del nombre y del tipo de prenda
+        filtro = (
+            Producto.objects.filter(nombre__icontains=palabra)
+            | Producto.objects.filter(producto_tipo_prenda__descripcion__icontains=palabra)
+        )
+        for producto in filtro:
+            resultado_busqueda.append(producto)
+
+    resultado_busqueda = list(set(resultado_busqueda))
 
     pagina = request.GET.get("pag")
     paginacion = Paginator(resultado_busqueda, 12)
@@ -28,44 +38,44 @@ def busqueda_productos(request):
     return render(request, directorio_templates + "/resultados-busqueda.html", contexto)
 
 
-def filtrar_productos(palabras_busqueda):
-    filtro_nombre = Q()
-    filtro_color = Q()
-    filtro_tipo_prenda = Q()
-    filtro_marca = Q()
+# def filtrar_productos(palabras_busqueda):
+#     filtro_nombre = Q()
+#     filtro_color = Q()
+#     filtro_tipo_prenda = Q()
+#     filtro_marca = Q()
 
-    for palabra in palabras_busqueda:
-        filtro_nombre |= Q(nombre__icontains=palabra)
-        filtro_color |= Q(producto_color__descripcion__icontains=palabra)
-        filtro_tipo_prenda |= Q(producto_tipo_prenda__descripcion__icontains=palabra)
-        filtro_marca |= Q(producto_marca__nombre__icontains=palabra)
+#     for palabra in palabras_busqueda:
+#         filtro_nombre |= Q(nombre__icontains=palabra)
+#         filtro_color |= Q(producto_color__descripcion__icontains=palabra)
+#         filtro_tipo_prenda |= Q(producto_tipo_prenda__descripcion__icontains=palabra)
+#         filtro_marca |= Q(producto_marca__nombre__icontains=palabra)
 
-    productos_por_nombre = Producto.objects.filter(filtro_nombre)
-    productos_por_color = Producto.objects.filter(filtro_color)
-    productos_por_tipo_prenda = Producto.objects.filter(filtro_tipo_prenda)
-    productos_por_marca = Producto.objects.filter(filtro_marca)
-    
-    consulta = Producto.objects.none()
-    
-    if productos_por_nombre:
-        consulta = productos_por_nombre
-        
-    if productos_por_color and consulta:
-        consulta = consulta & productos_por_color
-    elif productos_por_color:
-        consulta = productos_por_color
-        
-    if productos_por_tipo_prenda and consulta:
-        consulta = consulta & productos_por_tipo_prenda
-    elif productos_por_tipo_prenda:
-        consulta = productos_por_tipo_prenda
-        
-    if productos_por_marca and consulta:
-        consulta = consulta & productos_por_marca
-    elif productos_por_marca:
-        consulta = productos_por_marca
+#     productos_por_nombre = Producto.objects.filter(filtro_nombre)
+#     productos_por_color = Producto.objects.filter(filtro_color)
+#     productos_por_tipo_prenda = Producto.objects.filter(filtro_tipo_prenda)
+#     productos_por_marca = Producto.objects.filter(filtro_marca)
 
-    return consulta
+#     consulta = Producto.objects.none()
+
+#     if productos_por_nombre:
+#         consulta = productos_por_nombre
+
+#     if productos_por_color and consulta:
+#         consulta = consulta & productos_por_color
+#     elif productos_por_color:
+#         consulta = productos_por_color
+
+#     if productos_por_tipo_prenda and consulta:
+#         consulta = consulta & productos_por_tipo_prenda
+#     elif productos_por_tipo_prenda:
+#         consulta = productos_por_tipo_prenda
+
+#     if productos_por_marca and consulta:
+#         consulta = consulta & productos_por_marca
+#     elif productos_por_marca:
+#         consulta = productos_por_marca
+
+#     return consulta
 
 
 def producto_detalle(request, id_producto):
