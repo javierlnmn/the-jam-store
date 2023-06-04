@@ -1,0 +1,3 @@
+.seccion-resultados {
+    @include display-productos(4, 3rem, true);
+}

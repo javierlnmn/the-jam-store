@@ -1,0 +1,48 @@
+{% extends 'general/main.html' %}
+
+{% block contenido %}
+    <main>
+
+        <section class="contenedor seccion-resultados">
+
+            <h3 class="titulo">Mostrando resultados para '{{ busqueda }}'</h3>
+
+            {% if productos %}
+
+            <div class="display-productos">
+
+                {% for producto in productos %}
+                    <div class="producto-display_card">
+                        <div class="imagen">
+                            {% if producto.oferta %}
+                            <span class="marcador-oferta">Oferta</span>
+                            {% endif %}
+                            <img src="{{producto.imagen.url}}" alt="Imagen de la prenda">
+                        </div>
+                        <div class="informacion">
+                            <p class="negrita">{{ producto.nombre }}</p>
+                            {% if producto.oferta %}
+                                <p><span class="negrita"><span class="texto-tachado">{{ producto.precio }}</span>&nbsp;&nbsp;&nbsp;{{ producto.precio_oferta }}</span>€</p>
+                            {% else %}
+                                <p><span class="negrita">{{ producto.precio }}</span>€</p>
+                            {% endif %}
+                            <a class="enlace" href="{% url 'productos:producto_detalle' producto.id %}">Ver producto</a>
+                        </div>
+                    </div>
+                {% endfor %}
+                
+            </div>
+
+            {% else %}
+
+            <p class="texto-centrado texto-secundario">Vaya, parece que no hay resultados...</p>
+
+            {% endif %}
+
+        </section>
+
+
+        {% include 'general/base/paginacion-busqueda.html' with busqueda=busqueda objetos_paginas=productos %}
+
+    </main>
+{% endblock %}
