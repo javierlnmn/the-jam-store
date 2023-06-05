@@ -97,7 +97,7 @@ def producto_detalle(request, id_producto):
     esta_en_lista_de_deseos = False
     
     if request.user.is_authenticated:
-        lista_deseos = Lista_Deseos.objects.get(usuario=request.user)
+        lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
         if lista_deseos and lista_deseos.producto.filter(id=producto_detalle.id).exists():
             esta_en_lista_de_deseos = True
     
