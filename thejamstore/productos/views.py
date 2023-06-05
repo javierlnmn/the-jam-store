@@ -1,13 +1,12 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import Producto, Tipo_Prenda
 from pedidos.models import Pedido
 from usuarios.models import Comentario
 
-directorio_templates = "productos/"
+directorio_templates = "productos"
 
 
 def busqueda_productos(request):
@@ -20,6 +19,8 @@ def busqueda_productos(request):
         filtro = (
             Producto.objects.filter(nombre__icontains=palabra)
             | Producto.objects.filter(producto_tipo_prenda__descripcion__icontains=palabra)
+            | Producto.objects.filter(producto_color__descripcion__icontains=palabra)
+            | Producto.objects.filter(producto_marca__nombre__icontains=palabra)
         )
         for producto in filtro:
             resultado_busqueda.append(producto)
@@ -145,7 +146,7 @@ def seccion_productos(request, categoria=None):
         "categoria": categoria,
     }
 
-    return render(request, directorio_templates + "seccion.html", context)
+    return render(request, directorio_templates + "/seccion.html", context)
 
 
 def seccion_productos_tipo_prenda(request, categoria=None, tipo_prenda=None):
@@ -169,4 +170,4 @@ def seccion_productos_tipo_prenda(request, categoria=None, tipo_prenda=None):
         "tipo_prenda": tipo_prenda_descripcion_formateada,
     }
 
-    return render(request, directorio_templates + "seccion-tipo-prenda.html", context)
+    return render(request, directorio_templates + "/seccion-tipo-prenda.html", context)

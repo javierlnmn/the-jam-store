@@ -1,9 +1,4 @@
 .seccion-lista-deseos {
+    margin-top: 3rem;
     @include display-productos(1, 2rem, false);
-}
-
-
-.boton-ajustes-busqueda {
-    margin-bottom: 1.5rem;
-    cursor: pointer;
 }

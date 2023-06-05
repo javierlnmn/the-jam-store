@@ -1,8 +1,11 @@
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render
 from .forms import RegistrationForm
-from .models import Comentario, Producto
+from .models import Comentario, Producto, Lista_Deseos
+
+directorio_templates = 'usuarios'
 
 
 def iniciar_sesion(request):
@@ -70,3 +73,14 @@ def valorar_producto(request, id_producto):
     else:
         pass # 404    
     
+def lista_deseos(request):
+
+    # get_or_create devuelve una tupla con dos valores, el object y un booleano diciendo si existia antes o no
+    lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
+    productos_lista_deseos = lista_deseos.producto.all()
+
+    contexto = {
+        "productos": productos_lista_deseos,
+    }
+
+    return render(request, directorio_templates + "/lista-deseos.html", contexto)

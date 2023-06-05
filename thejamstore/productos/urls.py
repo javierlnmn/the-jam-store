@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from .views import  busqueda_productos, producto_detalle, seccion_productos, seccion_productos_tipo_prenda
 
 app_name = 'productos'
