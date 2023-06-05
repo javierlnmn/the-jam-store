@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import Producto, Tipo_Prenda
 from pedidos.models import Pedido
-from usuarios.models import Comentario
+from usuarios.models import Comentario, Lista_Deseos
 
 directorio_templates = "productos"
 
@@ -93,14 +93,21 @@ def producto_detalle(request, id_producto):
         )
 
     comentarios_producto = Comentario.objects.filter(producto__id=id_producto)
-
-    print(pedido_por_usuario)
+    
+    esta_en_lista_de_deseos = False
+    
+    if request.user.is_authenticated:
+        lista_deseos = Lista_Deseos.objects.get(usuario=request.user)
+        if lista_deseos and lista_deseos.producto.filter(id=producto_detalle.id).exists():
+            esta_en_lista_de_deseos = True
+    
 
     contexto = {
         "producto_detalle": producto_detalle,
         "productos_recomendados": productos_recomendados,
         "pedido_por_usuario": pedido_por_usuario,
         "comentarios": comentarios_producto,
+        "esta_en_lista_de_deseos": esta_en_lista_de_deseos,
     }
 
     return render(request, directorio_templates + "/producto-detalle.html", contexto)

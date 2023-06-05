@@ -48,13 +48,11 @@
                             <p class="texto-secundario texto-rojo">No hay stock de este producto</p>
                         {% endif %}
                         <div class="botones">
-                            <a class="enlace_boton" href="">Ver producto</a>
-                            {% if not producto.get_stock %}
+                            <a class="enlace_boton" href="{% url 'productos:producto_detalle' producto.id %}">Ver producto</a>
+                            {% if producto.get_stock %}
                                 <a class="enlace_boton" href="">Añadir al carrito</a>
-                            {% else %}
-                                <a class="enlace_boton desactivado" href="">Añadir al carrito</a>
                             {% endif %}
-                            <a class="enlace_boton" href="">Eliminar</a>
+                            <a class="enlace_boton" href="{% url 'usuarios:quitar_de_lista_deseos' producto.id %}">Eliminar</a>
                         </div>
                     </div>
                 </div>

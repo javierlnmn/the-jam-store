@@ -1,7 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 from .forms import RegistrationForm
 from .models import Comentario, Producto, Lista_Deseos
 
@@ -43,7 +44,7 @@ def registrar_usuario(request):
         else:
             messages.error(request, 'Se produjo un error en el registro. Inténtelo de nuevo.')
             return HttpResponseRedirect(pagina_previa)
-        
+
 def valorar_producto(request, id_producto):
     if request.method == 'POST':
         if request.user.is_authenticated:
@@ -71,16 +72,40 @@ def valorar_producto(request, id_producto):
             messages.error(request, 'Para valorar un producto debes haber iniciado sesión.')
             return HttpResponseRedirect(pagina_previa)
     else:
-        pass # 404    
+        pass # 404   
+
+def quitar_de_lista_deseos(request, id_producto):
+    if request.user.is_authenticated:
+        producto = Producto.objects.get(pk=id_producto)
+        lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
+        lista_deseos.producto.remove(producto)
+        
+    pagina_previa = request.META.get('HTTP_REFERER')
+    return HttpResponseRedirect(pagina_previa)
     
+def anadir_a_lista_deseos(request, id_producto):
+    if request.user.is_authenticated:
+        producto = Producto.objects.get(pk=id_producto)
+        lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
+        lista_deseos.producto.add(producto)
+    else:
+        messages.success(request, '¡Inicia sesión para crear tu lista de deseos!')
+    
+    return redirect('productos:producto_detalle', id_producto=id_producto)
+
+ 
 def lista_deseos(request):
 
     # get_or_create devuelve una tupla con dos valores, el object y un booleano diciendo si existia antes o no
     lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
     productos_lista_deseos = lista_deseos.producto.all()
+    
+    paginacion = Paginator(productos_lista_deseos, 5)
+    pagina = request.GET.get("pag")
+    productos_por_pagina = paginacion.get_page(pagina)
 
     contexto = {
-        "productos": productos_lista_deseos,
+        "productos": productos_por_pagina,
     }
 
     return render(request, directorio_templates + "/lista-deseos.html", contexto)
