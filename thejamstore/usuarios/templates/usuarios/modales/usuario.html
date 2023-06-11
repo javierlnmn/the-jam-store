@@ -50,7 +50,7 @@
             <form action="{% url 'usuarios:registrar_usuario' %}" method="POST" class="formulario">
                 {% csrf_token %}
                 <div class="contenedor-input-texto">
-                    <input type="text" name="username" maxlength="150" required="" id="id_username" class="login-input" />
+                    <input type="text" name="username" maxlength="150" required="" class="login-input" />
                     <label for="input-buscar" unselectable="on">Usuario</label>
                 </div>
                 <div class="contenedor-input-texto">
@@ -102,7 +102,7 @@
                 {% csrf_token %}
                 <div class="datos">
                     <div class="contenedor-input-texto contenedor-input-texto_animacion">
-                        <input type="text" name="username" maxlength="150" required="" id="id_username" class="login-input" value="{{ request.user.username }}" />
+                        <input type="text" name="username" maxlength="150" required="" class="login-input" value="{{ request.user.username }}" />
                         <label for="input-buscar" unselectable="on">Usuario</label>
                     </div>
                     <div class="contenedor-input-texto contenedor-input-texto_animacion">
@@ -110,16 +110,24 @@
                         <label for="input-buscar" unselectable="on">Correo electrónico</label>
                     </div>
                     <div class="contenedor-input-texto {% if request.user.first_name %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="username" maxlength="150" required="" id="id_username" class="login-input" value="{{ request.user.first_name }}" />
+                        <input type="text" name="username" maxlength="150" required="" class="login-input" value="{{ request.user.first_name }}" />
                         <label for="input-buscar" unselectable="on">Nombre</label>
                     </div>
                     <div class="contenedor-input-texto {% if request.user.first_name %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="username" maxlength="150" required="" id="id_username" class="login-input" value="{{ request.user.last_name }}" />
+                        <input type="text" name="username" maxlength="150" required="" class="login-input" value="{{ request.user.last_name }}" />
+                        <label for="input-buscar" unselectable="on">Apellidos</label>
+                    </div>
+                    <div class="contenedor-input-texto {% if request.user.telefono %} contenedor-input-texto_animacion {% endif %}">
+                        <input type="text" name="telefono" maxlength="150" required="" class="login-input" value="{{ request.user.last_name }}" />
                         <label for="input-buscar" unselectable="on">Apellidos</label>
                     </div>
                 </div>
                 
-                <img class="foto-perfil" src="{% if user.foto_perfil  %}{{ user.foto_perfil.url }}{% else %}{% static 'media/img/usuario.webp' %}{% endif %}">
+                <div class="contenedor-foto-perfil">
+                    <img class="foto-perfil" src="{% if user.foto_perfil  %}{{ user.foto_perfil.url }}{% else %}{% static 'media/img/usuario.webp' %}{% endif %}">
+                    <input type="file" name="foto_perfil" size="60" >
+                </div>
+                
                 
                 <button type="submit" class="enlace_boton">Actualizar datos</button>
             </form>
