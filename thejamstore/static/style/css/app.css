@@ -2278,6 +2278,59 @@ p {
   text-decoration: underline;
 }
 
+.modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2.5rem;
+}
+
+.modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .datos {
+  grid-column: 1 / 4;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .foto-perfil {
+  grid-column: 4 / 6;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: .3s ease filter;
+}
+
+.modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .foto-perfil:hover {
+  filter: brightness(80%);
+}
+
+.modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .enlace {
+  color: #009FB7;
+  transition: color .3s ease;
+  font-weight: 500;
+  grid-column: 1 / 6;
+}
+
+.modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .enlace:hover {
+  color: #009FB7;
+}
+
+.modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .enlace_boton {
+  background-color: #FCFCFC;
+  padding: 1rem 2rem;
+  color: #009FB7;
+  border: 1px solid #009FB7;
+  transition: background-color .3s ease;
+  grid-column: 1 / 6;
+}
+
+.modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .enlace_boton:hover {
+  color: #FCFCFC;
+}
+
+.modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .enlace_boton:hover {
+  background-color: #009FB7;
+}
+
 .modal .modal-usuario-contenido .contenedor-formulario .enlaces {
   margin-top: 3rem;
   display: flex;
@@ -2314,18 +2367,4 @@ p {
 
 .modal .modal-usuario-contenido .contenedor-formulario .enlaces .enlace_boton:hover {
   background-color: #b1b1b1;
-}
-
-.modal .modal-usuario-contenido .contenedor-formulario_actualizar-datos {
-  display: flex;
-  gap: 2rem;
-}
-
-.modal .modal-usuario-contenido .contenedor-formulario_actualizar-datos .datos {
-  flex: 1;
-}
-
-.modal .modal-usuario-contenido .contenedor-formulario_actualizar-datos .foto-perfil {
-  width: 30%;
-  height: fit-content;
 }

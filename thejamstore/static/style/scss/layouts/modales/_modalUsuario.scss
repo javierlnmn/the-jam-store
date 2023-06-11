@@ -34,6 +34,39 @@
                     }
                 }
             }
+
+            &_actualizar-datos {
+                margin-top: 2rem;
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 2.5rem;
+
+                .datos {
+                    grid-column: 1 / 4;
+
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2.5rem;
+                }
+
+                .foto-perfil {
+                    grid-column: 4 / 6;
+                    border-radius: 100%;
+                    cursor: pointer;
+                    transition: .3s ease filter;
+
+                    &:hover {
+                        filter: brightness(80%); 
+                    }
+
+                }
+
+                @include estilo-enlace($azul) {
+                    grid-column: 1 / 6;
+                    cursor: pointer;
+                }
+    
+            }
         }
 
         .enlaces {
@@ -50,18 +83,6 @@
             }
         }
 
-        &_actualizar-datos {
-            display: flex;
-            gap: 2rem;
-
-            .datos {
-                flex: 1;
-            }
-            .foto-perfil {
-                width: 30%;
-                height: fit-content;
-            }
-        }
     }
 
 }
