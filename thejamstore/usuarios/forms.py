@@ -1,13 +1,14 @@
 from django import forms
 from django.contrib.auth.hashers import make_password
-from usuarios.models import Custom_User
+from usuarios.models import Custom_User, Categoria_Usuario
 
 
 class RegistrationForm(forms.ModelForm):
+    categoria = forms.ModelChoiceField(queryset=Categoria_Usuario.objects.all(), empty_label=None)
 
     class Meta:
         model = Custom_User
-        fields = ['username', 'password', 'email']
+        fields = ['username', 'password', 'email', 'categoria']
 
     def save(self, commit=True):
         user = super().save(commit=False)

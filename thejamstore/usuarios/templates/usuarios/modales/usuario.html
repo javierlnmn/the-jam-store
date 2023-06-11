@@ -1,3 +1,5 @@
+{% load static %}
+
 <div id="modal-usuario" class="modal">
 
     {% if not user.is_authenticated %}
@@ -41,7 +43,7 @@
 
         <h4>Regístrate</h4>
 
-        <p class="texto-secundario">Regístrate con un nombre de usuario, correo electrónico y contraseña. Tus datos estarán seguros con nosotros</p>
+        <p class="texto-secundario">Regístrate con un nombre de usuario, correo electrónico y contraseña. Tus datos estarán seguros con nosotros.</p>
 
         <div class="contenedor-formulario">
             
@@ -59,6 +61,20 @@
                     <input type="password" name="password" maxlength="128" required="" id="id_password" class="login-input" />
                     <label for="input-buscar" unselectable="on">Contraseña</label>
                 </div>
+                <div class="checkbox-vendedor">
+                    <label class="contenedor-input-checkbox translate style-cyan">
+                        <input type="checkbox" name="categoria" value="2" />
+                        <span class="el">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z">
+                                </path>
+                            </svg>
+                        </span>
+                    </label>
+                    <p>Registrarme como vendedor. <a class="texto-secundario" href="">(?)</a></p>
+                </div>
+                
 
                 <button type="submit" class="enlace_boton">Registrarse</button>
             </form>
@@ -78,6 +94,35 @@
         <span class="close boton-cerrar-modal-usuario">&times;</span>
 
         <h4>Bienvenido, {{ user.username }}</h4>
+
+        <div class="contenedor-formulario contenedor-formulario_actualizar-datos">
+            <div class="datos">
+                {% comment %} FORMULARIO DE ACTUALIZACION DE DATOS {% endcomment %}
+                <form action="" method="POST" class="formulario">
+                    {% csrf_token %}
+                    <div class="contenedor-input-texto contenedor-input-texto_animacion">
+                        <input type="text" name="username" maxlength="150" required="" id="id_username" class="login-input" value="{{ request.user.username }}" />
+                        <label for="input-buscar" unselectable="on">Usuario</label>
+                    </div>
+                    <div class="contenedor-input-texto contenedor-input-texto_animacion">
+                        <input type="email" name="email" maxlength="128" id="id_email" class="login-input" value="{{ request.user.email }}" />
+                        <label for="input-buscar" unselectable="on">Correo electrónico</label>
+                    </div>
+                    <div class="contenedor-input-texto contenedor-input-texto_animacion">
+                        <input type="text" name="username" maxlength="150" required="" id="id_username" class="login-input" value="{{ request.user.first_name }}" />
+                        <label for="input-buscar" unselectable="on">Nombre</label>
+                    </div>
+                    <div class="contenedor-input-texto contenedor-input-texto_animacion">
+                        <input type="text" name="username" maxlength="150" required="" id="id_username" class="login-input" value="{{ request.user.last_name }}" />
+                        <label for="input-buscar" unselectable="on">Apellidos</label>
+                    </div>
+    
+                    <button type="submit" class="enlace_boton">Actualizar datos</button>
+                </form>
+            </div>
+
+            <img class="foto-perfil" src="{% if user.foto_perfil  %}{{ user.foto_perfil.url }}{% else %}{% static 'media/img/usuario.webp' %}{% endif %}">
+        </div>
 
         <a class="enlace_boton" href=""{% comment %} link al perfil de usuario {% endcomment %} >Ver mi perfil</a>
         <a class="enlace_boton" href="{% url 'usuarios:cerrar_sesion' %}">Cerrar sersión</a>

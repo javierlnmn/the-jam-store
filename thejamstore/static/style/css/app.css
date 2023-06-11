@@ -2264,6 +2264,20 @@ p {
   background-color: #009FB7;
 }
 
+.modal .modal-usuario-contenido .contenedor-formulario .formulario .checkbox-vendedor {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.modal .modal-usuario-contenido .contenedor-formulario .formulario .checkbox-vendedor p {
+  margin: 0;
+}
+
+.modal .modal-usuario-contenido .contenedor-formulario .formulario .checkbox-vendedor p a {
+  text-decoration: underline;
+}
+
 .modal .modal-usuario-contenido .contenedor-formulario .enlaces {
   margin-top: 3rem;
   display: flex;
@@ -2300,4 +2314,18 @@ p {
 
 .modal .modal-usuario-contenido .contenedor-formulario .enlaces .enlace_boton:hover {
   background-color: #b1b1b1;
+}
+
+.modal .modal-usuario-contenido .contenedor-formulario_actualizar-datos {
+  display: flex;
+  gap: 2rem;
+}
+
+.modal .modal-usuario-contenido .contenedor-formulario_actualizar-datos .datos {
+  flex: 1;
+}
+
+.modal .modal-usuario-contenido .contenedor-formulario_actualizar-datos .foto-perfil {
+  width: 30%;
+  height: fit-content;
 }

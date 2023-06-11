@@ -22,6 +22,18 @@
             gap: 2.5rem;
 
             @include estilo-enlace($azul);
+
+            .checkbox-vendedor {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                p {
+                    margin: 0;
+                    a {
+                        text-decoration: underline;
+                    }
+                }
+            }
         }
 
         .enlaces {
@@ -35,6 +47,19 @@
             @include estilo-enlace($gris) {
                 font-weight: $delgada;
                 text-decoration: underline;
+            }
+        }
+
+        &_actualizar-datos {
+            display: flex;
+            gap: 2rem;
+
+            .datos {
+                flex: 1;
+            }
+            .foto-perfil {
+                width: 30%;
+                height: fit-content;
             }
         }
     }
