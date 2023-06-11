@@ -189,11 +189,11 @@ $(".input-login").each(function () {
     }
 });
 
-$(".login-input").focus(function () {
+$(".input-texto").focus(function () {
     $(this).parent().addClass("contenedor-input-texto_animacion contenedor-input-texto_animacion-color");
 });
 
-$(".login-input").focusout(function () {
+$(".input-texto").focusout(function () {
     if ($(this).val() === "")
         $(this).parent().removeClass("contenedor-input-texto_animacion");
     $(this).parent().removeClass("contenedor-input-texto_animacion-color");

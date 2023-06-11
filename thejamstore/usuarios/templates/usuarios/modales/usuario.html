@@ -17,11 +17,11 @@
             <form action="{% url 'usuarios:iniciar_sesion' %}" method="POST" class="formulario">
                 {% csrf_token %}
                 <div class="contenedor-input-texto">
-                    <input name="username" type="text" class="login-input" />
+                    <input name="username" type="text" class="input-texto" />
                     <label for="input-buscar" unselectable="on">Usuario</label>
                 </div>
                 <div class="contenedor-input-texto">
-                    <input name="password" type="password" class="login-input" />
+                    <input name="password" type="password" class="input-texto" />
                     <label for="input-buscar" unselectable="on">Contraseña</label>
                 </div>
 
@@ -50,15 +50,15 @@
             <form action="{% url 'usuarios:registrar_usuario' %}" method="POST" class="formulario">
                 {% csrf_token %}
                 <div class="contenedor-input-texto">
-                    <input type="text" name="username" maxlength="150" required="" class="login-input" />
+                    <input type="text" name="username" maxlength="150" required="" class="input-texto" />
                     <label for="input-buscar" unselectable="on">Usuario</label>
                 </div>
                 <div class="contenedor-input-texto">
-                    <input type="email" name="email" maxlength="128" id="id_email" class="login-input" />
+                    <input type="email" name="email" maxlength="128" id="id_email" class="input-texto" />
                     <label for="input-buscar" unselectable="on">Correo electrónico</label>
                 </div>
                 <div class="contenedor-input-texto">
-                    <input type="password" name="password" maxlength="128" required="" id="id_password" class="login-input" />
+                    <input type="password" name="password" maxlength="128" required="" id="id_password" class="input-texto" />
                     <label for="input-buscar" unselectable="on">Contraseña</label>
                 </div>
                 <div class="checkbox-vendedor">
@@ -102,23 +102,23 @@
                 {% csrf_token %}
                 <div class="datos">
                     <div class="contenedor-input-texto contenedor-input-texto_animacion">
-                        <input type="text" name="username" maxlength="150" required="" class="login-input" value="{{ request.user.username }}" />
+                        <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ request.user.username }}" />
                         <label for="input-buscar" unselectable="on">Usuario</label>
                     </div>
                     <div class="contenedor-input-texto contenedor-input-texto_animacion">
-                        <input type="email" name="email" maxlength="128" id="id_email" class="login-input" value="{{ request.user.email }}" />
+                        <input type="email" name="email" maxlength="128" id="id_email" class="input-texto" value="{{ request.user.email }}" />
                         <label for="input-buscar" unselectable="on">Correo electrónico</label>
                     </div>
                     <div class="contenedor-input-texto {% if request.user.first_name %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="username" maxlength="150" required="" class="login-input" value="{{ request.user.first_name }}" />
+                        <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ request.user.first_name }}" />
                         <label for="input-buscar" unselectable="on">Nombre</label>
                     </div>
                     <div class="contenedor-input-texto {% if request.user.first_name %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="username" maxlength="150" required="" class="login-input" value="{{ request.user.last_name }}" />
+                        <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ request.user.last_name }}" />
                         <label for="input-buscar" unselectable="on">Apellidos</label>
                     </div>
                     <div class="contenedor-input-texto {% if request.user.telefono %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="telefono" maxlength="150" required="" class="login-input" value="{{ request.user.last_name }}" />
+                        <input type="text" name="telefono" maxlength="150" required="" class="input-texto" value="{{ request.user.last_name }}" />
                         <label for="input-buscar" unselectable="on">Apellidos</label>
                     </div>
                 </div>
