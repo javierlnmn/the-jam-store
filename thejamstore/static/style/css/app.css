@@ -2301,7 +2301,7 @@ p {
   grid-column: 1 / 4;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 3rem;
 }
 
 .modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .contenedor-foto-perfil {
@@ -2309,7 +2309,6 @@ p {
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .contenedor-foto-perfil .foto-perfil {

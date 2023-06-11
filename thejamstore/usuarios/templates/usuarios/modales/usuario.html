@@ -102,24 +102,24 @@
                 {% csrf_token %}
                 <div class="datos">
                     <div class="contenedor-input-texto contenedor-input-texto_animacion">
-                        <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ request.user.username }}" />
+                        <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ user.username }}" />
                         <label for="input-buscar" unselectable="on">Usuario</label>
                     </div>
                     <div class="contenedor-input-texto contenedor-input-texto_animacion">
-                        <input type="email" name="email" maxlength="128" id="id_email" class="input-texto" value="{{ request.user.email }}" />
+                        <input type="email" name="email" maxlength="128" id="id_email" class="input-texto" value="{{ user.email }}" />
                         <label for="input-buscar" unselectable="on">Correo electrónico</label>
                     </div>
-                    <div class="contenedor-input-texto {% if request.user.first_name %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ request.user.first_name }}" />
+                    <div class="contenedor-input-texto {% if user.first_name %} contenedor-input-texto_animacion {% endif %}">
+                        <input type="text" name="username" maxlength="150" required="" class="input-texto" {% if user.first_name %}value="{{ user.first_name }}" {% endif %} />
                         <label for="input-buscar" unselectable="on">Nombre</label>
                     </div>
-                    <div class="contenedor-input-texto {% if request.user.first_name %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ request.user.last_name }}" />
+                    <div class="contenedor-input-texto {% if user.first_name %} contenedor-input-texto_animacion {% endif %}">
+                        <input type="text" name="username" maxlength="150" required="" class="input-texto" {% if user.last_name %}value="{{ user.last_name }}" {% endif %} />
                         <label for="input-buscar" unselectable="on">Apellidos</label>
                     </div>
-                    <div class="contenedor-input-texto {% if request.user.telefono %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="telefono" maxlength="150" required="" class="input-texto" value="{{ request.user.last_name }}" />
-                        <label for="input-buscar" unselectable="on">Apellidos</label>
+                    <div class="contenedor-input-texto {% if user.telefono %} contenedor-input-texto_animacion {% endif %}">
+                        <input type="text" name="telefono" maxlength="150" required="" class="input-texto" {% if user.telefono %}value="{{ user.telefono }}" {% endif %} />
+                        <label for="input-buscar" unselectable="on">Teléfono</label>
                     </div>
                 </div>
                 
