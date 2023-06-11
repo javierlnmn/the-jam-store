@@ -2285,6 +2285,18 @@ p {
   gap: 2.5rem;
 }
 
+@media (max-width: 768px) {
+  .modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  .modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .contenedor-foto-perfil .foto-perfil {
+    max-width: 60%;
+    margin: 0 auto;
+  }
+}
+
 .modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .datos {
   grid-column: 1 / 4;
   display: flex;
@@ -2292,15 +2304,22 @@ p {
   gap: 2.5rem;
 }
 
-.modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .foto-perfil {
+.modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .contenedor-foto-perfil {
   grid-column: 4 / 6;
-  border-radius: 100%;
   cursor: pointer;
-  transition: .3s ease filter;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .foto-perfil:hover {
-  filter: brightness(80%);
+.modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .contenedor-foto-perfil .foto-perfil {
+  border-radius: 100%;
+  margin-bottom: 1rem;
+}
+
+.modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .contenedor-foto-perfil input[type="file"] {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .enlace {
@@ -2308,6 +2327,7 @@ p {
   transition: color .3s ease;
   font-weight: 500;
   grid-column: 1 / 6;
+  cursor: pointer;
 }
 
 .modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .enlace:hover {
@@ -2321,6 +2341,7 @@ p {
   border: 1px solid #009FB7;
   transition: background-color .3s ease;
   grid-column: 1 / 6;
+  cursor: pointer;
 }
 
 .modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .enlace_boton:hover {
