@@ -1,0 +1,38 @@
+.contenedor-file-input {
+
+    .file-input {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .etiqueta-file-input {
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 600;
+        color: $azul;
+        border: .1rem solid $azul;
+        font-size: 14px;
+        padding: 10px 12px;
+        background-color: $blanco;
+        transition: background-color .3s ease;
+
+        svg {
+            height: 16px;
+            margin-right: 4px;
+        }
+
+        &:hover {
+            background-color: $azul;
+            color: $blanco;
+        }
+
+    }
+
+}

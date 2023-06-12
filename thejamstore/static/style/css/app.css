@@ -515,6 +515,40 @@ p {
   outline-offset: -3px;
 }
 
+.contenedor-file-input .file-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.contenedor-file-input .etiqueta-file-input {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #009FB7;
+  border: 0.1rem solid #009FB7;
+  font-size: 14px;
+  padding: 10px 12px;
+  background-color: #FCFCFC;
+  transition: background-color .3s ease;
+}
+
+.contenedor-file-input .etiqueta-file-input svg {
+  height: 16px;
+  margin-right: 4px;
+}
+
+.contenedor-file-input .etiqueta-file-input:hover {
+  background-color: #009FB7;
+  color: #FCFCFC;
+}
+
 .producto-display_card {
   display: flex;
   flex-direction: column;
@@ -820,30 +854,6 @@ p {
 
 .seccion-paginacion .contenedor-botones.paginas {
   width: 70%;
-}
-
-.seccion-resultados .display-productos {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3rem;
-}
-
-@media (max-width: 1024px) {
-  .seccion-resultados .display-productos {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .seccion-resultados .display-productos {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .seccion-resultados .display-productos {
-    grid-template-columns: auto;
-  }
 }
 
 /** Layouts **/
@@ -1877,6 +1887,30 @@ p {
   }
 }
 
+.seccion-resultados .display-productos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+}
+
+@media (max-width: 1024px) {
+  .seccion-resultados .display-productos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .seccion-resultados .display-productos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .seccion-resultados .display-productos {
+    grid-template-columns: auto;
+  }
+}
+
 .pie-pagina {
   background-color: #151515;
   padding-top: 2rem;
@@ -2309,6 +2343,7 @@ p {
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .modal .modal-usuario-contenido .contenedor-formulario .formulario_actualizar-datos .contenedor-foto-perfil .foto-perfil {

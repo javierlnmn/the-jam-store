@@ -16,6 +16,7 @@
 
         margin-top: 1rem;
 
+        // Formulario general
         .formulario {
             display: flex;
             flex-direction: column;
@@ -35,7 +36,9 @@
                 }
             }
 
+            // Formulario de actualización de datos del usuario
             &_actualizar-datos {
+
                 margin-top: 2rem;
                 display: grid;
                 grid-template-columns: repeat(5, 1fr);
@@ -65,7 +68,7 @@
                     cursor: pointer;
                     display: flex;
                     flex-direction: column;
-                    // align-items: center;
+                    align-items: center;
 
                     .foto-perfil {
                         border-radius: 100%;

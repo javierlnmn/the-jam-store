@@ -13,13 +13,13 @@
 @import 'common/inputCheckbox';
 @import 'common/inputText';
 @import 'common/inputRadio';
+@import 'common/inputFile';
 @import 'common/displayProductos';
 @import 'common/productoCard';
 @import 'common/productoRow';
 @import 'common/bannerOndas';
 @import 'common/seccionProductosRecomendados';
 @import 'common/seccionPaginacion';
-@import 'layouts/resultadosBusqueda/seccionResultados';
 
 /** Layouts **/
 @import 'layouts/cabecera/cabecera';
@@ -44,6 +44,8 @@
 @import 'layouts/seccionRopa/seccionRopa';
 
 @import 'layouts/seccionRopaTipoPrenda/seccionRopaTipoPrenda';
+
+@import 'layouts/resultadosBusqueda/seccionResultados';
 
 @import 'layouts/piePagina/piePagina';
 @import 'layouts/piePagina/contenedorPiePagina';
