@@ -1,11 +1,11 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from .forms import RegistrarUsuarioForm, ActualizarUsuarioForm
-from .models import Comentario, Producto, Lista_Deseos
+from .models import Comentario, Producto, Lista_Deseos, Direccion
 
 directorio_templates = 'usuarios'
 
@@ -23,6 +23,8 @@ def iniciar_sesion(request):
         else:
             messages.error(request, 'Los datos son incorrectos. Inténtelo con otros distintos.')
             return HttpResponseRedirect(pagina_previa)
+    else:
+        return HttpResponseNotFound('Error 404')
 
 @login_required  
 def cerrar_sesion(request):
@@ -45,20 +47,24 @@ def registrar_usuario(request):
         else:
             messages.error(request, 'Se produjo un error en el registro. Inténtelo de nuevo.')
             return HttpResponseRedirect(pagina_previa)
+    else:
+        return HttpResponseNotFound('Error 404')
     
 @login_required
 def actualizar_datos_usuario(request):
-        user = request.user 
-        if request.method == 'POST':
-            form = ActualizarUsuarioForm(request.POST, instance=user)
-            pagina_previa = request.META.get('HTTP_REFERER')
-            if form.is_valid():
-                form.save()
-                messages.success(request, '¡Has actualizado los datos de tu perfil!')
-                return HttpResponseRedirect(pagina_previa)
-            else:
-                messages.error(request, 'Se produjo un error al actualizar los datos. Inténtelo de nuevo.')
-                return HttpResponseRedirect(pagina_previa)
+    user = request.user 
+    if request.method == 'POST':
+        form = ActualizarUsuarioForm(request.POST, request.FILES, instance=user)
+        pagina_previa = request.META.get('HTTP_REFERER')
+        if form.is_valid():
+            form.save()
+            messages.success(request, '¡Has actualizado los datos de tu perfil!')
+            return HttpResponseRedirect(pagina_previa)
+        else:
+            messages.error(request, 'Se produjo un error al actualizar los datos. Inténtelo de nuevo.')
+            return HttpResponseRedirect(pagina_previa)
+    else:
+        return HttpResponseNotFound('Error 404')
 
 @login_required
 def valorar_producto(request, id_producto):
@@ -82,8 +88,9 @@ def valorar_producto(request, id_producto):
             messages.error(request, 'Ha habido un error al añadir la valoración. Inténtalo de nuevo.')
         
         return HttpResponseRedirect(pagina_previa)
+    
     else:
-        pass # 404   
+        return HttpResponseNotFound('Error 404')
 
 @login_required
 def quitar_de_lista_deseos(request, id_producto):
@@ -120,3 +127,18 @@ def lista_deseos(request):
     }
 
     return render(request, directorio_templates + "/lista-deseos.html", contexto)
+
+@login_required
+def ver_direcciones(request):
+    user = request.user
+    direcciones = Direccion.objects.filter(usuario=user)
+    
+    paginacion = Paginator(direcciones, 5)
+    pagina = request.GET.get("pag")
+    direcciones_por_pagina = paginacion.get_page(pagina)
+    
+    contexto = {
+        'direcciones': direcciones_por_pagina
+    }
+    
+    return render(request, directorio_templates + "/direcciones.html", contexto)

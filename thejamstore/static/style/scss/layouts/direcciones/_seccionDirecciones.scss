@@ -1,0 +1,74 @@
+.seccion-direcciones {
+
+    .contenedor-direcciones {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        .direccion {
+            border: .1rem solid lighten($gris, 10%);
+            border-radius: .5rem;
+            min-height: 5rem;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            
+
+            .informacion {
+                flex: 1;
+                border-right: .1rem solid $gris;
+
+                .importante {
+                    font-size: 2.4rem;
+                }
+
+                p {
+                    margin: .5rem 0;
+                }
+            }
+
+            .botones {
+                display: flex;
+                gap: 2rem;
+                padding-left: 2rem;
+                
+                .boton {
+                    color: darken($gris, 40%);
+                    transition: color .3s ease;
+                    display: grid;
+                    place-items: center;
+    
+                    &:hover {
+                        color: $negro;
+                    }
+                }
+            }
+
+            &.crear-direccion {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                cursor: pointer;
+                
+                .enlace-crear-direccion, svg {
+                    color: darken($gris, 20%);
+                    transition: color .3s ease;
+                }
+
+                .enlace-crear-direccion {
+                    font-size: 3rem;
+                }
+
+                &:hover .enlace-crear-direccion,
+                &:hover svg {
+                    color: $negro;
+                }
+            }
+
+        }
+
+        
+        
+    }
+}

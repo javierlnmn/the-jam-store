@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import iniciar_sesion, cerrar_sesion, registrar_usuario, valorar_producto, lista_deseos, anadir_a_lista_deseos, quitar_de_lista_deseos,actualizar_datos_usuario
+from .views import iniciar_sesion, cerrar_sesion, registrar_usuario, valorar_producto, lista_deseos, anadir_a_lista_deseos, quitar_de_lista_deseos,actualizar_datos_usuario, ver_direcciones
 
 app_name = 'usuarios'
 
@@ -12,4 +12,5 @@ urlpatterns = [
     path('anadir-a-lista-deseos/<int:id_producto>', anadir_a_lista_deseos, name='anadir_a_lista_deseos'),
     path('quitar-de-lista-deseos/<int:id_producto>', quitar_de_lista_deseos, name='quitar_de_lista_deseos'),
     path('lista-de-deseos/', lista_deseos, name='lista_deseos'),
+    path('direcciones/', ver_direcciones, name='ver_direcciones')
 ]

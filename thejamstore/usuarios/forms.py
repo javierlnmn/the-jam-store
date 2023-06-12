@@ -18,7 +18,8 @@ class RegistrarUsuarioForm(forms.ModelForm):
         return user
     
 class ActualizarUsuarioForm(forms.ModelForm):
+    foto_perfil = forms.ImageField(required=False)
     
     class Meta:
         model = Custom_User
-        fields = ['username', 'email', 'first_name', 'last_name', 'telefono']
+        fields = ['username', 'email', 'first_name', 'last_name', 'telefono', 'foto_perfil']

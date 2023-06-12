@@ -98,23 +98,23 @@
         <div class="contenedor-formulario">
 
             {% comment %} FORMULARIO DE ACTUALIZACION DE DATOS {% endcomment %}
-            <form action="{% url 'usuarios:actualizar_datos_usuario' %}" method="post" class="formulario_actualizar-datos">
+            <form action="{% url 'usuarios:actualizar_datos_usuario' %}" method="post" class="formulario_actualizar-datos" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="datos">
                     <div class="contenedor-input-texto contenedor-input-texto_animacion">
                         <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ user.username }}" />
-                        <label for="input-buscar" unselectable="on">Usuario</label>
+                        <label for="input-buscar" unselectable="on">Usuario *</label>
                     </div>
                     <div class="contenedor-input-texto contenedor-input-texto_animacion">
-                        <input type="email" name="email" maxlength="128" id="id_email" class="input-texto" value="{{ user.email }}" />
-                        <label for="input-buscar" unselectable="on">Correo electrónico</label>
+                        <input type="email" name="email" maxlength="128" required="" id="id_email" class="input-texto" value="{{ user.email }}" />
+                        <label for="input-buscar" unselectable="on">Correo electrónico *</label>
                     </div>
                     <div class="contenedor-input-texto {% if user.first_name %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="first_name" maxlength="150" required="" class="input-texto" {% if user.first_name %}value="{{ user.first_name }}" {% endif %} />
+                        <input type="text" name="first_name" maxlength="150" class="input-texto" {% if user.first_name %}value="{{ user.first_name }}" {% endif %} />
                         <label for="input-buscar" unselectable="on">Nombre</label>
                     </div>
                     <div class="contenedor-input-texto {% if user.first_name %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="last_name" maxlength="150" required="" class="input-texto" {% if user.last_name %}value="{{ user.last_name }}" {% endif %} />
+                        <input type="text" name="last_name" maxlength="150" class="input-texto" {% if user.last_name %}value="{{ user.last_name }}" {% endif %} />
                         <label for="input-buscar" unselectable="on">Apellidos</label>
                     </div>
                     <div class="contenedor-input-texto {% if user.telefono %} contenedor-input-texto_animacion {% endif %}">
@@ -126,7 +126,7 @@
                 <div class="contenedor-foto-perfil">
                     <img class="foto-perfil" src="{% if user.foto_perfil  %}{{ user.foto_perfil.url }}{% else %}{% static 'media/img/usuario.webp' %}{% endif %}">
                     <div class="contenedor-file-input">
-                        <input type="file" name="file-input" id="file-input" class="file-input" />
+                        <input type="file" name="foto_perfil" id="file-input" class="file-input" />
                         <label class="etiqueta-file-input" for="file-input">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-photo-filled" width="24"
                                 height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -147,8 +147,12 @@
 
         </div>
 
-        {% comment %} <a class="enlace_boton" href="link al perfil de usuario">Ver mi perfil</a>
-        <a class="enlace_boton" href="{% url 'usuarios:cerrar_sesion' %}">Cerrar sersión</a> {% endcomment %}
+        <div class="contenedor-enlaces">
+            <a class="enlace_boton" href="{% url 'usuarios:ver_direcciones' %}">Ver mis pedidos</a>
+            <a class="enlace_boton" href="{% url 'usuarios:ver_direcciones' %}">Gestionar direcciones</a>
+            <a class="enlace_boton largo" href="{% url 'usuarios:cerrar_sesion' %}">Cerrar sersión</a>
+        </div>
+        
     </div>
 
     {% endif %}

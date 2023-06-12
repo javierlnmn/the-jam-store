@@ -25,7 +25,7 @@ class Pedido(models.Model):
     usuario = models.ForeignKey(
         Custom_User, on_delete=models.SET_NULL, null=True, blank=True
     )
-    direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
+    direccion = models.ForeignKey(Direccion, on_delete=models.PROTECT)
     codigo_pedido = models.UUIDField(
         default=uuid.uuid4,
         editable=False,

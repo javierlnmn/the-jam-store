@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -134,8 +134,7 @@ def seccion_productos(request, categoria=None):
     if categoria:
         productos = Producto.objects.filter(categoria__nombre=categoria)
     else:
-        # 404
-        productos = Producto.objects.all()
+        return HttpResponseNotFound('Error 404')
 
     tipo_prenda_list = Tipo_Prenda.objects.filter(
         producto__in=productos, categoria_padre__nombre=categoria
