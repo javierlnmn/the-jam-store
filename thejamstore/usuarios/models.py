@@ -107,6 +107,14 @@ class Direccion(models.Model):
     datos_adicionales = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
+    
+    @property
+    def en_uso(self):
+        from pedidos.models import Pedido
+        for pedido in Pedido.objects.all():
+            if pedido.direccion == self:
+                return True
+        return False
 
     def __str__(self):
         direccion_completa = (

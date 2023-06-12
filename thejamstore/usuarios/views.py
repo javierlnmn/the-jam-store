@@ -142,3 +142,12 @@ def ver_direcciones(request):
     }
     
     return render(request, directorio_templates + "/direcciones.html", contexto)
+
+@login_required
+def formulario_crear_direccion(request):
+    return render(request, directorio_templates + "/formulario-crear-direccion.html")
+
+
+@login_required
+def anadir_direccion(request):
+    return render(request, directorio_templates + "/direcciones.html") 

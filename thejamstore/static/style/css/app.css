@@ -1898,12 +1898,14 @@ p {
   border-radius: .5rem;
   min-height: 5rem;
   padding: 2rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
   align-items: center;
+  justify-content: center;
 }
 
 .seccion-direcciones .contenedor-direcciones .direccion .informacion {
-  flex: 1;
+  grid-column: 1 / 7;
   border-right: 0.1rem solid #b1b1b1;
 }
 
@@ -1912,24 +1914,37 @@ p {
 }
 
 .seccion-direcciones .contenedor-direcciones .direccion .informacion p {
-  margin: .5rem 0;
+  margin: 0;
+}
+
+.seccion-direcciones .contenedor-direcciones .direccion .informacion p + p {
+  margin-top: .5rem;
 }
 
 .seccion-direcciones .contenedor-direcciones .direccion .botones {
   display: flex;
+  justify-content: center;
   gap: 2rem;
   padding-left: 2rem;
 }
 
 .seccion-direcciones .contenedor-direcciones .direccion .botones .boton {
-  color: #4b4b4b;
+  color: #151515;
   transition: color .3s ease;
   display: grid;
   place-items: center;
 }
 
 .seccion-direcciones .contenedor-direcciones .direccion .botones .boton:hover {
-  color: #151515;
+  color: #585858;
+}
+
+.seccion-direcciones .contenedor-direcciones .direccion .botones .boton.rojo {
+  color: #e63232;
+}
+
+.seccion-direcciones .contenedor-direcciones .direccion .botones .boton.rojo:hover {
+  color: rgba(230, 50, 50, 0.8);
 }
 
 .seccion-direcciones .contenedor-direcciones .direccion.crear-direccion {
@@ -1951,6 +1966,18 @@ p {
 
 .seccion-direcciones .contenedor-direcciones .direccion.crear-direccion:hover .enlace-crear-direccion, .seccion-direcciones .contenedor-direcciones .direccion.crear-direccion:hover svg {
   color: #151515;
+}
+
+@media (max-width: 768px) {
+  .seccion-direcciones .contenedor-direcciones .direccion {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .seccion-direcciones .contenedor-direcciones .direccion .informacion {
+    border-right: none;
+    align-self: flex-start;
+  }
 }
 
 .seccion-resultados .display-productos {

@@ -1,0 +1,27 @@
+{% extends 'general/main.html' %}
+
+{% block contenido %}
+    <main>
+
+
+        <section class="contenedor seccion-formulario-crear-direccion">
+
+            <div class="contenedor-formulario">
+                <form action={% url 'usuarios:anadir_direccion' %} method="post">
+                    {% csrf_token %}
+
+
+
+
+                    <button type="submit" class="enlace_boton">Añadir dirección</button>
+                </form>
+            </div>
+            
+
+        </section>
+
+
+        {% include 'general/base/paginacion.html' with objetos_paginas=direcciones %}
+
+    </main>
+{% endblock %}

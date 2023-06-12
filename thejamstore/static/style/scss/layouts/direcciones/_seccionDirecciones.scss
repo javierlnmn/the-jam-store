@@ -10,12 +10,14 @@
             border-radius: .5rem;
             min-height: 5rem;
             padding: 2rem;
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
             align-items: center;
+            justify-content: center;
             
 
             .informacion {
-                flex: 1;
+                grid-column: 1 / 7;
                 border-right: .1rem solid $gris;
 
                 .importante {
@@ -23,23 +25,35 @@
                 }
 
                 p {
-                    margin: .5rem 0;
+                    margin: 0;
+                    &+p {
+                        margin-top: .5rem;
+                    }
                 }
             }
 
             .botones {
                 display: flex;
+                justify-content: center;
                 gap: 2rem;
                 padding-left: 2rem;
                 
                 .boton {
-                    color: darken($gris, 40%);
+                    color: $negro;
                     transition: color .3s ease;
                     display: grid;
                     place-items: center;
     
                     &:hover {
-                        color: $negro;
+                        color: darken($gris, 35%);
+                    }
+
+                    &.rojo {
+                        color: $rojo;
+                    }
+                    
+                    &.rojo:hover {
+                        color: rgba($rojo, .8);
                     }
                 }
             }
@@ -66,9 +80,17 @@
                 }
             }
 
-        }
+            @include tablet {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+                .informacion {
+                    border-right: none;
+                    align-self: flex-start;
+                }
+            }
 
-        
+        } 
         
     }
 }
