@@ -98,7 +98,7 @@
         <div class="contenedor-formulario">
 
             {% comment %} FORMULARIO DE ACTUALIZACION DE DATOS {% endcomment %}
-            <form action="" method="POST" class="formulario_actualizar-datos">
+            <form action="{% url 'usuarios:actualizar_datos_usuario' %}" method="post" class="formulario_actualizar-datos">
                 {% csrf_token %}
                 <div class="datos">
                     <div class="contenedor-input-texto contenedor-input-texto_animacion">
@@ -110,15 +110,15 @@
                         <label for="input-buscar" unselectable="on">Correo electrónico</label>
                     </div>
                     <div class="contenedor-input-texto {% if user.first_name %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="username" maxlength="150" required="" class="input-texto" {% if user.first_name %}value="{{ user.first_name }}" {% endif %} />
+                        <input type="text" name="first_name" maxlength="150" required="" class="input-texto" {% if user.first_name %}value="{{ user.first_name }}" {% endif %} />
                         <label for="input-buscar" unselectable="on">Nombre</label>
                     </div>
                     <div class="contenedor-input-texto {% if user.first_name %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="username" maxlength="150" required="" class="input-texto" {% if user.last_name %}value="{{ user.last_name }}" {% endif %} />
+                        <input type="text" name="last_name" maxlength="150" required="" class="input-texto" {% if user.last_name %}value="{{ user.last_name }}" {% endif %} />
                         <label for="input-buscar" unselectable="on">Apellidos</label>
                     </div>
                     <div class="contenedor-input-texto {% if user.telefono %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="telefono" maxlength="150" required="" class="input-texto" {% if user.telefono %}value="{{ user.telefono }}" {% endif %} />
+                        <input type="text" name="telefono" maxlength="150" class="input-texto" {% if user.telefono %}value="{{ user.telefono }}" {% endif %} />
                         <label for="input-buscar" unselectable="on">Teléfono</label>
                     </div>
                 </div>

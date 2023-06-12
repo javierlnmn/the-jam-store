@@ -3,7 +3,7 @@ from django.contrib.auth.hashers import make_password
 from usuarios.models import Custom_User, Categoria_Usuario
 
 
-class RegistrationForm(forms.ModelForm):
+class RegistrarUsuarioForm(forms.ModelForm):
     categoria = forms.ModelChoiceField(queryset=Categoria_Usuario.objects.all(), empty_label=None)
 
     class Meta:
@@ -16,3 +16,9 @@ class RegistrationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+    
+class ActualizarUsuarioForm(forms.ModelForm):
+    
+    class Meta:
+        model = Custom_User
+        fields = ['username', 'email', 'first_name', 'last_name', 'telefono']

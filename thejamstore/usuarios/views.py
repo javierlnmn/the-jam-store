@@ -1,13 +1,13 @@
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
-from .forms import RegistrationForm
+from .forms import RegistrarUsuarioForm, ActualizarUsuarioForm
 from .models import Comentario, Producto, Lista_Deseos
 
 directorio_templates = 'usuarios'
-
 
 def iniciar_sesion(request):
     if request.method == 'POST':
@@ -23,7 +23,8 @@ def iniciar_sesion(request):
         else:
             messages.error(request, 'Los datos son incorrectos. Inténtelo con otros distintos.')
             return HttpResponseRedirect(pagina_previa)
-        
+
+@login_required  
 def cerrar_sesion(request):
     logout(request)
     messages.success(request, 'Has cerrado sesión.')
@@ -35,7 +36,7 @@ def cerrar_sesion(request):
 
 def registrar_usuario(request):
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
+        form = RegistrarUsuarioForm(request.POST)
         pagina_previa = request.META.get('HTTP_REFERER')
         if form.is_valid():
             form.save()
@@ -44,52 +45,62 @@ def registrar_usuario(request):
         else:
             messages.error(request, 'Se produjo un error en el registro. Inténtelo de nuevo.')
             return HttpResponseRedirect(pagina_previa)
+    
+@login_required
+def actualizar_datos_usuario(request):
+        user = request.user 
+        if request.method == 'POST':
+            form = ActualizarUsuarioForm(request.POST, instance=user)
+            pagina_previa = request.META.get('HTTP_REFERER')
+            if form.is_valid():
+                form.save()
+                messages.success(request, '¡Has actualizado los datos de tu perfil!')
+                return HttpResponseRedirect(pagina_previa)
+            else:
+                messages.error(request, 'Se produjo un error al actualizar los datos. Inténtelo de nuevo.')
+                return HttpResponseRedirect(pagina_previa)
 
+@login_required
 def valorar_producto(request, id_producto):
     if request.method == 'POST':
-        if request.user.is_authenticated:
-            pagina_previa = request.META.get('HTTP_REFERER')
+        pagina_previa = request.META.get('HTTP_REFERER')
+        
+        texto = request.POST.get('texto')
+        valoracion = request.POST.get('valoracion')
+        producto = Producto.objects.get(pk=id_producto)
+        
+        try:
+            comentario = Comentario.objects.create(
+                comentario=texto,
+                valoracion=valoracion,
+                usuario=request.user,
+                producto=producto
+            )
             
-            texto = request.POST.get('texto')
-            valoracion = request.POST.get('valoracion')
-            producto = Producto.objects.get(pk=id_producto)
-            
-            try:
-                comentario = Comentario.objects.create(
-                    comentario=texto,
-                    valoracion=valoracion,
-                    usuario=request.user,
-                    producto=producto
-                )
-                
-                comentario.save()
-            except:
-                messages.error(request, 'Ha habido un error al añadir la valoración. Inténtalo de nuevo.')
-            
-            return HttpResponseRedirect(pagina_previa)
-        else:
-            pagina_previa = request.META.get('HTTP_REFERER')
-            messages.error(request, 'Para valorar un producto debes haber iniciado sesión.')
-            return HttpResponseRedirect(pagina_previa)
+            comentario.save()
+        except:
+            messages.error(request, 'Ha habido un error al añadir la valoración. Inténtalo de nuevo.')
+        
+        return HttpResponseRedirect(pagina_previa)
     else:
         pass # 404   
 
+@login_required
 def quitar_de_lista_deseos(request, id_producto):
-    if request.user.is_authenticated:
-        producto = Producto.objects.get(pk=id_producto)
-        lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
-        lista_deseos.producto.remove(producto)
-        
+    producto = Producto.objects.get(pk=id_producto)
+    lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
+    lista_deseos.producto.remove(producto)
     pagina_previa = request.META.get('HTTP_REFERER')
     return HttpResponseRedirect(pagina_previa)
     
 def anadir_a_lista_deseos(request, id_producto):
-    if request.user.is_authenticated:
-        producto = Producto.objects.get(pk=id_producto)
-        lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
-        lista_deseos.producto.add(producto)
-    else:
+    if not request.user.is_authenticated:
         messages.success(request, '¡Inicia sesión para crear tu lista de deseos!')
+        return redirect('productos:producto_detalle', id_producto=id_producto)
+
+    producto = Producto.objects.get(pk=id_producto)
+    lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
+    lista_deseos.producto.add(producto)
     
     return redirect('productos:producto_detalle', id_producto=id_producto)
 
