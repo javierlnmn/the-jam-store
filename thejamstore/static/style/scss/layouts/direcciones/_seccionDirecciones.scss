@@ -14,6 +14,7 @@
             grid-template-columns: repeat(7, 1fr);
             align-items: center;
             justify-content: center;
+            box-shadow: $sombra-menor;
             
 
             .informacion {
@@ -64,6 +65,7 @@
                 justify-content: center;
                 gap: 1rem;
                 cursor: pointer;
+                min-height: 12rem !important;
                 
                 .enlace-crear-direccion, svg {
                     color: darken($gris, 20%);

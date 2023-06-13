@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from .forms import RegistrarUsuarioForm, ActualizarUsuarioForm
-from .models import Comentario, Producto, Lista_Deseos, Direccion
+from .models import Comentario, Producto, Lista_Deseos, Direccion, PROVINCIAS_CHOICES
 
 directorio_templates = 'usuarios'
 
@@ -145,9 +145,13 @@ def ver_direcciones(request):
 
 @login_required
 def formulario_crear_direccion(request):
-    return render(request, directorio_templates + "/formulario-crear-direccion.html")
+    contexto = {
+        'provincias': PROVINCIAS_CHOICES
+    }
+    return render(request, directorio_templates + "/formulario-crear-direccion.html", contexto)
 
 
 @login_required
 def anadir_direccion(request):
+    
     return render(request, directorio_templates + "/direcciones.html") 
