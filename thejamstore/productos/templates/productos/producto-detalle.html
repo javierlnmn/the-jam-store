@@ -27,8 +27,8 @@
                 {% if producto_detalle.get_stock %}
                     <p class="texto-secundario">Utilizamos tallas europeas para nuestras prendas</p>
                     <div class="seleccion-producto">
-                        <div class="contenedor-input-select-talla">
-                            <select name="" id="">
+                        <div class="contenedor-input-select">
+                            <select class="desplegable" name="" id="">
                                 <option value="" selected disabled>Talla</option>
                                 {% for talla in producto_detalle.producto_talla_set.all %}
                                 <option value="{{talla.id}}">{{talla.talla}}</option>
