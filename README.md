@@ -18,9 +18,7 @@
 </ul>
 
 
-<h3>Para compilar el scss al fichero app.css del proyecto:</h3>
-
-    python manage.py sass static/style/scss/app.scss static/style/css/app.css
+<h3>Para compilar el scss al fichero app.css del proyecto se utilizan los scripts de compilación de Sass.</h3>
 
 
 <h3>Para exportar los datos guardados en la base de datos de una aplicación:</h3>
