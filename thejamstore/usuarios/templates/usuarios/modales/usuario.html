@@ -17,12 +17,12 @@
             <form action="{% url 'usuarios:iniciar_sesion' %}" method="POST" class="formulario">
                 {% csrf_token %}
                 <div class="contenedor-input-texto">
-                    <input name="username" type="text" class="input-texto" />
-                    <label for="input-buscar" unselectable="on">Usuario</label>
+                    <input name="username" id="input-texto" type="text" class="input-texto" />
+                    <label for="input-texto" unselectable="on">Usuario</label>
                 </div>
                 <div class="contenedor-input-texto">
-                    <input name="password" type="password" class="input-texto" />
-                    <label for="input-buscar" unselectable="on">Contraseña</label>
+                    <input name="password" id="input-texto" type="password" class="input-texto" />
+                    <label for="input-texto" unselectable="on">Contraseña</label>
                 </div>
 
                 <button type="submit" class="enlace_boton">Iniciar Sesión</button>
@@ -51,15 +51,15 @@
                 {% csrf_token %}
                 <div class="contenedor-input-texto">
                     <input type="text" name="username" maxlength="150" required="" class="input-texto" />
-                    <label for="input-buscar" unselectable="on">Usuario</label>
+                    <label for="input-texto" unselectable="on">Usuario</label>
                 </div>
                 <div class="contenedor-input-texto">
                     <input type="email" name="email" maxlength="128" id="id_email" class="input-texto" />
-                    <label for="input-buscar" unselectable="on">Correo electrónico</label>
+                    <label for="input-texto" unselectable="on">Correo electrónico</label>
                 </div>
                 <div class="contenedor-input-texto">
                     <input type="password" name="password" maxlength="128" required="" id="id_password" class="input-texto" />
-                    <label for="input-buscar" unselectable="on">Contraseña</label>
+                    <label for="id_password" unselectable="on">Contraseña</label>
                 </div>
                 <div class="checkbox-vendedor">
                     <label class="contenedor-input-checkbox translate style-cyan">
@@ -103,23 +103,23 @@
                 <div class="datos">
                     <div class="contenedor-input-texto contenedor-input-texto_animacion">
                         <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ user.username }}" />
-                        <label for="input-buscar" unselectable="on">Usuario *</label>
+                        <label for="input-texto" unselectable="on">Usuario *</label>
                     </div>
                     <div class="contenedor-input-texto contenedor-input-texto_animacion">
                         <input type="email" name="email" maxlength="128" required="" id="id_email" class="input-texto" value="{{ user.email }}" />
-                        <label for="input-buscar" unselectable="on">Correo electrónico *</label>
+                        <label for="id_email" unselectable="on">Correo electrónico *</label>
                     </div>
                     <div class="contenedor-input-texto {% if user.first_name %} contenedor-input-texto_animacion {% endif %}">
                         <input type="text" name="first_name" maxlength="150" class="input-texto" {% if user.first_name %}value="{{ user.first_name }}" {% endif %} />
-                        <label for="input-buscar" unselectable="on">Nombre</label>
+                        <label for="input-texto" unselectable="on">Nombre</label>
                     </div>
                     <div class="contenedor-input-texto {% if user.first_name %} contenedor-input-texto_animacion {% endif %}">
                         <input type="text" name="last_name" maxlength="150" class="input-texto" {% if user.last_name %}value="{{ user.last_name }}" {% endif %} />
-                        <label for="input-buscar" unselectable="on">Apellidos</label>
+                        <label for="input-texto" unselectable="on">Apellidos</label>
                     </div>
                     <div class="contenedor-input-texto {% if user.telefono %} contenedor-input-texto_animacion {% endif %}">
                         <input type="text" name="telefono" maxlength="150" class="input-texto" {% if user.telefono %}value="{{ user.telefono }}" {% endif %} />
-                        <label for="input-buscar" unselectable="on">Teléfono</label>
+                        <label for="input-texto" unselectable="on">Teléfono</label>
                     </div>
                 </div>
                 

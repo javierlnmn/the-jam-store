@@ -10,33 +10,37 @@
                 <form action={% url 'usuarios:anadir_direccion' %} method="post">
                     {% csrf_token %}
                     <div class="contenedor-doble">
-                        <div class="contenedor-input-texto contenedor-input-texto_animacion">
-                            <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ user.username }}" />
-                            <label for="input-buscar" unselectable="on">Usuario *</label>
+                        <div class="contenedor-input-select">
+                            <select class="desplegable" name="" id="">
+                                <option value="" selected disabled>Provincia</option>
+                                {% for provincia in provincias %}
+                                <option value="{{provincia}}">{{provincia.get_provincia_display}}</option>
+                                {% endfor %}
+                            </select>
                         </div>
                         <div class="contenedor-input-texto contenedor-input-texto_animacion">
                             <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ user.username }}" />
-                            <label for="input-buscar" unselectable="on">Usuario *</label>
-                        </div>
-                    </div>
-                    <div class="contenedor-doble">
-                        <div class="contenedor-input-texto contenedor-input-texto_animacion">
-                            <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ user.username }}" />
-                            <label for="input-buscar" unselectable="on">Usuario *</label>
-                        </div>
-                        <div class="contenedor-input-texto contenedor-input-texto_animacion">
-                            <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ user.username }}" />
-                            <label for="input-buscar" unselectable="on">Usuario *</label>
+                            <label for="input-texto" unselectable="on">Municipio *</label>
                         </div>
                     </div>
                     <div class="contenedor-doble">
                         <div class="contenedor-input-texto contenedor-input-texto_animacion">
                             <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ user.username }}" />
-                            <label for="input-buscar" unselectable="on">Usuario *</label>
+                            <label for="input-texto" unselectable="on">Usuario *</label>
                         </div>
                         <div class="contenedor-input-texto contenedor-input-texto_animacion">
                             <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ user.username }}" />
-                            <label for="input-buscar" unselectable="on">Usuario *</label>
+                            <label for="input-texto" unselectable="on">Usuario *</label>
+                        </div>
+                    </div>
+                    <div class="contenedor-doble">
+                        <div class="contenedor-input-texto contenedor-input-texto_animacion">
+                            <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ user.username }}" />
+                            <label for="input-texto" unselectable="on">Usuario *</label>
+                        </div>
+                        <div class="contenedor-input-texto contenedor-input-texto_animacion">
+                            <input type="text" name="username" maxlength="150" required="" class="input-texto" value="{{ user.username }}" />
+                            <label for="input-texto" unselectable="on">Usuario *</label>
                         </div>
                     </div>
 
