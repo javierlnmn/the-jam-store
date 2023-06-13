@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import iniciar_sesion, cerrar_sesion, registrar_usuario, valorar_producto, lista_deseos, anadir_a_lista_deseos, quitar_de_lista_deseos,actualizar_datos_usuario, ver_direcciones, formulario_crear_direccion, anadir_direccion
+from .views import iniciar_sesion, cerrar_sesion, registrar_usuario, valorar_producto, lista_deseos, anadir_a_lista_deseos, quitar_de_lista_deseos,actualizar_datos_usuario, ver_direcciones, formulario_crear_direccion, anadir_direccion, eliminar_direccion
 
 app_name = 'usuarios'
 
@@ -14,5 +14,6 @@ urlpatterns = [
     path('lista-de-deseos/', lista_deseos, name='lista_deseos'),
     path('direcciones/', ver_direcciones, name='ver_direcciones'),
     path('direcciones/formulario-crear-direccion/', formulario_crear_direccion, name='formulario_crear_direccion'),
-    path('direcciones/anadir-direccion/', anadir_direccion, name='anadir_direccion') 
+    path('direcciones/anadir-direccion/', anadir_direccion, name='anadir_direccion'),
+    path('direcciones/eliminar-direccion/<int:id_direccion>', eliminar_direccion, name="eliminar_direccion")
 ]

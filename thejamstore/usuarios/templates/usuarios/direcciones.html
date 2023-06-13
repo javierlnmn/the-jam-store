@@ -28,7 +28,7 @@
                         <p>{% if direccion.piso %}{{ direccion.piso }}{% endif %} {% if direccion.puerta %} {{ direccion.puerta }}{% endif %}</p>
                         {% endif %}
                         {% if direccion.datos_adicionales %}
-                            <p class="texto-secundario datos-adicionales">Datos adicionales: </p>
+                            <p class="texto-secundario datos-adicionales"><span class="negrita">Datos adicionales:</span> {{ direccion.datos_adicionales }}</p>
                         {% endif %}
                         {% if direccion.en_uso %}
                         <p class="texto-secundario">Esta dirección está registrada en un pedido y no se puede borrar.</p>
@@ -43,7 +43,7 @@
                             </svg>
                         </a>
                         {% if not direccion.en_uso %}
-                        <a class="boton rojo" href="{%comment%} ELIMINAR {%endcomment%}">
+                        <a class="boton rojo" href="{% url 'usuarios:eliminar_direccion' direccion.id %}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash-x-filled" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <path d="M20 6a1 1 0 0 1 .117 1.993l-.117 .007h-.081l-.919 11a3 3 0 0 1 -2.824 2.995l-.176 .005h-8c-1.598 0 -2.904 -1.249 -2.992 -2.75l-.005 -.167l-.923 -11.083h-.08a1 1 0 0 1 -.117 -1.993l.117 -.007h16zm-9.489 5.14a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z" stroke-width="0" fill="currentColor" />

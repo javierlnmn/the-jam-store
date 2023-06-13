@@ -4,10 +4,24 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
-from .forms import RegistrarUsuarioForm, ActualizarUsuarioForm
+from .forms import RegistrarUsuarioForm, ActualizarUsuarioForm, CrearDireccionForm
 from .models import Comentario, Producto, Lista_Deseos, Direccion, PROVINCIAS_CHOICES
 
 directorio_templates = 'usuarios'
+
+def registrar_usuario(request):
+    if request.method == 'POST':
+        form = RegistrarUsuarioForm(request.POST)
+        pagina_previa = request.META.get('HTTP_REFERER')
+        if form.is_valid():
+            form.save()
+            messages.success(request, '¡Registro exitoso! Ahora puedes iniciar sesión.')
+            return HttpResponseRedirect(pagina_previa)
+        else:
+            messages.error(request, 'Se produjo un error en el registro. Inténtelo de nuevo.')
+            return HttpResponseRedirect(pagina_previa)
+    else:
+        return HttpResponseNotFound('Error 404')
 
 def iniciar_sesion(request):
     if request.method == 'POST':
@@ -35,20 +49,6 @@ def cerrar_sesion(request):
     pagina_previa = request.META.get('HTTP_REFERER')
     
     return HttpResponseRedirect(pagina_previa)
-
-def registrar_usuario(request):
-    if request.method == 'POST':
-        form = RegistrarUsuarioForm(request.POST)
-        pagina_previa = request.META.get('HTTP_REFERER')
-        if form.is_valid():
-            form.save()
-            messages.success(request, '¡Registro exitoso! Ahora puedes iniciar sesión.')
-            return HttpResponseRedirect(pagina_previa)
-        else:
-            messages.error(request, 'Se produjo un error en el registro. Inténtelo de nuevo.')
-            return HttpResponseRedirect(pagina_previa)
-    else:
-        return HttpResponseNotFound('Error 404')
     
 @login_required
 def actualizar_datos_usuario(request):
@@ -153,5 +153,22 @@ def formulario_crear_direccion(request):
 
 @login_required
 def anadir_direccion(request):
+    if request.method == 'POST':
+        form = CrearDireccionForm(request.POST)
+        if form.is_valid():
+            direccion = form.save(commit=False)
+            direccion.usuario = request.user
+            direccion.save()
+            messages.success(request, '¡Dirección añadida con éxito!')
+            return redirect('usuarios:ver_direcciones')
+        else:
+            messages.error(request, 'Se produjo un error al añadir la dirección. Inténtelo de nuevo.')
+            return redirect('usuarios:ver_direcciones')
+    else:
+        return HttpResponseNotFound('Error 404')
     
-    return render(request, directorio_templates + "/direcciones.html") 
+def eliminar_direccion(request, id_direccion):
+    direccion = Direccion.objects.get(pk=id_direccion)
+    direccion.delete()
+    messages.success(request, 'Dirección eliminada.')
+    return redirect('usuarios:ver_direcciones')
