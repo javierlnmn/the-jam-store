@@ -68,8 +68,8 @@
 
                     </div>
 
-                    <div class="contenedor-input-texto contenedor-input-texto_textarea {% if direccion.datos_adicionales is '' or direccion.datos_adicionales is None %} contenedor-input-texto_animacion {% endif %}">
-                        <textarea type="text" id="input-texto" name="datos_adicionales" value="{{direccion.datos_adicionales}}" class="input-texto"></textarea>
+                    <div class="contenedor-input-texto contenedor-input-texto_textarea {% if direccion.datos_adicionales is not '' or direccion.datos_adicionales is not None %} contenedor-input-texto_animacion {% endif %}">
+                        <textarea type="text" id="input-texto" name="datos_adicionales" class="input-texto">{{direccion.datos_adicionales}}</textarea>
                         <label for="input-texto" unselectable="on">Datos adicionales</label>
                     </div>
 

@@ -15,7 +15,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: $sombra-menor;
-            
+
 
             .informacion {
                 grid-column: 1 / 7;
@@ -27,6 +27,7 @@
 
                 p {
                     margin: 0;
+
                     &+p {
                         margin-top: .5rem;
                     }
@@ -45,13 +46,13 @@
                 justify-content: center;
                 gap: 2rem;
                 padding-left: 2rem;
-                
+
                 .boton {
                     color: $negro;
                     transition: color .3s ease;
                     display: grid;
                     place-items: center;
-    
+
                     &:hover {
                         color: darken($gris, 35%);
                     }
@@ -59,7 +60,7 @@
                     &.rojo {
                         color: $rojo;
                     }
-                    
+
                     &.rojo:hover {
                         color: rgba($rojo, .8);
                     }
@@ -73,8 +74,9 @@
                 gap: 1rem;
                 cursor: pointer;
                 min-height: 12rem !important;
-                
-                .enlace-crear-direccion, svg {
+
+                .enlace-crear-direccion,
+                svg {
                     color: darken($gris, 20%);
                     transition: color .3s ease;
                 }
@@ -93,13 +95,16 @@
                 display: flex;
                 flex-direction: column;
                 gap: 2rem;
+                width: 100%;
+
                 .informacion {
-                    border-right: none;
                     align-self: flex-start;
+                    max-width: 100%;
+                    border-right: none;
                 }
             }
 
-        } 
-        
+        }
+
     }
 }

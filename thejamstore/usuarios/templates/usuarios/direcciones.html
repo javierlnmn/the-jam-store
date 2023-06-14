@@ -25,7 +25,7 @@
                         <p class="importante negrita">{{ direccion.get_provincia_display }}, {{ direccion.municipio }} {{ direccion.cod_postal }}</p>
                         <p>{{ direccion.calle }}, {{ direccion.numero }}</p>
                         {% if direccion.piso or direccion.puerta %}
-                        <p>{% if direccion.piso %}{{ direccion.piso }}{% endif %} {% if direccion.puerta %} {{ direccion.puerta }}{% endif %}</p>
+                        <p>{% if direccion.piso %}Piso {{ direccion.piso }}{% endif %} {% if direccion.puerta %} Puerta {{ direccion.puerta }}{% endif %}</p>
                         {% endif %}
                         {% if direccion.datos_adicionales %}
                             <p class="texto-secundario datos-adicionales"><span class="negrita">Datos adicionales:</span> {{ direccion.datos_adicionales }}</p>
