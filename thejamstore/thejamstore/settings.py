@@ -189,4 +189,4 @@ EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
 EMAIL_HOST_USER = '6ea741db240235'
 EMAIL_HOST_PASSWORD = 'fefa2eb7e078a8'
 EMAIL_PORT = '2525'
-DEFAULT_FROM_EMAIL = "pepitopolo45@gmail.com"
+DEFAULT_FROM_EMAIL = "ejemplo@gmail.com"
