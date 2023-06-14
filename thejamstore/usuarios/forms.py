@@ -8,7 +8,7 @@ class RegistrarUsuarioForm(forms.ModelForm):
 
     class Meta:
         model = Custom_User
-        fields = ['username', 'password', 'email', 'categoria']
+        fields = ['username', 'email', 'password', 'categoria']
 
     def save(self, commit=True):
         user = super().save(commit=False)
