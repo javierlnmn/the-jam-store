@@ -140,6 +140,14 @@ class Direccion(models.Model):
         direccion_completa += " " + self.puerta if self.puerta else ""
 
         return direccion_completa
+    
+    def clean(self):
+        if self.piso is None:
+            self.piso = ''
+        
+        if self.puerta is None:
+            self.puerta = ''
+            
 
     class Meta:
         verbose_name = "Dirección"
