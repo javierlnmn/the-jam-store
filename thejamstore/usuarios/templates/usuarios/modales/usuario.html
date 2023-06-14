@@ -29,7 +29,7 @@
             </form>
 
             <div class="enlaces">
-                <a class="enlace">¿Has olvidado tu contraseña?</a>
+                <a href="{% url 'usuarios:password_reset' %}" class="enlace">¿Has olvidado tu contraseña?</a>
                 <a class="enlace" id="boton-formulario-registro">¿No tienes una cuenta?</a>
             </div>
 
@@ -150,7 +150,8 @@
         <div class="contenedor-enlaces">
             <a class="enlace_boton" href="{% url 'usuarios:ver_direcciones' %}">Ver mis pedidos</a>
             <a class="enlace_boton" href="{% url 'usuarios:ver_direcciones' %}">Gestionar direcciones</a>
-            <a class="enlace_boton largo" href="{% url 'usuarios:cerrar_sesion' %}">Cerrar sersión</a>
+            <a class="enlace_boton" href="{% url 'usuarios:cerrar_sesion' %}">Cerrar sersión</a>
+            <a class="enlace_boton" href="{% url 'usuarios:password_reset' %}">Cambiar contraseña</a>
         </div>
         
     </div>

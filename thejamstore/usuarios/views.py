@@ -8,6 +8,12 @@ from django.urls import resolve
 from .forms import RegistrarUsuarioForm, ActualizarUsuarioForm, DireccionForm
 from .models import Comentario, Producto, Producto_Talla, Lista_Deseos, Carrito, Carrito_Productos, Direccion, Talla, PROVINCIAS_CHOICES
 from urllib.parse import urlparse
+from django.contrib.auth.views import (
+    PasswordResetView,
+    PasswordResetDoneView,
+    PasswordResetConfirmView,
+    PasswordResetCompleteView,
+)
 
 directorio_templates = 'usuarios'
 
@@ -252,3 +258,20 @@ def editar_direccion(request, id_direccion):
             return redirect('usuarios:ver_direcciones')
     else:
         return HttpResponseNotFound('Error 404')
+    
+
+class CustomPasswordResetView(PasswordResetView):
+    template_name = 'usuarios/registration/password_reset_form.html'
+    email_template_name = 'usuarios/registration/password_reset_email.html'
+    subject_template_name = 'usuarios/registration/password_reset_subject.txt'
+    success_url = '/usuarios/password-reset/done/'
+
+class CustomPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'usuarios/registration/password_reset_done.html'
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'usuarios/registration/password_reset_confirm.html'
+    success_url = '/usuarios/password-reset/complete/'
+
+class CustomPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'usuarios/registration/password_reset_complete.html'

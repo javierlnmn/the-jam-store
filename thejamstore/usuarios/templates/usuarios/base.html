@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Título de tu sitio</title>
+    <!-- Agrega aquí tus etiquetas meta, enlaces a archivos CSS, etc. -->
+</head>
+<body>
+    <nav>
+        <!-- Barra de navegación -->
+        <ul>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/about/">Acerca de</a></li>
+            <!-- Agrega otros enlaces de navegación según tus necesidades -->
+        </ul>
+    </nav>
+
+    <div class="content">
+        {% block content %}
+        <!-- Contenido específico de cada página -->
+        {% endblock %}
+    </div>
+
+    <footer>
+        <!-- Pie de página -->
+        <p>Derechos de autor &copy; 2023. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
