@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.urls import resolve
 from .forms import RegistrarUsuarioForm, ActualizarUsuarioForm, DireccionForm
-from .models import Comentario, Producto, Lista_Deseos, Direccion, PROVINCIAS_CHOICES
+from .models import Comentario, Producto, Producto_Talla, Lista_Deseos, Carrito, Carrito_Productos, Direccion, Talla, PROVINCIAS_CHOICES
 from urllib.parse import urlparse
 
 directorio_templates = 'usuarios'
@@ -95,28 +95,13 @@ def valorar_producto(request, id_producto):
     else:
         return HttpResponseNotFound('Error 404')
 
-@login_required
-def quitar_de_lista_deseos(request, id_producto):
-    producto = Producto.objects.get(pk=id_producto)
-    lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
-    lista_deseos.producto.remove(producto)
-    pagina_previa = request.META.get('HTTP_REFERER')
-    return HttpResponseRedirect(pagina_previa)
-    
-def anadir_a_lista_deseos(request, id_producto):
+
+def lista_deseos(request):
     if not request.user.is_authenticated:
         messages.success(request, '¡Inicia sesión para crear tu lista de deseos!')
-        return redirect('productos:producto_detalle', id_producto=id_producto)
-
-    producto = Producto.objects.get(pk=id_producto)
-    lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
-    lista_deseos.producto.add(producto)
+        pagina_previa = request.META.get('HTTP_REFERER')
+        return HttpResponseRedirect(pagina_previa)
     
-    return redirect('productos:producto_detalle', id_producto=id_producto)
-
-@login_required
-def lista_deseos(request):
-
     # get_or_create devuelve una tupla con dos valores, el object y un booleano diciendo si existia antes o no
     lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
     productos_lista_deseos = lista_deseos.producto.all()
@@ -130,6 +115,73 @@ def lista_deseos(request):
     }
 
     return render(request, directorio_templates + "/lista-deseos.html", contexto)
+
+    
+def anadir_a_lista_deseos(request, id_producto):
+    if not request.user.is_authenticated:
+        messages.success(request, '¡Inicia sesión para crear tu lista de deseos!')
+        return redirect('productos:producto_detalle', id_producto=id_producto)
+
+    producto = Producto.objects.get(pk=id_producto)
+    lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
+    lista_deseos.producto.add(producto)
+    
+    return redirect('productos:producto_detalle', id_producto=id_producto)
+
+@login_required
+def quitar_de_lista_deseos(request, id_producto):
+    producto = Producto.objects.get(pk=id_producto)
+    lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
+    lista_deseos.producto.remove(producto)
+    pagina_previa = request.META.get('HTTP_REFERER')
+    return HttpResponseRedirect(pagina_previa)
+
+
+def carrito(request):
+    if not request.user.is_authenticated:
+        messages.success(request, '¡Inicia sesión para crear tu carrito!')
+        pagina_previa = request.META.get('HTTP_REFERER')
+        return HttpResponseRedirect(pagina_previa)
+    
+    carrito, _ = Carrito.objects.get_or_create(usuario=request.user)
+    productos_carrito = carrito.producto.all()
+
+    contexto = {
+        "productos": productos_carrito,
+    }
+
+    return render(request, directorio_templates + "/lista-deseos.html", contexto)
+
+def anadir_a_carrito(request, id_producto):
+    if not request.user.is_authenticated:
+        messages.success(request, '¡Inicia sesión para añadir productos a tu carrito!')
+        return redirect('productos:producto_detalle', id_producto=id_producto)
+
+    formulario_talla = int(request.GET.get('talla')) # El id de la talla que obtenemos es el de la relación producto_talla
+    talla_producto = Producto_Talla.objects.get(pk=formulario_talla)
+    talla = Talla.objects.get(pk=talla_producto.talla_id)
+    cantidad = request.GET.get('cantidad') # Lo mismo para cantidad
+
+    producto = Producto.objects.get(pk=id_producto)
+    
+    carrito, _ =   Carrito.objects.get_or_create(usuario=request.user)
+    
+    carrito_productos = Carrito_Productos.objects.create(producto_id=id_producto, carrito_id=carrito.id, talla=talla, cantidad=cantidad)
+    carrito_productos.save()
+    
+    messages.success(request, '¡Has añadido '+ producto.nombre +' a tu carrito!')
+    return redirect('productos:producto_detalle', id_producto=id_producto)
+
+@login_required
+def quitar_de_carrito(request, id_producto):
+    # producto = Producto.objects.get(pk=id_producto)
+    # lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
+    # lista_deseos.producto.remove(producto)
+    # pagina_previa = request.META.get('HTTP_REFERER')
+    # return HttpResponseRedirect(pagina_previa)
+    pass
+
+
 
 @login_required
 def ver_direcciones(request):
@@ -186,6 +238,7 @@ def formulario_editar_direccion(request, id_direccion):
     }
     return render(request, directorio_templates + "/formulario-editar-direccion.html", contexto)
 
+@login_required
 def editar_direccion(request, id_direccion):
     direccion = Direccion.objects.get(pk=id_direccion)
     if request.method == 'POST':

@@ -7,8 +7,8 @@ class RegistrarUsuarioForm(forms.ModelForm):
     categoria = forms.ModelChoiceField(queryset=Categoria_Usuario.objects.all(), empty_label=None)
 
     class Meta:
-        model = Direccion
-        fields = ['provincia', 'municipio', 'cod_postal', 'calle', 'numero', 'piso', 'puerta', 'datos_adicionales']
+        model = Custom_User
+        fields = ['username', 'password', 'email', 'categoria']
 
     def save(self, commit=True):
         user = super().save(commit=False)
