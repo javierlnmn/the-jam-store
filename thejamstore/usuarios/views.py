@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
-from .forms import RegistrarUsuarioForm, ActualizarUsuarioForm, CrearDireccionForm
+from .forms import RegistrarUsuarioForm, ActualizarUsuarioForm, DireccionForm
 from .models import Comentario, Producto, Lista_Deseos, Direccion, PROVINCIAS_CHOICES
 
 directorio_templates = 'usuarios'
@@ -154,7 +154,7 @@ def formulario_crear_direccion(request):
 @login_required
 def anadir_direccion(request):
     if request.method == 'POST':
-        form = CrearDireccionForm(request.POST)
+        form = DireccionForm(request.POST)
         if form.is_valid():
             direccion = form.save(commit=False)
             direccion.usuario = request.user
@@ -182,3 +182,17 @@ def formulario_editar_direccion(request, id_direccion):
         'direccion': direccion
     }
     return render(request, directorio_templates + "/formulario-editar-direccion.html", contexto)
+
+def editar_direccion(request, id_direccion):
+    direccion = Direccion.objects.get(pk=id_direccion)
+    if request.method == 'POST':
+        form = DireccionForm(request.POST, instance=direccion)
+        if form.is_valid():
+            direccion = form.save(commit=True)
+            messages.success(request, '¡Dirección actualizada con éxito!')
+            return redirect('usuarios:ver_direcciones')
+        else:
+            messages.error(request, 'Se produjo un error al añadir la dirección. Inténtelo de nuevo.')
+            return redirect('usuarios:ver_direcciones')
+    else:
+        return HttpResponseNotFound('Error 404')

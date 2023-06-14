@@ -24,7 +24,7 @@ class ActualizarUsuarioForm(forms.ModelForm):
         model = Custom_User
         fields = ['username', 'email', 'first_name', 'last_name', 'telefono', 'foto_perfil']
         
-class CrearDireccionForm(forms.ModelForm):
+class DireccionForm(forms.ModelForm):
     class Meta:
         model = Direccion
         fields = ['provincia', 'municipio', 'cod_postal', 'calle', 'numero', 'piso', 'puerta', 'datos_adicionales']

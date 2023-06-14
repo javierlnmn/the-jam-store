@@ -8,7 +8,7 @@
 
             <div class="contenedor-formulario">
 
-                <form action={% url 'usuarios:anadir_direccion' %} method="post" class="formulario">
+                <form action={% url 'usuarios:editar_direccion' direccion.id %} method="post" class="formulario">
                     {% csrf_token %}
                     
 
