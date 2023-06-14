@@ -17,12 +17,12 @@
             <form action="{% url 'usuarios:iniciar_sesion' %}" method="POST" class="formulario">
                 {% csrf_token %}
                 <div class="contenedor-input-texto">
-                    <input name="username" id="input-texto" type="text" class="input-texto" />
-                    <label for="input-texto" unselectable="on">Usuario</label>
+                    <input name="username" id="input-usuario" type="text" class="input-texto" />
+                    <label for="input-usuario" unselectable="on">Usuario</label>
                 </div>
                 <div class="contenedor-input-texto">
-                    <input name="password" id="input-texto" type="password" class="input-texto" />
-                    <label for="input-texto" unselectable="on">Contraseña</label>
+                    <input name="password" id="input-password" type="password" class="input-texto" />
+                    <label for="input-password" unselectable="on">Contraseña</label>
                 </div>
 
                 <button type="submit" class="enlace_boton">Iniciar Sesión</button>
@@ -50,12 +50,12 @@
             <form action="{% url 'usuarios:registrar_usuario' %}" method="POST" class="formulario">
                 {% csrf_token %}
                 <div class="contenedor-input-texto">
-                    <input type="text" name="username" maxlength="150" required="" class="input-texto" />
-                    <label for="input-texto" unselectable="on">Usuario</label>
+                    <input type="text" name="username" maxlength="150" required="" id="id_usuario" class="input-texto" />
+                    <label for="id_usuario" unselectable="on">Usuario</label>
                 </div>
                 <div class="contenedor-input-texto">
                     <input type="email" name="email" maxlength="128" id="id_email" class="input-texto" />
-                    <label for="input-texto" unselectable="on">Correo electrónico</label>
+                    <label for="id_email" unselectable="on">Correo electrónico</label>
                 </div>
                 <div class="contenedor-input-texto">
                     <input type="password" name="password" maxlength="128" required="" id="id_password" class="input-texto" />
