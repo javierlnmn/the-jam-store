@@ -1,0 +1,73 @@
+{% extends 'general/main.html' %}
+
+{% block contenido %}
+    <main>
+
+        <section class="contenedor seccion-carrito">
+
+            {% if productos %}
+
+
+            <div class="display-productos">
+
+                {% for producto in productos %}
+                <div class="producto-display_row">
+                    <div class="imagen">
+                        {% if producto.oferta %}
+                        <span class="marcador-oferta">Oferta</span>
+                        {% endif %}
+                        <img src="{{producto.imagen.url}}" alt="Imagen de la prenda">
+                    </div>
+                    <div class="informacion">
+                        <p class="nombre-articulo negrita">{{ producto.nombre }}</p>
+                        {% if producto.oferta %}
+                            <p><span class="negrita"><span class="texto-tachado">{{ producto.precio }}</span>&nbsp;&nbsp;&nbsp;{{ producto.precio_oferta }}</span>€</p>
+                        {% else %}
+                            <p><span class="negrita">{{ producto.precio }}</span>€</p>
+                        {% endif %}
+                        {% if producto.get_stock %}
+                            <p class="texto-secundario">Utilizamos tallas europeas para nuestras prendas</p>
+                            <div class="seleccion-producto">
+                                <div class="contenedor-input-select-talla">
+                                    <select name="" id="">
+                                        <option value="" selected disabled>Talla</option>
+                                        {% for talla in producto.producto_talla_set.all %}
+                                        <option value="{{talla.id}}">{{talla.talla}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="numero-articulos">
+                                    <input type="number" min="1" max="91" step="1" value="1">
+                                    <div class="numero-articulos-nav">
+                                        <div class="numero-articulos-button numero-articulos-up">+</div>
+                                        <div class="numero-articulos-button numero-articulos-down">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <p class="texto-secundario texto-rojo">No hay stock de este producto</p>
+                        {% endif %}
+                        <div class="botones">
+                            <a class="enlace_boton" href="{% url 'productos:producto_detalle' producto.id %}">Ver producto</a>
+                            {% endif %}
+                            <a class="enlace_boton" href="{% url 'usuarios:quitar_de_carrito' producto.id %}">Quitar</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+
+            {% else %}
+
+            <p class="texto-centrado texto-secundario">Todavía no has añadido ningún producto al carrito.</p>
+
+            {% endif %}
+
+        </section>
+
+
+        {% include 'general/base/paginacion.html' with objetos_paginas=productos %}
+
+    </main>
+{% endblock %}
