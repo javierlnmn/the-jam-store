@@ -26,28 +26,32 @@
                 </p>
                 {% if producto_detalle.get_stock %}
                     <p class="texto-secundario">Utilizamos tallas europeas para nuestras prendas</p>
-                    <div class="seleccion-producto">
-                        <div class="contenedor-input-select">
-                            <select class="desplegable" name="" id="">
-                                <option value="" selected disabled>Talla</option>
-                                {% for talla in producto_detalle.producto_talla_set.all %}
-                                <option value="{{talla.id}}">{{talla.talla}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="numero-articulos">
-                            <input type="number" min="1" max="91" step="1" value="1">
-                            <div class="numero-articulos-nav">
-                                <div class="numero-articulos-button numero-articulos-up">+</div>
-                                <div class="numero-articulos-button numero-articulos-down">-</div>
+                    <form id="formulario-anadir-al-carrito" action="{% url 'usuarios:anadir_a_carrito' producto_detalle.id %}" method="get">
+                        {% csrf_token %}
+                        <div class="seleccion-producto">
+                            <div class="contenedor-input-select">
+                                <select class="desplegable" name="talla" id="">
+                                    <option value="" selected disabled>Talla</option>
+                                    {% for talla in producto_detalle.producto_talla_set.all %}
+                                    <option value="{{talla.id}}">{{talla.talla}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="numero-articulos">
+                                <input type="number" min="1" max="91" step="1" value="1" name="cantidad">
+                                <div class="numero-articulos-nav">
+                                    <div class="numero-articulos-button numero-articulos-up">+</div>
+                                    <div class="numero-articulos-button numero-articulos-down">-</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
+
                 {% else %}
                     <p class="texto-secundario">No hay stock de este producto</p>
                 {% endif %}
                 <div class="botones">
-                    <a class="enlace_boton">
+                    <a class="enlace_boton" id="anadir-al-carrito">
                         Añadir al carrito
                     </a>
                     <a class="enlace_boton" href="{% url 'productos:seccion_tipo_prenda' producto_detalle.categoria producto_detalle.producto_tipo_prenda.first|slugify %}">
@@ -107,4 +111,9 @@
         {% include 'usuarios/valoraciones.html' %}
 
     </main>
+{% endblock %}
+
+{% block scripts %}
+    {% load static %}
+    <script type="text/javascript" src="{% static 'scripts/producto-detalle/index.js' %}"></script>
 {% endblock %}
