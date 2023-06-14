@@ -32,12 +32,12 @@
                     <div class="contenedor-doble">
 
                         <div class="contenedor-input-texto {% if direccion.municipio %} contenedor-input-texto_animacion {% endif %}">
-                            <input id="input-texto" type="text" name="municipio" value="{{direccion.municipio}}" maxlength="150" required="" class="input-texto"/>
-                            <label for="input-texto" unselectable="on">Municipio *</label>
+                            <input id="input-municipio" type="text" name="municipio" value="{{direccion.municipio}}" maxlength="150" required="" class="input-texto"/>
+                            <label for="input-municipio" unselectable="on">Municipio *</label>
                         </div>
                         <div class="contenedor-input-texto {% if direccion.cod_postal %} contenedor-input-texto_animacion {% endif %}">
-                            <input id="input-texto" type="text" name="cod_postal" value="{{direccion.cod_postal}}" maxlength="150" required="" class="input-texto"/>
-                            <label for="input-texto" unselectable="on">Código postal *</label>
+                            <input id="input-cp" type="text" name="cod_postal" value="{{direccion.cod_postal}}" maxlength="150" required="" class="input-texto"/>
+                            <label for="input-cp" unselectable="on">Código postal *</label>
                         </div>
 
                     </div>
@@ -45,12 +45,12 @@
                     <div class="contenedor-doble">
 
                         <div class="contenedor-input-texto {% if direccion.calle %} contenedor-input-texto_animacion {% endif %}">
-                            <input id="input-texto" type="text" name="calle" value="{{direccion.calle}}" maxlength="150" required="" class="input-texto"/>
-                            <label for="input-texto" unselectable="on">Calle *</label>
+                            <input id="input-calle" type="text" name="calle" value="{{direccion.calle}}" maxlength="150" required="" class="input-texto"/>
+                            <label for="input-calle" unselectable="on">Calle *</label>
                         </div>
                         <div class="contenedor-input-texto {% if direccion.numero %} contenedor-input-texto_animacion {% endif %}">
-                            <input id="input-texto" type="text" name="numero" value="{{direccion.numero}}" maxlength="150" required="" class="input-texto"/>
-                            <label for="input-texto" unselectable="on">Número *</label>
+                            <input id="input-numero" type="text" name="numero" value="{{direccion.numero}}" maxlength="150" required="" class="input-texto"/>
+                            <label for="input-numero" unselectable="on">Número *</label>
                         </div>
 
                     </div>
@@ -58,19 +58,19 @@
                     <div class="contenedor-doble">
 
                         <div class="contenedor-input-texto {% if direccion.piso %} contenedor-input-texto_animacion {% endif %}">
-                            <input id="input-texto" type="text" name="piso" value="{{direccion.piso}}" maxlength="150" class="input-texto"/>
-                            <label for="input-texto" unselectable="on">Piso</label>
+                            <input id="input-piso" type="text" name="piso" value="{{direccion.piso}}" maxlength="150" class="input-texto"/>
+                            <label for="input-piso" unselectable="on">Piso</label>
                         </div>
                         <div class="contenedor-input-texto {% if direccion.puerta %} contenedor-input-texto_animacion {% endif %}">
-                            <input id="input-texto" type="text" name="puerta" value="{{direccion.puerta}}" maxlength="150" class="input-texto"/>
-                            <label for="input-texto" unselectable="on">Puerta</label>
+                            <input id="input-piso" type="text" name="puerta" value="{{direccion.puerta}}" maxlength="150" class="input-texto"/>
+                            <label for="input-piso" unselectable="on">Puerta</label>
                         </div>
 
                     </div>
 
                     <div class="contenedor-input-texto contenedor-input-texto_textarea {% if direccion.datos_adicionales is not '' or direccion.datos_adicionales is not None %} contenedor-input-texto_animacion {% endif %}">
-                        <textarea type="text" id="input-texto" name="datos_adicionales" class="input-texto">{{direccion.datos_adicionales}}</textarea>
-                        <label for="input-texto" unselectable="on">Datos adicionales</label>
+                        <textarea type="text" id="input-datos" name="datos_adicionales" class="input-texto">{{direccion.datos_adicionales}}</textarea>
+                        <label for="input-datos" unselectable="on">Datos adicionales</label>
                     </div>
 
                     <button type="submit" class="enlace_boton">Guardar dirección</button>

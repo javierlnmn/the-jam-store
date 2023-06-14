@@ -32,25 +32,12 @@
                     <div class="contenedor-doble">
 
                         <div class="contenedor-input-texto">
-                            <input id="input-texto" type="text" name="municipio" maxlength="150" required="" class="input-texto"/>
-                            <label for="input-texto" unselectable="on">Municipio *</label>
+                            <input id="input-municipio" type="text" name="municipio" maxlength="150" required="" class="input-texto"/>
+                            <label for="input-municipio" unselectable="on">Municipio *</label>
                         </div>
                         <div class="contenedor-input-texto">
-                            <input id="input-texto" type="text" name="cod_postal" maxlength="150" required="" class="input-texto"/>
-                            <label for="input-texto" unselectable="on">Código postal *</label>
-                        </div>
-
-                    </div>
-
-                    <div class="contenedor-doble">
-
-                        <div class="contenedor-input-texto">
-                            <input id="input-texto" type="text" name="calle" maxlength="150" required="" class="input-texto"/>
-                            <label for="input-texto" unselectable="on">Calle *</label>
-                        </div>
-                        <div class="contenedor-input-texto">
-                            <input id="input-texto" type="text" name="numero" maxlength="150" required="" class="input-texto"/>
-                            <label for="input-texto" unselectable="on">Número *</label>
+                            <input id="input-cp" type="text" name="cod_postal" maxlength="150" required="" class="input-texto"/>
+                            <label for="input-cp" unselectable="on">Código postal *</label>
                         </div>
 
                     </div>
@@ -58,19 +45,32 @@
                     <div class="contenedor-doble">
 
                         <div class="contenedor-input-texto">
-                            <input id="input-texto" type="text" name="piso" maxlength="150" class="input-texto"/>
-                            <label for="input-texto" unselectable="on">Piso</label>
+                            <input id="input-calle" type="text" name="calle" maxlength="150" required="" class="input-texto"/>
+                            <label for="input-calle" unselectable="on">Calle *</label>
                         </div>
                         <div class="contenedor-input-texto">
-                            <input id="input-texto" type="text" name="puerta" maxlength="150" class="input-texto"/>
-                            <label for="input-texto" unselectable="on">Puerta</label>
+                            <input id="input-numero" type="text" name="numero" maxlength="150" required="" class="input-texto"/>
+                            <label for="input-numero" unselectable="on">Número *</label>
+                        </div>
+
+                    </div>
+
+                    <div class="contenedor-doble">
+
+                        <div class="contenedor-input-texto">
+                            <input id="input-piso" type="text" name="piso" maxlength="150" class="input-texto"/>
+                            <label for="input-piso" unselectable="on">Piso</label>
+                        </div>
+                        <div class="contenedor-input-texto">
+                            <input id="input-puerta" type="text" name="puerta" maxlength="150" class="input-texto"/>
+                            <label for="input-puerta" unselectable="on">Puerta</label>
                         </div>
 
                     </div>
 
                     <div class="contenedor-input-texto contenedor-input-texto_textarea">
-                        <textarea type="text" id="input-texto" name="datos_adicionales" class="input-texto"></textarea>
-                        <label for="input-texto" unselectable="on">Datos adicionales</label>
+                        <textarea type="text" id="input-datos" name="datos_adicionales" class="input-texto"></textarea>
+                        <label for="input-datos" unselectable="on">Datos adicionales</label>
                     </div>
 
                     <button type="submit" class="enlace_boton">Añadir dirección</button>
