@@ -4,8 +4,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
+from django.urls import resolve
 from .forms import RegistrarUsuarioForm, ActualizarUsuarioForm, DireccionForm
 from .models import Comentario, Producto, Lista_Deseos, Direccion, PROVINCIAS_CHOICES
+from urllib.parse import urlparse
 
 directorio_templates = 'usuarios'
 
@@ -47,8 +49,9 @@ def cerrar_sesion(request):
     request.user = None
     
     pagina_previa = request.META.get('HTTP_REFERER')
-    
-    return HttpResponseRedirect(pagina_previa)
+    parsed_url = urlparse(pagina_previa)
+    url_pagina_previa = parsed_url.path
+    return redirect('general:indice')
     
 @login_required
 def actualizar_datos_usuario(request):
@@ -111,7 +114,7 @@ def anadir_a_lista_deseos(request, id_producto):
     
     return redirect('productos:producto_detalle', id_producto=id_producto)
 
- 
+@login_required
 def lista_deseos(request):
 
     # get_or_create devuelve una tupla con dos valores, el object y un booleano diciendo si existia antes o no
