@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from productos.models import Producto
+from productos.models import Producto, Talla, Producto_Talla
 from django.core.exceptions import ValidationError
 
 
@@ -80,6 +80,11 @@ class Custom_User(AbstractUser):
     foto_perfil = models.ImageField(null=True, blank=True, verbose_name="Avatar de usuario", upload_to="usuarios")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
+    
+    @property
+    def num_articulos_carrito(self):
+        carrito = Carrito.objects.get(usuario__pk=self.id)
+        return carrito.producto.all().count()
 
     def clean(self):
         if not self.categoria:
@@ -160,10 +165,43 @@ class Carrito_Productos(models.Model):
         on_delete=models.CASCADE,
     )
     cantidad = models.PositiveIntegerField(default=1)
+    talla = models.ForeignKey(Talla, on_delete=models.CASCADE, verbose_name = 'Talla')
 
     class Meta:
         verbose_name = "Producto del Carrito"
         verbose_name_plural = "Productos del Carrito"
+        
+    def clean(self):
+        try:
+            producto = Producto.objects.get(pk=self.producto.id)
+            inventario_tallas = Producto_Talla.objects.filter(producto=producto.id)
+        except:
+            raise ValidationError("")
+
+        if not self.producto or not self.cantidad or not self.talla_id:
+            return
+
+        talla_valida = False
+        cantidad_valida = False
+
+        for inventario in inventario_tallas:
+            if self.talla == inventario.talla:
+                talla_valida = True
+
+                if self.cantidad <= inventario.cantidad:
+                    cantidad_valida = True
+
+                break
+
+        if not talla_valida:
+            raise ValidationError(
+                {"talla": "No disponemos de esta talla en el inventario"}
+            )
+
+        if not cantidad_valida:
+            raise ValidationError(
+                {"cantidad": "No disponemos de esta cantidad en el inventario"}
+            )
 
 
 class Lista_Deseos(models.Model):

@@ -1,0 +1,96 @@
+{% extends 'general/main.html' %}
+
+{% block contenido %}
+    <main>
+
+
+        <section class="contenedor seccion-formulario-crear-direccion">
+
+            <div class="contenedor-formulario">
+
+                <form action={% url 'usuarios:anadir_direccion' %} method="post" class="formulario">
+                    {% csrf_token %}
+                    
+
+                    <div class="contenedor-doble">
+
+                        <p>
+                            Elige una provincia: *
+                        </p>
+                        <div class="contenedor-input-select">
+                            <select class="desplegable" name="provincia" id="">
+                                <option value="" {% if not direccion.provincia %} selected {% endif %} disabled>Provincia</option>
+                                {% for identificador, nombre_provincia in provincias %}
+                                    <option value="{{ identificador }}" {% if direccion.provincia is identificador %} selected {% endif %}>{{ nombre_provincia }} ({{identificador}})</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                    </div>
+                    
+
+                    <div class="contenedor-doble">
+
+                        <div class="contenedor-input-texto {% if direccion.municipio %} contenedor-input-texto_animacion {% endif %}">
+                            <input id="input-texto" type="text" name="municipio" value="{{direccion.municipio}}" maxlength="150" required="" class="input-texto"/>
+                            <label for="input-texto" unselectable="on">Municipio *</label>
+                        </div>
+                        <div class="contenedor-input-texto {% if direccion.cod_postal %} contenedor-input-texto_animacion {% endif %}">
+                            <input id="input-texto" type="text" name="cod_postal" value="{{direccion.cod_postal}}" maxlength="150" required="" class="input-texto"/>
+                            <label for="input-texto" unselectable="on">Código postal *</label>
+                        </div>
+
+                    </div>
+
+                    <div class="contenedor-doble">
+
+                        <div class="contenedor-input-texto {% if direccion.calle %} contenedor-input-texto_animacion {% endif %}">
+                            <input id="input-texto" type="text" name="calle" value="{{direccion.calle}}" maxlength="150" required="" class="input-texto"/>
+                            <label for="input-texto" unselectable="on">Calle *</label>
+                        </div>
+                        <div class="contenedor-input-texto {% if direccion.numero %} contenedor-input-texto_animacion {% endif %}">
+                            <input id="input-texto" type="text" name="numero" value="{{direccion.numero}}" maxlength="150" required="" class="input-texto"/>
+                            <label for="input-texto" unselectable="on">Número *</label>
+                        </div>
+
+                    </div>
+
+                    <div class="contenedor-doble">
+
+                        <div class="contenedor-input-texto {% if direccion.piso %} contenedor-input-texto_animacion {% endif %}">
+                            <input id="input-texto" type="text" name="piso" value="{{direccion.piso}}" maxlength="150" class="input-texto"/>
+                            <label for="input-texto" unselectable="on">Piso</label>
+                        </div>
+                        <div class="contenedor-input-texto {% if direccion.puerta %} contenedor-input-texto_animacion {% endif %}">
+                            <input id="input-texto" type="text" name="puerta" value="{{direccion.puerta}}" maxlength="150" class="input-texto"/>
+                            <label for="input-texto" unselectable="on">Puerta</label>
+                        </div>
+
+                    </div>
+
+                    <div class="contenedor-input-texto contenedor-input-texto_textarea {% if direccion.datos_adicionales is '' or direccion.datos_adicionales is None %} contenedor-input-texto_animacion {% endif %}">
+                        <textarea type="text" id="input-texto" name="datos_adicionales" value="{{direccion.datos_adicionales}}" class="input-texto"></textarea>
+                        <label for="input-texto" unselectable="on">Datos adicionales</label>
+                    </div>
+
+                    <button type="submit" class="enlace_boton">Guardar dirección</button>
+                </form>
+            </div>
+
+            <aside class="informacion-extra">
+                
+                <p class="texto-secundario">
+                    Con nosotros, tu información estrá segura; protegemos tus datos y no los compartimos ccon terceros.
+                    Asegúrate de que la dirección que introduces está dentro del territorio español (Islas Baleares y Canarias incluidas).
+                </p>
+
+            </aside>
+            
+
+        </section>
+
+
+        {% include 'general/base/paginacion.html' with objetos_paginas=direcciones %}
+
+    </main>
+{% endblock %}

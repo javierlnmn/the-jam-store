@@ -167,8 +167,18 @@ def anadir_direccion(request):
     else:
         return HttpResponseNotFound('Error 404')
     
+@login_required
 def eliminar_direccion(request, id_direccion):
     direccion = Direccion.objects.get(pk=id_direccion)
     direccion.delete()
     messages.success(request, 'Dirección eliminada.')
     return redirect('usuarios:ver_direcciones')
+
+@login_required
+def formulario_editar_direccion(request, id_direccion):
+    direccion = Direccion.objects.get(pk=id_direccion)
+    contexto = {
+        'provincias': PROVINCIAS_CHOICES,
+        'direccion': direccion
+    }
+    return render(request, directorio_templates + "/formulario-editar-direccion.html", contexto)

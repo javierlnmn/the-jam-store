@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.forms.models import BaseInlineFormSet
+from django.utils.html import format_html
 from .models import *
 
 
@@ -43,14 +45,35 @@ class DireccionAdmin(admin.ModelAdmin):
         "numero",
     )
     
-class Carrito_ProductoInline(admin.TabularInline):
+class CarritoProductoFormSet(BaseInlineFormSet):
+    def clean(self):
+        super().clean()
+        productos = [
+            (form.cleaned_data.get("producto"), form.cleaned_data.get("talla"))
+            for form in self.forms
+            if (form.cleaned_data.get("producto") or form.cleaned_data.get("talla")) and not form.cleaned_data.get("DELETE")
+        ]
+
+        if not productos:
+            raise ValidationError(
+                format_html('<div style="padding: 10px 0;">No se puede crear un carrito sin productos.</div>')
+            )
+            
+        productos_no_duplicados = set(productos)
+        if len(productos_no_duplicados) < len(productos):
+            raise ValidationError(
+               format_html('<div style="padding: 10px 0;">Hay productos duplicados. Modifique el producto o seleccione otra talla.</div>')
+            )
+    
+class CarritoProductoInline(admin.TabularInline):
     model = Carrito_Productos
     extra = 1
+    formset = CarritoProductoFormSet
 
 
 class CarritoAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'display_productos_list')
-    inlines = [Carrito_ProductoInline]
+    inlines = [CarritoProductoInline]
     
     def display_productos_list(self, obj):
         productos = obj.producto.all()
