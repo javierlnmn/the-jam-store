@@ -8,12 +8,8 @@ from django.urls import resolve
 from .forms import RegistrarUsuarioForm, ActualizarUsuarioForm, DireccionForm
 from .models import Comentario, Producto, Producto_Talla, Lista_Deseos, Carrito, Carrito_Productos, Direccion, Talla, PROVINCIAS_CHOICES
 from urllib.parse import urlparse
-from django.contrib.auth.views import (
-    PasswordResetView,
-    PasswordResetDoneView,
-    PasswordResetConfirmView,
-    PasswordResetCompleteView,
-)
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+
 
 directorio_templates = 'usuarios'
 
@@ -260,18 +256,18 @@ def editar_direccion(request, id_direccion):
         return HttpResponseNotFound('Error 404')
     
 
-class CustomPasswordResetView(PasswordResetView):
-    template_name = 'usuarios/registration/password_reset_form.html'
-    email_template_name = 'usuarios/registration/password_reset_email.html'
-    subject_template_name = 'usuarios/registration/password_reset_subject.txt'
-    success_url = '/usuarios/password-reset/done/'
+class CustomRestablecerContrasenaFormularioView(PasswordResetView):
+    template_name = directorio_templates + '/restablecer-contrasena/formulario_restablecer_contrasena.html'
+    email_template_name = directorio_templates + '/restablecer-contrasena/correo_restablecer_contrasena.html'
+    asunto_correo = directorio_templates + '/restablecer-contrasena/asunto_correo.txt'
+    success_url = '/usuarios/restablecer-contrasena/correo-enviado/'
 
-class CustomPasswordResetDoneView(PasswordResetDoneView):
-    template_name = 'usuarios/registration/password_reset_done.html'
+class CustomRestablecerContrasenaCorreoEnviadoView(PasswordResetDoneView):
+    template_name = directorio_templates + '/restablecer-contrasena/correo_restablecer_contrasena_enviado.html'
 
-class CustomPasswordResetConfirmView(PasswordResetConfirmView):
-    template_name = 'usuarios/registration/password_reset_confirm.html'
-    success_url = '/usuarios/password-reset/complete/'
+class CustomRestablecerContrasenaView(PasswordResetConfirmView):
+    template_name = directorio_templates + '/restablecer-contrasena/restablecer_contrasena.html'
+    success_url = '/usuarios/restablecer-contrasena/completado/'
 
-class CustomPasswordResetCompleteView(PasswordResetCompleteView):
-    template_name = 'usuarios/registration/password_reset_complete.html'
+class CustomRestablecerContrasenaCompletadoView(PasswordResetCompleteView):
+    template_name = directorio_templates + '/restablecer-contrasena/completado.html'

@@ -1,10 +1,10 @@
 from django.urls import path
 from .views import iniciar_sesion, cerrar_sesion, registrar_usuario, valorar_producto, lista_deseos, anadir_a_lista_deseos, quitar_de_lista_deseos, carrito, anadir_a_carrito, actualizar_datos_usuario, ver_direcciones, formulario_crear_direccion, anadir_direccion, eliminar_direccion, formulario_editar_direccion, editar_direccion
 from .views import (
-    CustomPasswordResetView,
-    CustomPasswordResetDoneView,
-    CustomPasswordResetConfirmView,
-    CustomPasswordResetCompleteView,
+    CustomRestablecerContrasenaFormularioView,
+    CustomRestablecerContrasenaCorreoEnviadoView,
+    CustomRestablecerContrasenaView,
+    CustomRestablecerContrasenaCompletadoView,
 )
 app_name = 'usuarios'
 
@@ -30,8 +30,8 @@ urlpatterns = [
     path('direcciones/formulario-editar-direccion/<int:id_direccion>', formulario_editar_direccion, name='formulario_editar_direccion'),
     path('direcciones/editar-direccion/<int:id_direccion>', editar_direccion, name='editar_direccion'),
     
-    path('password-reset/', CustomPasswordResetView.as_view(), name='password_reset'),
-    path('password-reset/done/', CustomPasswordResetDoneView.as_view(), name='password_reset_done'),
-    path('password-reset/confirm/<uidb64>/<token>/', CustomPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('password-reset/complete/', CustomPasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('restablecer-contrasena/', CustomRestablecerContrasenaFormularioView.as_view(), name='restablecer_contrasena'),
+    path('restablecer-contrasena/correo-enviado/', CustomRestablecerContrasenaCorreoEnviadoView.as_view(),),
+    path('restablecer-contrasena/confirmar/<uidb64>/<token>/', CustomRestablecerContrasenaView.as_view(), name='restablecer_contrasena_confirmar'),
+    path('restablecer-contrasena/completado/', CustomRestablecerContrasenaCompletadoView.as_view(),),
 ]
