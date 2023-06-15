@@ -152,7 +152,7 @@ def carrito(request):
         "productos": productos_carrito,
     }
 
-    return render(request, directorio_templates + "/lista-deseos.html", contexto)
+    return render(request, directorio_templates + "/carrito.html", contexto)
 
 def anadir_a_carrito(request, id_producto):
     if not request.user.is_authenticated:
@@ -175,7 +175,7 @@ def anadir_a_carrito(request, id_producto):
     return redirect('productos:producto_detalle', id_producto=id_producto)
 
 @login_required
-def quitar_de_carrito(request, id_producto):
+def quitar_del_carrito(request, id_producto):
     # producto = Producto.objects.get(pk=id_producto)
     # lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
     # lista_deseos.producto.remove(producto)

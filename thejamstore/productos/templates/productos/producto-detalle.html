@@ -51,9 +51,11 @@
                     <p class="texto-secundario">No hay stock de este producto</p>
                 {% endif %}
                 <div class="botones">
-                    <a class="enlace_boton" id="anadir-al-carrito">
-                        Añadir al carrito
-                    </a>
+                    {% if producto_detalle.get_stock %} 
+                        <a class="enlace_boton" id="anadir-al-carrito">
+                            Añadir al carrito
+                        </a>
+                    {% endif %}
                     <a class="enlace_boton" href="{% url 'productos:seccion_tipo_prenda' producto_detalle.categoria producto_detalle.producto_tipo_prenda.first|slugify %}">
                         Sección {{ producto_detalle.producto_tipo_prenda.first|lower }}
                     </a>
