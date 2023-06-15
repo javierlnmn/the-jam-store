@@ -6,9 +6,50 @@
 
         <section class="contenedor seccion-pedidos">
 
-            {% for pedido in pedidos %}
-                {{pedido}}
-            {% endfor %}
+            <h2 class="titulo">Tus pedidos</h2>
+
+            <div class="pedidos">
+                
+                {% for pedido in pedidos %}
+
+                <div class="contenedor-pedido">
+                        
+                    <div class="informacion">
+                        <div>
+                            <p>Código del pedido: <span class="negrita mayusculas">{{ pedido.codigo_pedido }}</span></p>
+                            <p>Dirección de envío: {{ pedido.direccion.get_provincia_display }}, {{ pedido.direccion.municipio }}, {{ pedido.direccion.calle }} {{ pedido.direccion.numero }} </p>
+                            <p>Estado del pedido: {% if pedido.estado.id is 4 %}<span class="texto-verde negrita">{{ pedido.estado }}</span>{% else %}{{ pedido.estado }}{% endif %}</p>
+                            <p class="texto-secundario">Pedido realizado el {{ pedido.created|date:"d \d\e F \d\e Y" }}</p>
+                        </div>
+                        
+                        <div class="productos">
+                            <p>Productos del pedido:</p>
+                            <ul class="lista-productos">
+                            {% for producto in pedido.pedido_producto_set.all|slice:":5" %}
+                                <li class="producto"><a class="enlace" href={% url 'productos:producto_detalle' producto.producto.id %}>{{ producto.producto.nombre }}</a></li>
+                            {% endfor %}
+                            </ul>
+                            {% if pedido.pedido_producto_set.all|length > 5 %}
+                            <p class="texto-secundario texto-pequeno">Haga click en detalles para ver todos los productos</p>
+                            {% endif %}
+                        </div>
+                        
+                        
+                        
+                    </div>
+
+                    <div class="botones">
+                        <a class="enlace" href="{% url 'pedidos:detalle_pedido' pedido.id %}">Ver detalles del pedido</a>
+                        {% if pedido.estado.id is not 4 %}
+                        <a class="enlace" {% comment %} href="{% url 'pedidos:detalle_pedido' pedido.id %}" {% endcomment %}>Cancelar pedido</a>
+                        {% endif %}
+                    </div>
+    
+                </div>
+
+                {% endfor %}
+
+            </div>
 
         </section>
 
