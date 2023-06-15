@@ -1,0 +1,57 @@
+{% extends 'general/main.html' %}
+
+{% block contenido %}
+    <main>
+
+
+        <section class="contenedor seccion-detalle-pedido">
+
+            <h3 class="titulo">Detalles del pedido</h3>
+
+            <div class="pedido">
+
+                <div class="informacion-pedido">
+                    <p><span class="negrita">Código del pedido</span>: <span class="mayusculas">{{pedido.codigo_pedido}}</span></p>
+                    <p><span class="negrita">Dirección</span>: {{ pedido.direccion.get_provincia_display }}, {{ pedido.direccion.municipio }}, {{ pedido.direccion.calle }} {{ pedido.direccion.numero }}</p>
+                    <p><span class="negrita">Estado del pedido</span>: {{ pedido.estado }}</p>
+                </div>
+                
+                <div class="enlaces">
+                    <a class="enlace_boton" href="{% url 'pedidos:pedidos' %}">Volver a todos los pedidos</a>
+                    <a class="enlace_boton rojo" href="{% url 'pedidos:pedidos' %}">Cancelar pedido</a>
+                </div>
+                
+            </div>
+
+            <h3 class="titulo-secundario">Productos del pedido</h3>
+
+            <div class="contenedor display-productos seccion-productos">
+
+                {% for producto in pedido.pedido_producto_set.all %}
+                <div class="producto-display_row">
+                    <div class="imagen">
+                        <img src="{{producto.producto.imagen.url}}" alt="Imagen de la prenda">
+                    </div>
+                    <div class="informacion">
+                        <p class="nombre-articulo negrita"><span class="texto-secundario">Nombre del producto:&nbsp;&nbsp;</span>{{ producto.producto.nombre }}</p>
+                        <p class="texto-secundario">Referencia: {{ producto.producto.referencia }}</p>
+                        {% if producto.producto.oferta %}
+                            <p><span class="texto-secundario">Precio final:&nbsp;&nbsp;</span><span class="negrita">{{ producto.producto.precio_oferta }}</span>€</p>
+                        {% else %}
+                            <p><span class="texto-secundario">Precio final:&nbsp;&nbsp;</span><span class="negrita">{{ producto.producto.precio }}</span>€</p>
+                        {% endif %}
+                        <div class="botones">
+                            <a class="enlace_boton" href="{% url 'productos:producto_detalle' producto.producto.id %}">Ver producto</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+    
+            </div>
+
+
+        </section>
+
+
+    </main>
+{% endblock %}

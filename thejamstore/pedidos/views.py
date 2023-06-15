@@ -20,4 +20,9 @@ def pedidos(request):
 
 @login_required
 def detalle_pedido(request, id_pedido):
-    pass
+    pedido = Pedido.objects.get(pk=id_pedido)
+    contexto = {
+        'pedido': pedido
+    }
+    
+    return render(request, directorio_templates + "/detalle_pedido.html", contexto)

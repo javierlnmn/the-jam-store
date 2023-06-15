@@ -1,0 +1,40 @@
+.seccion-detalle-pedido {
+
+    @include display-productos(1, 2rem, false) {
+        margin-top: 6rem;
+    }
+
+    .pedido {
+
+        padding-bottom: 2rem;
+        border-bottom: .1rem solid lighten($gris, 10%);
+
+        .enlaces {
+            display: flex;
+            justify-content: flex-end;
+            gap: 3rem;
+
+            @include tablet {
+                flex-direction: column;
+                align-items: flex-end;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            @include estilo-enlace($azul){    
+                &.rojo {
+                    color: $rojo;
+                    border-color: $rojo;
+                    &:hover {
+                        color: $blanco;
+                        background-color: $rojo;
+                    }
+                }
+
+                @include telefono {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
