@@ -47,6 +47,10 @@ def formulario_pago(request):
         messages.error(request, 'Se produjo un error al realizar el pedido. Inténtelo de nuevo.')
         return HttpResponseRedirect(pagina_previa)
     
+    contexto = {
+        
+    }
+    
     return render(request, directorio_templates + "/detalle_pedido.html", contexto)
         
     
