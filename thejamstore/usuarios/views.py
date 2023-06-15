@@ -69,12 +69,12 @@ def actualizar_datos_usuario(request):
     
 @login_required
 def formulario_peticion(request):
-    if request.user.categoria.id is not 4 : raise Http404()
+    if request.user.categoria.id != 4 : raise Http404()
     return render(request, directorio_templates + "/formulario-peticion.html")
 
 @login_required
 def hacer_peticion(request):
-    if request.user.categoria.id is not 4 : raise Http404()
+    if request.user.categoria.id != 4 : raise Http404()
     if request.method == 'POST':
         form = PeticionForm(request.POST, request.FILES)
         if form.is_valid():

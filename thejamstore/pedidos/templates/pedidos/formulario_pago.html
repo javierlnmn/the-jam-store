@@ -5,7 +5,6 @@
     <title>Pago del Viaje</title>
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'viajes/css/estilos.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -60,11 +59,10 @@
     {% endif %}
 
     <div class="center-form">
-        <form action="{% url 'marcarViajeComoPagado' viaje.id %}" method="post" id="payment-form">
+        <form action="{% url 'pedidos:realizar_pedido' direccion %}" method="post" id="payment-form">
             <h2>Pago del Viaje</h2>
             {% csrf_token %}
-            <input type="hidden" name="viaje_id" value="{{ viaje.id }}">
-            <p>Precio Total: {{ viaje.precioTotal }}€</p>
+            <p>Precio Total: {{ precio_total }}€</p>
             <div id="card-element">
                 <!-- Elemento de tarjeta de crédito de Stripe -->
             </div>
@@ -73,8 +71,12 @@
         </form>
     </div>
 
+    {% for producto in pedido.pedido_producto_set.all %}
+        {{producto}}
+    {% endfor %}
+
     <script>
-        var stripe = Stripe('pk_test_51NGluaCYvehD92m4gllecyjawrBxkBpzYVSQTJ1sx3RgRVyOgEFJI22x8l9F5W1IFzvNIjRWQRBvzzVQsGuZ7uCh00Rg1Uq8Wu');
+        var stripe = Stripe('pk_test_51NJKVRJcEWd3pOtkebemHn9v2T5EMRTqCGOkSB77bRRffbdnhPh7B76oBFyrL34wTNXvGRDBUKCLlfFwsbCYs12R00B67AM5ki');
         var elements = stripe.elements();
         var cardElement = elements.create('card');
         cardElement.mount('#card-element');
