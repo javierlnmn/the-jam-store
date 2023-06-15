@@ -1,10 +1,43 @@
-{% extends 'usuarios/base.html' %}
 
-{% block content %}
-  <h2>Confirmación de recuperación de contraseña</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Restablecer contraseña</button>
-  </form>
+{% extends 'general/main.html' %}
+
+{% block contenido %}
+    <main>
+
+
+        <section class="contenedor seccion-formulario-recuperar-contrasena">
+
+            <h3 class="titulo">Confirmación de recuperación de contraseña</h3>
+
+            <p class="texto-formulario-recuperar-contraseña">Introduce tu nueva contraseña.</p>
+
+            <form method="post" class="formulario-recuperar-contrasena">
+                {% csrf_token %}
+
+                <div class="contenedor-input-texto">
+                    <input  class="input-texto" type="password" name="new_password1" autocomplete="new-password" required="" id="id_new_password1">
+                    <label for="id_new_password1">Contraseña nueva:</label>
+                </div>
+
+                <div class="contenedor-input-texto">
+                    <input  class="input-texto" type="password" name="new_password2" autocomplete="new-password" required="" id="id_new_password1">
+                    <label for="id_new_password2">Contraseña nueva:</label>
+                </div>
+
+                <button class="enlace_boton" type="submit">Restablecer contraseña</button>
+            </form>
+
+            {% if form.errors %}
+                {% for field_errors in form.errors.values %}
+                {% for error in field_errors %}
+                    <p class="texto-formulario-recuperar-contraseña texto-secundario texto-rojo">&rarr; {{error}}</p>                 
+                {% endfor %}
+                {% endfor %}
+            {% endif %}
+
+        </section>
+
+
+    </main>
+    
 {% endblock %}

@@ -1,10 +1,29 @@
-{% extends 'usuarios/base.html' %}
+{% extends 'general/main.html' %}
 
-{% block content %}
-  <h2>Recuperación de contraseña</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Enviar</button>
-  </form>
+{% block contenido %}
+    <main>
+
+
+        <section class="contenedor seccion-formulario-recuperar-contrasena">
+
+            <h3 class="titulo">Recuperación de contraseña</h3>
+
+            <p>Introduce tu correo electrónico vinculado a tu cuenta de The Jam Store&copy;. Te enviaremos un correo de confirmación para realizar el cambio de contraseña.</p>
+
+            <form method="post" class="formulario-recuperar-contrasena">
+                {% csrf_token %}
+
+                <div class="contenedor-input-texto">
+                    <input class="input-texto" type="email" name="email" autocomplete="email" maxlength="254" required="" id="id_email">
+                    <label for="id_email">Correo electrónico:</label>
+                </div>
+
+                <button class="enlace_boton" type="submit">Enviar</button>
+            </form>
+
+        </section>
+
+
+    </main>
+    
 {% endblock %}
