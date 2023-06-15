@@ -4,7 +4,7 @@ from usuarios.models import Custom_User, Categoria_Usuario, Direccion
 
 
 class RegistrarUsuarioForm(forms.ModelForm):
-    categoria = forms.ModelChoiceField(queryset=Categoria_Usuario.objects.all(), empty_label=None)
+    categoria = forms.ModelChoiceField(queryset=Categoria_Usuario.objects.all(), empty_label=None, required=False)
 
     class Meta:
         model = Custom_User
