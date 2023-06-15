@@ -7,8 +7,8 @@ from django.core.paginator import Paginator
 from django.urls import resolve
 from .forms import RegistrarUsuarioForm, ActualizarUsuarioForm, DireccionForm, PeticionForm
 from .models import Comentario, Producto, Producto_Talla, Lista_Deseos, Carrito, Carrito_Productos, Direccion, Talla, PROVINCIAS_CHOICES
-from urllib.parse import urlparse
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.http import Http404
 
 
 directorio_templates = 'usuarios'
@@ -25,7 +25,7 @@ def registrar_usuario(request):
             messages.error(request, 'Se produjo un error en el registro. Inténtelo de nuevo.')
             return HttpResponseRedirect(pagina_previa)
     else:
-        return HttpResponseNotFound('Error 404')
+        raise Http404()
 
 def iniciar_sesion(request):
     if request.method == 'POST':
@@ -42,7 +42,7 @@ def iniciar_sesion(request):
             messages.error(request, 'Los datos son incorrectos. Inténtelo con otros distintos.')
             return HttpResponseRedirect(pagina_previa)
     else:
-        return HttpResponseNotFound('Error 404')
+        raise Http404()
 
 @login_required  
 def cerrar_sesion(request):
@@ -65,16 +65,16 @@ def actualizar_datos_usuario(request):
             messages.error(request, 'Se produjo un error al actualizar los datos. Inténtelo de nuevo.')
             return HttpResponseRedirect(pagina_previa)
     else:
-        return HttpResponseNotFound('Error 404')
+        raise Http404()
     
 @login_required
 def formulario_peticion(request):
-    if request.user.categoria.id is not 4 : return HttpResponseNotFound('Error 404')
+    if request.user.categoria.id is not 4 : raise Http404()
     return render(request, directorio_templates + "/formulario-peticion.html")
 
 @login_required
 def hacer_peticion(request):
-    if request.user.categoria.id is not 4 : return HttpResponseNotFound('Error 404')
+    if request.user.categoria.id is not 4 : raise Http404()
     if request.method == 'POST':
         form = PeticionForm(request.POST, request.FILES)
         if form.is_valid():
@@ -111,7 +111,7 @@ def valorar_producto(request, id_producto):
         return HttpResponseRedirect(pagina_previa)
     
     else:
-        return HttpResponseNotFound('Error 404')
+        raise Http404()
 
 
 def lista_deseos(request):
@@ -271,7 +271,7 @@ def anadir_direccion(request):
             messages.error(request, 'Se produjo un error al añadir la dirección. Inténtelo de nuevo.')
             return redirect('usuarios:ver_direcciones')
     else:
-        return HttpResponseNotFound('Error 404')
+        raise Http404()
     
 @login_required
 def eliminar_direccion(request, id_direccion):
@@ -302,7 +302,7 @@ def editar_direccion(request, id_direccion):
             messages.error(request, 'Se produjo un error al añadir la dirección. Inténtelo de nuevo.')
             return redirect('usuarios:ver_direcciones')
     else:
-        return HttpResponseNotFound('Error 404')
+        raise Http404()
     
 
 class CustomRestablecerContrasenaFormularioView(PasswordResetView):
