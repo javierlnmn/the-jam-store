@@ -144,12 +144,13 @@ def carrito(request):
         messages.success(request, '¡Inicia sesión para crear tu carrito!')
         pagina_previa = request.META.get('HTTP_REFERER')
         return HttpResponseRedirect(pagina_previa)
-    
     carrito, _ = Carrito.objects.get_or_create(usuario=request.user)
-    productos_carrito = carrito.producto.all()
-
+    subtotal = 0
+    for producto_carrito in carrito.carrito_productos_set.all():
+        subtotal += producto_carrito.producto.precio
     contexto = {
-        "productos": productos_carrito,
+        "carrito": carrito,
+        "subtotal": subtotal
     }
 
     return render(request, directorio_templates + "/carrito.html", contexto)
@@ -168,20 +169,31 @@ def anadir_a_carrito(request, id_producto):
     
     carrito, _ =   Carrito.objects.get_or_create(usuario=request.user)
     
-    carrito_productos = Carrito_Productos.objects.create(producto_id=id_producto, carrito_id=carrito.id, talla=talla, cantidad=cantidad)
-    carrito_productos.save()
+    productos_del_carrito = carrito.carrito_productos_set.all()
+    repetido = False
+    for producto_carrito in productos_del_carrito:
+        if producto.id == producto_carrito.producto.id and producto_carrito.talla.id == talla.id:
+            repetido = True
+            break
+    
+    if not repetido:
+        producto_del_carrito = Carrito_Productos.objects.create(producto_id=id_producto, carrito_id=carrito.id, talla=talla, cantidad=cantidad)
+    else:
+        producto_del_carrito = Carrito_Productos.objects.get(producto_id=id_producto, carrito_id=carrito.id, talla=talla)
+        producto_del_carrito.cantidad = cantidad
+
+    producto_del_carrito.save()
     
     messages.success(request, '¡Has añadido '+ producto.nombre +' a tu carrito!')
     return redirect('productos:producto_detalle', id_producto=id_producto)
 
 @login_required
 def quitar_del_carrito(request, id_producto):
-    # producto = Producto.objects.get(pk=id_producto)
-    # lista_deseos, _ = Lista_Deseos.objects.get_or_create(usuario=request.user)
-    # lista_deseos.producto.remove(producto)
-    # pagina_previa = request.META.get('HTTP_REFERER')
-    # return HttpResponseRedirect(pagina_previa)
-    pass
+    producto = Producto.objects.get(pk=id_producto)
+    carrito =  Carrito.objects.get(usuario=request.user)
+    carrito.producto.remove(producto)
+    messages.success(request, '¡Has retirado '+ producto.nombre +' de tu carrito!')
+    return redirect('productos:producto_detalle', id_producto=id_producto)
 
 
 

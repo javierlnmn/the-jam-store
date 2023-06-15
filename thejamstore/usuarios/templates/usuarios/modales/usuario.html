@@ -121,6 +121,10 @@
                         <input type="text" name="telefono" maxlength="150" class="input-texto" {% if user.telefono %}value="{{ user.telefono }}" {% endif %} />
                         <label for="input-texto" unselectable="on">Teléfono</label>
                     </div>
+
+                    {% if user.categoria.id is 2 %}
+                        <p class="texto-secundario texto-pequeno" style="margin: 0;">Esta cuenta está registrada como vendedor</p>
+                    {% endif  %}
                 </div>
                 
                 <div class="contenedor-foto-perfil">

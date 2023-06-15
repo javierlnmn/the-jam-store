@@ -161,6 +161,9 @@ class Carrito(models.Model):
     producto = models.ManyToManyField(Producto, through="Carrito_Productos")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificación")
+    
+    def tiene_productos(self):
+        return self.producto.all().count() > 0
 
     def __str__(self):
         return "Carrito de " + self.usuario.username
