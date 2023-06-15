@@ -152,7 +152,9 @@
         </div>
 
         <div class="contenedor-enlaces">
+            {% if user.categoria.id == 4  %}
             <a class="enlace_boton largo" href="{% url 'usuarios:formulario_peticion' %}">Petición de venta</a>
+            {% endif %}
             <a class="enlace_boton" href="{% url 'pedidos:pedidos' %}">Ver mis pedidos</a>
             <a class="enlace_boton" href="{% url 'usuarios:ver_direcciones' %}">Gestionar direcciones</a>
             <a class="enlace_boton" href="{% url 'usuarios:restablecer_contrasena' %}">Cambiar contraseña</a>
