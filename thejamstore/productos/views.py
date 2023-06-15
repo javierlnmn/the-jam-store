@@ -168,7 +168,7 @@ def seccion_productos_tipo_prenda(request, categoria=None, tipo_prenda=None):
         categoria__nombre=categoria, producto_tipo_prenda=tipo_prenda_id
     )
 
-    paginacion = Paginator(lista_productos, 20)
+    paginacion = Paginator(lista_productos, 12)
     pagina = request.GET.get("pag")
     productos_por_pagina = paginacion.get_page(pagina)
 
