@@ -1,0 +1,19 @@
+<h2>Detalles del Pago</h2>
+<p>Cantidad: {{ pago.cantidad }}</p>
+<p>Descripción: {{ pago.descripcion }}</p>
+
+<h2>Realizar Pago</h2>
+<form action="{% url 'procesar_pago' %}" method="POST">
+  {% csrf_token %}
+  <script
+    src="https://checkout.stripe.com/checkout.js"
+    class="stripe-button"
+    data-key="{{ STRIPE_PUBLISHABLE_KEY }}"
+    data-amount="{{ pago.cantidad }}"
+    data-name="Mi Tienda"
+    data-description="{{ pago.descripcion }}"
+    data-image="ruta/a/tu/logo.png"
+    data-currency="usd"
+  >
+  </script>
+</form>
