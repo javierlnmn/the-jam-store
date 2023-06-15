@@ -1,11 +1,6 @@
 from django.urls import path
 from .views import iniciar_sesion, cerrar_sesion, registrar_usuario, valorar_producto, lista_deseos, anadir_a_lista_deseos, quitar_de_lista_deseos, carrito, anadir_a_carrito, actualizar_datos_usuario, ver_direcciones, formulario_crear_direccion, anadir_direccion, eliminar_direccion, formulario_editar_direccion, editar_direccion, quitar_del_carrito
-from .views import (
-    CustomRestablecerContrasenaFormularioView,
-    CustomRestablecerContrasenaCorreoEnviadoView,
-    CustomRestablecerContrasenaView,
-    CustomRestablecerContrasenaCompletadoView,
-)
+from .views import CustomRestablecerContrasenaFormularioView, CustomRestablecerContrasenaCorreoEnviadoView, CustomRestablecerContrasenaView, CustomRestablecerContrasenaCompletadoView
 app_name = 'usuarios'
 
 urlpatterns = [
