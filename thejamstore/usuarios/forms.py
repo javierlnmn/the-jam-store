@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.hashers import make_password
-from usuarios.models import Custom_User, Categoria_Usuario, Direccion
+from usuarios.models import Custom_User, Categoria_Usuario, Direccion, Peticiones
 
 
 class RegistrarUsuarioForm(forms.ModelForm):
@@ -28,3 +28,10 @@ class DireccionForm(forms.ModelForm):
     class Meta:
         model = Direccion
         fields = ['provincia', 'municipio', 'cod_postal', 'calle', 'numero', 'piso', 'puerta', 'datos_adicionales']
+        
+class PeticionForm(forms.ModelForm):
+    imagen = forms.ImageField(required=False)
+
+    class Meta:
+        model = Peticiones
+        fields = ['nombre_producto', 'precio', 'imagen', 'mensaje', 'talla']

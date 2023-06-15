@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.urls import resolve
-from .forms import RegistrarUsuarioForm, ActualizarUsuarioForm, DireccionForm
+from .forms import RegistrarUsuarioForm, ActualizarUsuarioForm, DireccionForm, PeticionForm
 from .models import Comentario, Producto, Producto_Talla, Lista_Deseos, Carrito, Carrito_Productos, Direccion, Talla, PROVINCIAS_CHOICES
 from urllib.parse import urlparse
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
@@ -70,6 +70,24 @@ def actualizar_datos_usuario(request):
             return HttpResponseRedirect(pagina_previa)
     else:
         return HttpResponseNotFound('Error 404')
+    
+@login_required
+def formulario_peticion(request):
+    return render(request, directorio_templates + "/formulario-peticion.html")
+
+@login_required
+def hacer_peticion(request):
+    if request.method == 'POST':
+        form = PeticionForm(request.POST, request.FILES)
+        if form.is_valid():
+            peticion = form.save(commit=False)
+            peticion.usuario = request.user
+            peticion.save()
+            messages.success(request, '¡Tu petición ha sido enviada! Se te notificará por correo una vez aceptada.')
+            return redirect('general:indice')
+        else:
+            messages.error(request, 'Ha habido un error al procesar tu petición. Inténtalo de nuevo rellenando todos los datos.')
+            return redirect('usuarios:formulario_peticion')
 
 @login_required
 def valorar_producto(request, id_producto):

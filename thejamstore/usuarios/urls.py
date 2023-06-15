@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import iniciar_sesion, cerrar_sesion, registrar_usuario, valorar_producto, lista_deseos, anadir_a_lista_deseos, quitar_de_lista_deseos, carrito, anadir_a_carrito, actualizar_datos_usuario, ver_direcciones, formulario_crear_direccion, anadir_direccion, eliminar_direccion, formulario_editar_direccion, editar_direccion, quitar_del_carrito, vaciar_carrito
+from .views import iniciar_sesion, cerrar_sesion, registrar_usuario, valorar_producto, lista_deseos, anadir_a_lista_deseos, quitar_de_lista_deseos, carrito, anadir_a_carrito, actualizar_datos_usuario, ver_direcciones, formulario_crear_direccion, anadir_direccion, eliminar_direccion, formulario_editar_direccion, editar_direccion, quitar_del_carrito, vaciar_carrito, formulario_peticion, hacer_peticion
 from .views import CustomRestablecerContrasenaFormularioView, CustomRestablecerContrasenaCorreoEnviadoView, CustomRestablecerContrasenaView, CustomRestablecerContrasenaCompletadoView
 app_name = 'usuarios'
 
@@ -8,6 +8,9 @@ urlpatterns = [
     path('cerrar-sesion/', cerrar_sesion, name='cerrar_sesion'),
     path('registro/', registrar_usuario, name='registrar_usuario'),
     path('actualizar/', actualizar_datos_usuario, name='actualizar_datos_usuario'),
+    
+    path('formulario-peticion/', formulario_peticion, name='formulario_peticion'),
+    path('hacer-peticion/', hacer_peticion, name='hacer_peticion'),
     
     path('valorar/<int:id_producto>', valorar_producto, name='valorar_producto'),
     
