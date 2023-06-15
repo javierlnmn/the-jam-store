@@ -29,30 +29,33 @@
                         {% endif %}
                         {% if producto.get_stock %}
                             <p class="texto-secundario">Utilizamos tallas europeas para nuestras prendas</p>
-                            <div class="seleccion-producto">
-                                <div class="contenedor-input-select">
-                                    <select class="desplegable" name="" id="">
-                                        <option value="" selected disabled>Talla</option>
-                                        {% for talla in producto.producto_talla_set.all %}
-                                        <option value="{{talla.id}}">{{talla.talla}}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="numero-articulos">
-                                    <input type="number" min="1" max="91" step="1" value="1">
-                                    <div class="numero-articulos-nav">
-                                        <div class="numero-articulos-button numero-articulos-up">+</div>
-                                        <div class="numero-articulos-button numero-articulos-down">-</div>
+                            <form id="formulario-anadir-al-carrito-{{producto.id}}" action="{% url 'usuarios:anadir_a_carrito' producto.id %}" method="get">
+                                {% csrf_token %}
+                                <div class="seleccion-producto">
+                                    <div class="contenedor-input-select">
+                                        <select class="desplegable" name="talla" id="">
+                                            <option value="" selected disabled>Talla</option>
+                                            {% for talla in producto.producto_talla_set.all %}
+                                            <option value="{{talla.id}}">{{talla.talla}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="numero-articulos">
+                                        <input type="number" min="1" max="91" step="1" value="1" name="cantidad">
+                                        <div class="numero-articulos-nav">
+                                            <div class="numero-articulos-button numero-articulos-up">+</div>
+                                            <div class="numero-articulos-button numero-articulos-down">-</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         {% else %}
                             <p class="texto-secundario texto-rojo">No hay stock de este producto</p>
                         {% endif %}
                         <div class="botones">
                             <a class="enlace_boton" href="{% url 'productos:producto_detalle' producto.id %}">Ver producto</a>
                             {% if producto.get_stock %}
-                                <a class="enlace_boton" href="">Añadir al carrito</a>
+                                <a class="enlace_boton boton-anadir-al-carrito" producto-id="{{ producto.id }}">Añadir al carrito</a>
                             {% endif %}
                             <a class="enlace_boton" href="{% url 'usuarios:quitar_de_lista_deseos' producto.id %}">Eliminar</a>
                         </div>
@@ -74,4 +77,9 @@
         {% include 'general/base/paginacion.html' with objetos_paginas=productos %}
 
     </main>
+{% endblock %}
+
+{% block scripts %}
+    {% load static %}
+    <script type="text/javascript" src="{% static 'scripts/lista-de-deseos/index.js' %}"></script>
 {% endblock %}

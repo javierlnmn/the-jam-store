@@ -99,12 +99,9 @@
 
             </div>
 
-            <div class="ver-mas">
-                <span></span>
-                <p class="texto-secundario">Ver todas las valoraciones</p>
-                <span></span>
-            </div>
-
+            {% if comentarios.has_other_pages %}
+            <p class="texto-secundario texto-centrado">Puedes ver el resto de valoraciones en otras páginas</p>
+            {% endif %}
         {% else %}
 
             <p class="negrita texto-secundario">Vaya, nadie ha comentado aún...</p>

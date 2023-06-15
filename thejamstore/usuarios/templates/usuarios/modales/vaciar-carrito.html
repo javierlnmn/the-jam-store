@@ -8,9 +8,9 @@
         <p class="texto-secundario">No podrás deshacer este cambio</p>
 
         <div class="botones">
-            <a class="enlace_boton" href="carrito.html">No</a>
+            <a class="enlace_boton" href="{% url 'usuarios:carrito' %}">No</a>
             <span class="enlace-rojo">
-                <a class="enlace_boton" href="carrito.html">Sí</a>
+                <a class="enlace_boton" href="{% url 'usuarios:vaciar_carrito' %}">Sí</a>
             </span>
         </div>
 

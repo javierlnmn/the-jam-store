@@ -91,8 +91,6 @@ def producto_detalle(request, id_producto):
         pedido_por_usuario = comprobarPedidoPorUsuario(
             producto_detalle.id, pedidos_del_usuario
         )
-
-    comentarios_producto = Comentario.objects.filter(producto__id=id_producto)
     
     esta_en_lista_de_deseos = False
     
@@ -101,13 +99,17 @@ def producto_detalle(request, id_producto):
         if lista_deseos and lista_deseos.producto.filter(id=producto_detalle.id).exists():
             esta_en_lista_de_deseos = True
     
+    comentarios_producto = Comentario.objects.filter(producto__id=id_producto)
+    paginacion = Paginator(comentarios_producto, 5)
+    pagina = request.GET.get("pag")
+    comentarios_por_pagina = paginacion.get_page(pagina)
 
     contexto = {
         "producto_detalle": producto_detalle,
         "productos_recomendados": productos_recomendados,
-        "pedido_por_usuario": pedido_por_usuario,
-        "comentarios": comentarios_producto,
         "esta_en_lista_de_deseos": esta_en_lista_de_deseos,
+        "pedido_por_usuario": pedido_por_usuario,
+        "comentarios": comentarios_por_pagina,
     }
 
     return render(request, directorio_templates + "/producto-detalle.html", contexto)

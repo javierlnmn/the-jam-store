@@ -144,10 +144,17 @@ def carrito(request):
         messages.success(request, '¡Inicia sesión para crear tu carrito!')
         pagina_previa = request.META.get('HTTP_REFERER')
         return HttpResponseRedirect(pagina_previa)
+    
     carrito, _ = Carrito.objects.get_or_create(usuario=request.user)
+    
     subtotal = 0
+    
     for producto_carrito in carrito.carrito_productos_set.all():
-        subtotal += producto_carrito.producto.precio
+        if producto_carrito.producto.oferta:
+            subtotal += producto_carrito.producto.precio_oferta * producto_carrito.cantidad
+        else:
+            subtotal += producto_carrito.producto.precio * producto_carrito.cantidad
+            
     contexto = {
         "carrito": carrito,
         "subtotal": subtotal
@@ -164,7 +171,8 @@ def anadir_a_carrito(request, id_producto):
         formulario_talla = int(request.GET.get('talla')) # El id de la talla que obtenemos es el de la relación producto_talla
     except:
         messages.error(request, 'Elige una talla para añadir el producto al carrito')
-        return redirect('productos:producto_detalle', id_producto)
+        pagina_previa = request.META.get('HTTP_REFERER')
+        return HttpResponseRedirect(pagina_previa)
     
     talla_producto = Producto_Talla.objects.get(pk=formulario_talla)
     talla = Talla.objects.get(pk=talla_producto.talla_id)
@@ -198,6 +206,14 @@ def quitar_del_carrito(request, id_producto):
     carrito =  Carrito.objects.get(usuario=request.user)
     carrito.producto.remove(producto)
     messages.success(request, '¡Has retirado '+ producto.nombre +' de tu carrito!')
+    return redirect('usuarios:carrito')
+
+@login_required
+def vaciar_carrito(request):
+    carrito =  Carrito.objects.get(usuario=request.user)
+    Carrito_Productos.objects.filter(carrito=carrito).delete()
+    
+    messages.success(request, '¡Has vaciado tu carrito!')
     return redirect('usuarios:carrito')
 
 

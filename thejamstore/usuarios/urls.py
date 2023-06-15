@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import iniciar_sesion, cerrar_sesion, registrar_usuario, valorar_producto, lista_deseos, anadir_a_lista_deseos, quitar_de_lista_deseos, carrito, anadir_a_carrito, actualizar_datos_usuario, ver_direcciones, formulario_crear_direccion, anadir_direccion, eliminar_direccion, formulario_editar_direccion, editar_direccion, quitar_del_carrito
+from .views import iniciar_sesion, cerrar_sesion, registrar_usuario, valorar_producto, lista_deseos, anadir_a_lista_deseos, quitar_de_lista_deseos, carrito, anadir_a_carrito, actualizar_datos_usuario, ver_direcciones, formulario_crear_direccion, anadir_direccion, eliminar_direccion, formulario_editar_direccion, editar_direccion, quitar_del_carrito, vaciar_carrito
 from .views import CustomRestablecerContrasenaFormularioView, CustomRestablecerContrasenaCorreoEnviadoView, CustomRestablecerContrasenaView, CustomRestablecerContrasenaCompletadoView
 app_name = 'usuarios'
 
@@ -18,7 +18,7 @@ urlpatterns = [
     path('carrito/', carrito, name='carrito'),
     path('anadir_a_carrito/<int:id_producto>', anadir_a_carrito, name='anadir_a_carrito'),
     path('quitar_del_carrito/<int:id_producto>', quitar_del_carrito, name='quitar_del_carrito'),
-    
+    path('vaciar-carrito/', vaciar_carrito, name='vaciar_carrito'),    
     
     path('direcciones/', ver_direcciones, name='ver_direcciones'),
     path('direcciones/formulario-crear-direccion/', formulario_crear_direccion, name='formulario_crear_direccion'),
