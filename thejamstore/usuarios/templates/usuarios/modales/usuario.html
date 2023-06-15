@@ -110,16 +110,16 @@
                         <label for="id_email" unselectable="on">Correo electrónico *</label>
                     </div>
                     <div class="contenedor-input-texto {% if user.first_name %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="first_name" maxlength="150" class="input-texto" {% if user.first_name %}value="{{ user.first_name }}" {% endif %} />
-                        <label for="input-texto" unselectable="on">Nombre</label>
+                        <input type="text" id="id_nombre" name="first_name" maxlength="150" class="input-texto" {% if user.first_name %}value="{{ user.first_name }}" {% endif %} />
+                        <label for="id_nombre" unselectable="on">Nombre</label>
                     </div>
                     <div class="contenedor-input-texto {% if user.first_name %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="last_name" maxlength="150" class="input-texto" {% if user.last_name %}value="{{ user.last_name }}" {% endif %} />
-                        <label for="input-texto" unselectable="on">Apellidos</label>
+                        <input type="text" id="id_apellidos" name="last_name" maxlength="150" class="input-texto" {% if user.last_name %}value="{{ user.last_name }}" {% endif %} />
+                        <label for="id_apellidos" unselectable="on">Apellidos</label>
                     </div>
                     <div class="contenedor-input-texto {% if user.telefono %} contenedor-input-texto_animacion {% endif %}">
-                        <input type="text" name="telefono" maxlength="150" class="input-texto" {% if user.telefono %}value="{{ user.telefono }}" {% endif %} />
-                        <label for="input-texto" unselectable="on">Teléfono</label>
+                        <input type="text" id="id_telefono" name="telefono" maxlength="150" class="input-texto" {% if user.telefono %}value="{{ user.telefono }}" {% endif %} />
+                        <label for="id_telefono" unselectable="on">Teléfono</label>
                     </div>
 
                     {% if user.categoria.id is 2 %}
@@ -154,8 +154,8 @@
         <div class="contenedor-enlaces">
             <a class="enlace_boton" href="{% url 'usuarios:ver_direcciones' %}">Ver mis pedidos</a>
             <a class="enlace_boton" href="{% url 'usuarios:ver_direcciones' %}">Gestionar direcciones</a>
-            <a class="enlace_boton" href="{% url 'usuarios:cerrar_sesion' %}">Cerrar sersión</a>
             <a class="enlace_boton" href="{% url 'usuarios:restablecer_contrasena' %}">Cambiar contraseña</a>
+            <a class="enlace_boton enlace-rojo" href="{% url 'usuarios:cerrar_sesion' %}">Cerrar sersión</a>
         </div>
         
     </div>

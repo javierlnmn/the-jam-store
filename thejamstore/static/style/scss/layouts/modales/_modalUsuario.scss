@@ -124,7 +124,17 @@
             &.largo {
                 grid-column: 1 / 3
             }
+            &.enlace-rojo {
+                color: $rojo;
+                border-color: $rojo;
+                &:hover {
+                    color: $blanco;
+                    background-color: $rojo;
+                }
+            }
         }
+
+        
 
         @include tablet {
             display: flex;
