@@ -49,10 +49,6 @@ def cerrar_sesion(request):
     logout(request)
     messages.success(request, 'Has cerrado sesión.')
     request.user = None
-    
-    pagina_previa = request.META.get('HTTP_REFERER')
-    parsed_url = urlparse(pagina_previa)
-    url_pagina_previa = parsed_url.path
     return redirect('general:indice')
     
 @login_required

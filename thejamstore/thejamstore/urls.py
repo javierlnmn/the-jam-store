@@ -6,9 +6,11 @@ urlpatterns = [
     path('jet/', include('jet.urls', 'jet')),
     path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('admin/', admin.site.urls),
+    
     path('', include('general.urls')),
     path('productos/', include('productos.urls')),
     path('usuarios/', include('usuarios.urls')),
+    path('pedidos/', include('pedidos.urls')),
 ]
 
 if settings.DEBUG:

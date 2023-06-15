@@ -1,0 +1,19 @@
+{% extends 'general/main.html' %}
+
+{% block contenido %}
+    <main>
+
+
+        <section class="contenedor seccion-pedidos">
+
+            {% for pedido in pedidos %}
+                {{pedido}}
+            {% endfor %}
+
+        </section>
+
+
+        {% include 'general/base/paginacion.html' with objetos_paginas=pedidos %}
+
+    </main>
+{% endblock %}
