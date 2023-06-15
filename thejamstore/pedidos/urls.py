@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import pedidos
+from .views import pedidos, detalle_pedido
 
 app_name = 'pedidos'
 
 urlpatterns = [
     path('mis-pedidos/', pedidos, name='pedidos'),
+    path('pedido/<int:id_pedido>', detalle_pedido, name='detalle_pedido')
 ]

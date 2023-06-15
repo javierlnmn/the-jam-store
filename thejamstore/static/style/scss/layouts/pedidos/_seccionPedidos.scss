@@ -1,0 +1,74 @@
+.seccion-pedidos {
+
+
+    .pedidos {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        .contenedor-pedido {
+            border: .1rem solid lighten($gris, 10%);
+            border-radius: .5rem;
+            padding: 2rem;
+
+            .informacion {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                margin-bottom: 2rem;
+
+                .productos {
+                    
+                    padding-left: 3rem;
+                    margin-left: 2rem;
+                    border-left: .1rem solid $gris;
+
+                    .lista-productos {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1rem;
+                        font-size: 1.6rem;
+                        padding-left: 2rem;
+                        margin-bottom: 1rem;
+    
+                        .producto {
+                            @include estilo-enlace($negro);
+                        }
+    
+                    }
+                }
+
+                @include tablet {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                
+                    .productos {
+                        border-left: none;
+                        padding-left: 0;
+                        margin-left: 0;
+                    }
+                }
+                
+            }
+
+            .botones {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                gap: 2rem;
+
+                @include estilo-enlace($negro) {
+                    width: fit-content;
+                }
+
+                @include tablet {
+                    flex-direction: column;
+                    gap: 1rem;
+                    margin-top: 2rem;
+                    align-items: flex-end;
+                }
+            }
+        }
+    }
+
+}
