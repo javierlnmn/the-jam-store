@@ -160,7 +160,12 @@ def anadir_a_carrito(request, id_producto):
         messages.success(request, '¡Inicia sesión para añadir productos a tu carrito!')
         return redirect('productos:producto_detalle', id_producto=id_producto)
 
-    formulario_talla = int(request.GET.get('talla')) # El id de la talla que obtenemos es el de la relación producto_talla
+    try:
+        formulario_talla = int(request.GET.get('talla')) # El id de la talla que obtenemos es el de la relación producto_talla
+    except:
+        messages.error(request, 'Elige una talla para añadir el producto al carrito')
+        return redirect('productos:producto_detalle', id_producto)
+    
     talla_producto = Producto_Talla.objects.get(pk=formulario_talla)
     talla = Talla.objects.get(pk=talla_producto.talla_id)
     cantidad = request.GET.get('cantidad') # Lo mismo para cantidad
@@ -185,7 +190,7 @@ def anadir_a_carrito(request, id_producto):
     producto_del_carrito.save()
     
     messages.success(request, '¡Has añadido '+ producto.nombre +' a tu carrito!')
-    return redirect('productos:producto_detalle', id_producto=id_producto)
+    return redirect('usuarios:carrito')
 
 @login_required
 def quitar_del_carrito(request, id_producto):
@@ -193,7 +198,7 @@ def quitar_del_carrito(request, id_producto):
     carrito =  Carrito.objects.get(usuario=request.user)
     carrito.producto.remove(producto)
     messages.success(request, '¡Has retirado '+ producto.nombre +' de tu carrito!')
-    return redirect('productos:producto_detalle', id_producto=id_producto)
+    return redirect('usuarios:carrito')
 
 
 
