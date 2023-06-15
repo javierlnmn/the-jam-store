@@ -19,6 +19,27 @@ $(document).on('keydown', function (event) {
     }
 });
 
+// Desplegar el modal de seleccionar direccion
+
+let modalSeleccionarDireccion = $('#modal-seleccionar-direccion');
+
+$('#boton-seleccionar-direccion').on('click', function () {
+    modalSeleccionarDireccion.show();
+    $('body').css('overflow', 'hidden');
+});
+
+$('#boton-cerrar-modal-seleccionar-direccion').on('click', function () {
+    modalSeleccionarDireccion.hide();
+    $('body').css('overflow', 'auto');
+});
+
+$(document).on('keydown', function (event) {
+    if (event.keyCode == 27) /* 27 == ESC */ {
+        modalSeleccionarDireccion.hide();
+        $('body').css('overflow', 'auto');
+    }
+});
+
 // Banner del precio no sticky para altura de ventana menor de 1350px
 
 

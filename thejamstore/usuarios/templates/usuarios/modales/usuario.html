@@ -152,7 +152,7 @@
         </div>
 
         <div class="contenedor-enlaces">
-            {% if user.categoria.id == 4  %}
+            {% if user.categoria.id == 2  %}
             <a class="enlace_boton largo" href="{% url 'usuarios:formulario_peticion' %}">Petición de venta</a>
             {% endif %}
             <a class="enlace_boton" href="{% url 'pedidos:pedidos' %}">Ver mis pedidos</a>

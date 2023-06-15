@@ -55,7 +55,7 @@
                         <span class="texto-secundario">Envío gratuito en pedidos superiores a 50€</span>
                     </p>
                     <div class="botones">
-                        <a class="enlace_boton" href="compra.html">Comprar todo</a>
+                        <a class="enlace_boton" id="boton-seleccionar-direccion">Comprar todo</a>
                         <a class="enlace_boton" id="boton-vaciar-carrito">Vaciar carrito</a>
                     </div>
                 </div>
@@ -145,6 +145,8 @@
         </section>
 
         {% include 'usuarios/modales/vaciar-carrito.html' %}
+
+        {% include 'usuarios/modales/seleccionar-direccion.html' %}
 
     </main>
 {% endblock %}

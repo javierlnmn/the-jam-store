@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pago del Viaje</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'viajes/css/estilos.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .center-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            max-width: 400px;
+            width: 90%; /* Aumenta el ancho del formulario */
+            padding: 20px;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #card-element {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        #card-errors {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body class="fondo">
+    {% if error %}
+    <p>{{ error }}</p>
+    {% endif %}
+
+    <div class="center-form">
+        <form action="{% url 'marcarViajeComoPagado' viaje.id %}" method="post" id="payment-form">
+            <h2>Pago del Viaje</h2>
+            {% csrf_token %}
+            <input type="hidden" name="viaje_id" value="{{ viaje.id }}">
+            <p>Precio Total: {{ viaje.precioTotal }}€</p>
+            <div id="card-element">
+                <!-- Elemento de tarjeta de crédito de Stripe -->
+            </div>
+            <div id="card-errors" role="alert"></div>
+            <button type="submit">Pagar</button>
+        </form>
+    </div>
+
+    <script>
+        var stripe = Stripe('pk_test_51NGluaCYvehD92m4gllecyjawrBxkBpzYVSQTJ1sx3RgRVyOgEFJI22x8l9F5W1IFzvNIjRWQRBvzzVQsGuZ7uCh00Rg1Uq8Wu');
+        var elements = stripe.elements();
+        var cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+    
+        var form = document.getElementById('payment-form');
+        var errorElement = document.getElementById('card-errors');
+    
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            stripe.createToken(cardElement).then(function(result) {
+                if (result.error) {
+                    // Mostrar el mensaje de error en el elemento correspondiente
+                    errorElement.textContent = '<span class="error-message">' + result.error.message + '</span>';
+                } else {
+                    // Limpiar cualquier mensaje de error anterior
+                    errorElement.textContent = '';
+    
+                    var tokenInput = document.createElement('input');
+                    tokenInput.type = 'hidden';
+                    tokenInput.name = 'stripeToken';
+                    tokenInput.value = result.token.id;
+                    form.appendChild(tokenInput);
+                    form.submit();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

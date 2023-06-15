@@ -1,0 +1,42 @@
+<div id="modal-seleccionar-direccion" class="modal">
+
+    <div class="modal-contenido modal-seleccionar-direccion-contenido">
+
+        <span id="boton-cerrar-modal-seleccionar-direccion" class="close">&times;</span>
+
+        {% if direcciones %}
+
+            <p class="negrita">Elige una dirección de envío</p>
+
+            <form method="get" action="{% url 'pedidos:formulario_pago' %}">
+
+                <div class="direcciones">
+                    
+                    {% for direccion in direcciones %}
+                    <div class="direccion">
+                        <div class="contenedor-boton-radio">
+                            <input required="" class="boton-radio" value="{{direccion.id}}" id="direccion-{{direccion.id}}" type="radio" name="direccion" />
+                        </div>
+                        <label for="direccion-{{direccion.id}}">
+                            <span class="negrita">{{ direccion.get_provincia_display }}, {{ direccion.municipio }}</span> {{ direccion.calle }} {{ direccion.numero }}
+                        </label>
+                    </div>
+                    {% endfor %}
+        
+                </div>
+                
+                <div class="botones">
+                    <button class="enlace_boton" type="submit">Pagar</button>
+                </div>
+
+            </form>
+
+        {% else %}
+
+            <p>Todavía no has agregado ninguna dirección de envío. <a class="enlace" href="{% url 'usuarios:formulario_crear_direccion' %}">Añade una dirección.</a>
+
+        {% endif %}
+
+    </div>
+
+</div>

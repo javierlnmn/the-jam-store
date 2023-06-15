@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect, HttpResponseNotFound
+from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -171,9 +171,12 @@ def carrito(request):
         else:
             subtotal += producto_carrito.producto.precio * producto_carrito.cantidad
             
+    direcciones = Direccion.objects.filter(usuario_id=request.user.id)
+            
     contexto = {
         "carrito": carrito,
-        "subtotal": subtotal
+        "subtotal": subtotal,
+        "direcciones": direcciones
     }
 
     return render(request, directorio_templates + "/carrito.html", contexto)

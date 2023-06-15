@@ -9,6 +9,8 @@
             <h2 class="titulo">Tus pedidos</h2>
 
             <div class="pedidos">
+
+                {% if pedidos %}
                 
                 {% for pedido in pedidos %}
 
@@ -48,6 +50,10 @@
                 </div>
 
                 {% endfor %}
+
+                {% else %}
+                    <p class="texto-secundario texto-centrado">Vaya, aún no has realizado ningún pedido...</p>
+                {% endif %}
 
             </div>
 

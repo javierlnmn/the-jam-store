@@ -1,0 +1,41 @@
+.modal .modal-seleccionar-direccion-contenido {
+
+    max-width: 90rem;
+    width: 90%;
+    min-width: 30rem;
+
+    @include estilo-enlace($negro);
+
+    .direcciones {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        .direccion {
+            border-radius: .5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+
+            &+.direccion {
+                border-top: .1rem solid lighten($gris, 10%);
+                padding-top: 2rem;
+            }
+        }
+
+    }
+
+    .botones {
+        margin-top: 2rem;
+        display: flex;
+        gap: 2rem;
+        justify-content: flex-end;
+
+        @include estilo-enlace($negro) {
+            cursor: pointer;
+            text-align: center;
+        }
+
+    }
+
+}
